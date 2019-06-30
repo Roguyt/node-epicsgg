@@ -1,0 +1,40 @@
+{
+  "name": "node-epicsgg",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx} && yarn run lint && yarn run build",
+    "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
+    "build": "rm -rf lib && tsc -p . && rm -fr lib/tests && mv lib/src/** lib/ && rm -fr lib/src",
+    "prepublish": "yarn run build"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "lib/"
+  ],
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.0.10",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-typescript": "^2.0.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-import-resolver-typescript": "^1.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-typescript": "^0.14.0",
+    "mocha": "^6.1.4",
+    "mocha-clean": "^1.0.0",
+    "prettier": "^1.18.2",
+    "resolve": "^1.11.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  }
+}
