@@ -12,5 +12,9 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "pretty": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "__tests__/**/*"
+  ]
 }
