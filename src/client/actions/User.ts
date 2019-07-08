@@ -9,9 +9,24 @@ export default class User {
         this.baseClient = baseClient;
     }
 
-    public getOwnedCards(userId: number, collectionId: number): Promise<Card[]> {
+    public getOwnedCards(
+        userId: number,
+        collectionId: number,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<Card[]> {
         return this.baseClient
-            .get('collections/' + collectionId + '/users/' + userId + '/owned2?categoryId=1&gameId=1')
+            .get(
+                'collections/' +
+                    collectionId +
+                    '/users/' +
+                    userId +
+                    '/owned2?categoryId=' +
+                    categoryId +
+                    '&gameId=' +
+                    gameId +
+                    ''
+            )
             .then(
                 (result): Promise<Card[]> => {
                     return new Promise((resolve): void => {
@@ -30,9 +45,46 @@ export default class User {
             );
     }
 
-    public getMarketListings(userId: number, page: number = 1): Promise<UserMarketListings> {
+    public getShowcasedCards(userId: number, categoryId: number = 1, gameId: number = 1): Promise<Card[]> {
         return this.baseClient
-            .get('market/listed/users/' + userId + '?categoryId=1&gameId=1&page=' + page + '&userId=' + userId)
+            .get('showcase/' + userId + '/all?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .then(
+                (result): Promise<Card[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Card[] = [];
+
+                        for (let i = 0; i < result.cards.length; i += 1) {
+                            let card = result.cards[i];
+                            let cardData: Card = CardUtils.createACard(card);
+
+                            data.push(cardData);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
+
+    public getMarketListings(
+        userId: number,
+        page: number = 1,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<UserMarketListings> {
+        return this.baseClient
+            .get(
+                'market/listed/users/' +
+                    userId +
+                    '?categoryId=' +
+                    categoryId +
+                    '&gameId=' +
+                    gameId +
+                    '&page=' +
+                    page +
+                    '&userId=' +
+                    userId
+            )
             .then(
                 (result): Promise<UserMarketListings> => {
                     return new Promise((resolve): void => {
