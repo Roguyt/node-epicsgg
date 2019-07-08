@@ -1,11 +1,8 @@
 import DateUtils from './Date';
 
 export default class CardUtils {
-    // TODO: Fix for previous non V2 Rating
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createACard(data: any): Card {
-        console.log(data);
-
         let card: Card = {
             id: data.id,
             uuid: data.uuid,
@@ -113,7 +110,27 @@ export default class CardUtils {
                 lastDate: DateUtils.convertToDate(data.cardTemplate.player.lastDate),
                 playerRoleId: data.cardTemplate.player.playerRoleId,
             };
+        }
 
+        if (data.cardTemplate.playerRole) {
+            card.template.playerRole = {
+                name: data.cardTemplate.playerRole.name,
+                gameSideIcon: data.cardTemplate.playerRole.gameSideIcon,
+            };
+        }
+
+        if (data.cardTemplate.playerStats) {
+            card.template.playerStats = {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                rating: data.cardTemplate.playerStats.filter((e: any): any => {
+                    return e.name === 'rating2';
+                })[0].value,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                previousRating: data.cardTemplate.playerStats.filter((e: any): any => {
+                    return e.name === 'prevRating2';
+                })[0].value,
+            };
+        } else if (data.cardTemplate.playerStatsV2) {
             card.template.playerStats = {
                 rating: data.cardTemplate.playerStatsV2.rating,
                 accuracy: data.cardTemplate.playerStatsV2.accuracy,
@@ -123,12 +140,9 @@ export default class CardUtils {
                 utility: data.cardTemplate.playerStatsV2.utility,
                 experience: data.cardTemplate.playerStatsV2.experience,
             };
-
-            card.template.playerRole = {
-                name: data.cardTemplate.playerRole.name,
-                gameSideIcon: data.cardTemplate.playerRole.gameSideIcon,
-            };
         }
+
+
 
         return card;
     }
