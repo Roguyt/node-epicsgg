@@ -1,0 +1,125 @@
+import axios, { AxiosResponse } from 'axios';
+import * as jwt from 'jsonwebtoken';
+
+import Timeout = NodeJS.Timeout;
+
+function timeout(ms: number): Promise<void> {
+    return new Promise(
+        (resolve): Timeout => {
+            return setTimeout(resolve, ms);
+        }
+    );
+}
+
+export default class BaseClient {
+    private username: string;
+    private password: string;
+
+    private jwt: string;
+    private jwtExpiracy: Date;
+
+    public constructor(options: BaseClientOptions) {
+        if (!options) {
+            // Throw a warning
+            throw new Error('Missing BaseClient options');
+        }
+
+        this.username = options.email || '';
+        this.password = options.password || '';
+
+        this._validateOptions();
+    }
+
+    private _validateOptions() {
+        if (this.username === '' || this.password === '') {
+            // Throw an error
+            throw new Error('Missing epics.gg credentials');
+        }
+    }
+
+    public async login(): Promise<void> {
+        try {
+            let response: AxiosResponse = await axios.post(
+                'https://api.epics.gg/api/v1/auth/login?categoryId=1&gameId=1',
+                { email: this.username, password: this.password }
+            );
+
+            if (!response.data) {
+                // Throw an error
+            }
+
+            this.jwt = response.data.data.jwt;
+
+            // @ts-ignore
+            this.jwtExpiracy = jwt.decode(this.jwt).exp * 1000;
+        } catch (e) {
+            switch (e.response.status) {
+                case 429:
+                    await timeout(60 * 1000);
+                    await this.login();
+            }
+        }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public async get(path: string): Promise<Record<string, any>> {
+        if (!this.jwt || this.jwtExpiracy < new Date()) {
+            await this.login();
+        }
+
+        try {
+            let response: AxiosResponse = await axios.get('https://api.epics.gg/api/v1/' + path, {
+                headers: {
+                    'X-User-JWT': this.jwt,
+                },
+            });
+
+            if (!response.data) {
+                // Throw an error
+            }
+
+            if (response.data.success === false) {
+                // Throw an error
+            }
+
+            return response.data.data;
+        } catch (e) {
+            // Throw a custom error, not an axios one
+            switch (e.response.status) {
+                case 429:
+                    throw new Error('Rate limit reached');
+            }
+        }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public async post(path: string, data: Record<string, any>): Promise<Record<string, string | string[]>> {
+        if (!this.jwt || this.jwtExpiracy < new Date()) {
+            await this.login();
+        }
+
+        try {
+            let response: AxiosResponse = await axios.post('https://api.epics.gg/api/v1/' + path, data, {
+                headers: {
+                    'X-User-JWT': this.jwt,
+                },
+            });
+
+            if (!response.data) {
+                // Throw an error
+            }
+
+            if (response.data.success === false) {
+                // Throw an error
+            }
+
+            return response.data.data;
+        } catch (e) {
+            // Throw a custom error, not an axios one
+            switch (e.response.status) {
+                case 429:
+                    throw new Error('Rate limit reached');
+            }
+        }
+    }
+}

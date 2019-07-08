@@ -1,11 +1,15 @@
-export default function func(options: Object): Function {
-    return function fooBar() {
-        let foo = 1;
+import BaseClient from './client/BaseClient';
 
-        if (options) {
-            foo = 2;
-        }
+import User from './client/actions/User';
 
-        return foo;
-    };
-}
+export = class Index {
+    private baseClient: BaseClient;
+
+    public User: User;
+
+    public constructor(options: BaseClientOptions) {
+        this.baseClient = new BaseClient(options);
+
+        this.User = new User(this.baseClient);
+    }
+};
