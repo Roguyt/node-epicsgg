@@ -29,4 +29,44 @@ export default class User {
                 }
             );
     }
+
+    public getMarketListings(userId: number, page: number = 1): Promise<UserMarketListings> {
+        return this.baseClient
+            .get('market/listed/users/' + userId + '?categoryId=1&gameId=1&page=' + page + '&userId=' + userId)
+            .then(
+                (result): Promise<UserMarketListings> => {
+                    return new Promise((resolve): void => {
+                        let data: UserMarketListings = {
+                            count: result.count,
+                            total: result.total,
+                            marketListings: [],
+                        };
+
+                        for (let i = 0; i < result.market.length; i += 1) {
+                            let marketListing: MarketListing;
+
+                            marketListing = {
+                                marketId: result.market[i].marketId,
+                                price: result.market[i].price,
+                                currentAvgHourPrice: {
+                                    date: result.market[i].currentHourPrice.statDate,
+                                    value: result.market[i].currentHourPrice.statValue,
+                                },
+                                previousAvgPrice: {
+                                    date: result.market[i].previousAvgPrice.statDate,
+                                    value: result.market[i].previousAvgPrice.statValue,
+                                },
+                                createdAt: new Date(result.market[i].created),
+                                type: result.market[i].type,
+                                card: CardUtils.createACard(result.market[i].card),
+                            };
+
+                            data.marketListings.push(marketListing);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
 }
