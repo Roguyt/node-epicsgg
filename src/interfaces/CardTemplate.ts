@@ -27,7 +27,7 @@ interface CardTemplate {
     game?: Game;
     team?: Team;
     player?: Player;
-    playerStats?: PlayerStats;
+    playerStats?: PlayerStatsV2 | PlayerStats;
     playerRole?: PlayerRole;
 
     treatment: Treatment;
