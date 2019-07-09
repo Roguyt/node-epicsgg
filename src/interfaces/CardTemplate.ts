@@ -24,6 +24,7 @@ interface CardTemplate {
 
     images: Record<string, string>;
 
+    insert?: Insert;
     game?: Game;
     team?: Team;
     player?: Player;

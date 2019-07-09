@@ -57,7 +57,7 @@ export default class CardUtils {
         };
 
         if (data.cardTemplate.game) {
-            data.game = {
+            card.template.game = {
                 id: data.cardTemplate.game.id,
                 name: data.cardTemplate.game.name,
                 startDate: DateUtils.convertToDate(data.cardTemplate.game.dateStart),
@@ -68,7 +68,7 @@ export default class CardUtils {
         }
 
         if (data.cardTemplate.team) {
-            data.team = {
+            card.template.team = {
                 id: data.cardTemplate.team.id,
                 country: data.cardTemplate.team.country,
                 birthDate: DateUtils.convertToDate(data.cardTemplate.team.dob),
@@ -142,7 +142,26 @@ export default class CardUtils {
             };
         }
 
-
+        if (data.cardTemplate.insert) {
+            card.template.insert = {
+                id: data.cardTemplate.insert.id,
+                name: data.cardTemplate.insert.name,
+                images: data.cardTemplate.insert.images,
+                videos: data.cardTemplate.insert.videos,
+                isRedeemable: data.cardTemplate.insert.isRedeemable,
+                properties: {
+                    playerIds: data.cardTemplate.insert.properties.player_ids,
+                    teamIds: data.cardTemplate.insert.properties.team_ids,
+                    streamerIds: data.cardTemplate.insert.properties.streamer_ids,
+                    externalItem: data.cardTemplate.insert.properties.external_item,
+                    expire: DateUtils.convertToDate(data.cardTemplate.insert.properties.expire),
+                    coins: data.cardTemplate.insert.properties.coins,
+                    silverCoins: data.cardTemplate.insert.properties.silvercoins,
+                    craftingCoins: data.cardTemplate.insert.properties.craftingcoins,
+                    packTemplateIds: data.cardTemplate.insert.properties.pack_template_ids,
+                },
+            };
+        }
 
         return card;
     }

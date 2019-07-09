@@ -1,4 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Video {
-    // TODO:
+    id: number;
+    parentType: string;
+    parentId: number;
+    name: string;
+    position: string;
+    url: string;
+    cardSide: string;
+    treatmentId: number;
 }
