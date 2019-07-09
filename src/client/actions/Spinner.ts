@@ -43,4 +43,18 @@ export default class Spinner {
             }
         );
     }
+
+    public spin(spinnerId: number = 166): Promise<null> {
+        return this.baseClient
+            .post('spinner/spin', {
+                spinnerId,
+            })
+            .then(
+                (result): Promise<null> => {
+                    return new Promise((resolve): void => {
+                        resolve(null);
+                    });
+                }
+            );
+    }
 }
