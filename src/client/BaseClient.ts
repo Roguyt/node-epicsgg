@@ -88,6 +88,9 @@ export default class BaseClient {
             switch (e.response.status) {
                 case 429:
                     throw new Error('Rate limit reached');
+
+                case 403:
+                    throw new Error(e.response.data.error);
             }
         }
     }
@@ -119,6 +122,9 @@ export default class BaseClient {
             switch (e.response.status) {
                 case 429:
                     throw new Error('Rate limit reached');
+
+                case 403:
+                    throw new Error(e.response.data.error);
             }
         }
     }
