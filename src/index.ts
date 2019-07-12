@@ -1,6 +1,7 @@
 import BaseClient from './client/BaseClient';
 
 import User from './client/actions/User';
+import Trade from './client/actions/Trade';
 import Spinner from './client/actions/Spinner';
 import Leaderboard from './client/actions/Leaderboard';
 
@@ -8,6 +9,7 @@ export = class Index {
     private baseClient: BaseClient;
 
     public User: User;
+    public Trade: Trade;
     public Spinner: Spinner;
     public Leaderboard: Leaderboard;
 
@@ -15,6 +17,7 @@ export = class Index {
         this.baseClient = new BaseClient(options);
 
         this.User = new User(this.baseClient);
+        this.Trade = new Trade(this.baseClient);
         this.Spinner = new Spinner(this.baseClient);
         this.Leaderboard = new Leaderboard(this.baseClient);
     }

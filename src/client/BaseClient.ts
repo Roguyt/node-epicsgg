@@ -96,7 +96,7 @@ export default class BaseClient {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async post(path: string, data: Record<string, any>): Promise<Record<string, string | string[]>> {
+    public async post(path: string, data: Record<string, any>): Promise<Record<string, string | string[] | number>> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
