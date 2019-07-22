@@ -81,13 +81,9 @@ export default class Leaderboard {
             url += '&season=' + season;
         }
 
-        console.log(url);
-
         return this.baseClient.get(url).then(
             (result): Promise<CollectionRanking[]> => {
                 return new Promise((resolve): void => {
-                    console.log(result);
-
                     const data: CollectionRanking[] = [];
 
                     for (let i = 0; i < result.length; i += 1) {
