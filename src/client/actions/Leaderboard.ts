@@ -48,4 +48,52 @@ export default class Leaderboard {
             }
         );
     }
+
+    public getCollectionLeaderboards(
+        collectionId: number,
+        page: number = 1,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<CollectionRanking[]> {
+        return this.baseClient
+            .get(
+                'leaderboards/collections/' +
+                    collectionId +
+                    '?categoryId=' +
+                    categoryId +
+                    '&gameId=' +
+                    gameId +
+                    '&page=' +
+                    page +
+                    ''
+            )
+            .then(
+                (result): Promise<CollectionRanking[]> => {
+                    return new Promise((resolve): void => {
+                        const data: CollectionRanking[] = [];
+
+                        for (let i = 0; i < result.length; i += 1) {
+                            let ranking = result[i];
+
+                            data.push({
+                                id: ranking.user.id,
+                                username: ranking.user.username,
+                                avatar: ranking.user.avatar,
+                                group: ranking.user.group,
+                                country: ranking.user.country,
+                                joined: ranking.user.created,
+                                ranking: {
+                                    rank: ranking.rank,
+                                    score: ranking.score,
+                                    cardCount: ranking.cardCount,
+                                    entityCount: ranking.entityCount,
+                                },
+                            });
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
 }
