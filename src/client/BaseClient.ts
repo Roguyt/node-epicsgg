@@ -62,7 +62,7 @@ export default class BaseClient {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async get(path: string): Promise<Record<string, any>> {
+    public async get(path: string): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
@@ -96,7 +96,7 @@ export default class BaseClient {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async post(path: string, data: Record<string, any>): Promise<Record<string, string | string[] | number>> {
+    public async post(path: string, data: Record<string, any>): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }

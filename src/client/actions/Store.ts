@@ -62,4 +62,26 @@ export default class Store {
             }
         );
     }
+
+    public buyPack(
+        packTemplateId: number,
+        amount: number = 1,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<number[]> {
+        return this.baseClient
+            .post('packs/buy?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                amount,
+                packTemplateId,
+            })
+            .then(
+                (result): Promise<number[]> => {
+                    return new Promise((resolve): void => {
+                        const data: number[] = result;
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
 }
