@@ -1,6 +1,6 @@
 {
   "name": "node-epicsgg",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx} && yarn run lint && yarn run build",
     "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
