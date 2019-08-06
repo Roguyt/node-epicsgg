@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import obj from '../src/index';
+
+import obj = require('../src/index');
 
 const { describe, it } = global;
 

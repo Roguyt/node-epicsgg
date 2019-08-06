@@ -3,7 +3,7 @@ import DateUtils from './Date';
 export default class CardUtils {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createACard(data: any): Card {
-        let card: Card = {
+        return {
             id: data.id,
             uuid: data.uuid,
             images: data.images,
@@ -18,151 +18,156 @@ export default class CardUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: {
-                id: data.cardTemplate.id,
-                uuid: data.cardTemplate.uuid,
-                title: data.cardTemplate.title,
-                cardType: data.cardTemplate.cardType,
-                categoryId: data.cardTemplate.categoryId,
-                treatmentId: data.cardTemplate.treatmentId,
-                properties: {
-                    season: data.cardTemplate.properties.season,
-                    gameId: data.cardTemplate.properties.game_id,
-                    teamId: data.cardTemplate.properties.team_id,
-                    playerId: data.cardTemplate.properties.player_id,
-                    startDate: DateUtils.convertToDate(data.cardTemplate.properties.date_start),
-                    endDate: DateUtils.convertToDate(data.cardTemplate.properties.date_end),
-                },
-                limitedEdition: data.cardTemplate.limitedEdition,
-                inCirculation: data.cardTemplate.inCirculation,
-                rarity: data.cardTemplate.rarity,
-                images: data.cardTemplate.images,
-                treatment: {
-                    id: data.cardTemplate.treatment.id,
-                    name: data.cardTemplate.treatment.name,
-                    categoryId: data.cardTemplate.treatment.categoryId,
-                    designation: data.cardTemplate.treatment.designation,
-                    tier: data.cardTemplate.treatment.tier,
-                    active: data.cardTemplate.treatment.active,
-                    variation: data.cardTemplate.treatment.variation,
-                    gameSide: data.cardTemplate.treatment.gameSide,
-                    accentColor: data.cardTemplate.treatment.accentColor,
-                    artistName: data.cardTemplate.treatment.artistName,
-                    season: data.cardTemplate.treatment.season,
-                    buyPrice: data.cardTemplate.treatment.buyPrice,
-                    images: data.cardTemplate.treatment.images,
-                    videos: data.cardTemplate.treatment.videos,
-                },
+            template: this.createCardTemplate(data.cardTemplate),
+        };
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public static createCardTemplate(data: any): CardTemplate {
+        let cardTemplate: CardTemplate = {
+            id: data.id,
+            uuid: data.uuid,
+            title: data.title,
+            cardType: data.cardType,
+            categoryId: data.categoryId,
+            treatmentId: data.treatmentId,
+            properties: {
+                season: data.properties.season,
+                gameId: data.properties.game_id,
+                teamId: data.properties.team_id,
+                playerId: data.properties.player_id,
+                startDate: DateUtils.convertToDate(data.properties.date_start),
+                endDate: DateUtils.convertToDate(data.properties.date_end),
+            },
+            limitedEdition: data.limitedEdition,
+            inCirculation: data.inCirculation,
+            rarity: data.rarity,
+            images: data.images,
+            treatment: {
+                id: data.treatment.id,
+                name: data.treatment.name,
+                categoryId: data.treatment.categoryId,
+                designation: data.treatment.designation,
+                tier: data.treatment.tier,
+                active: data.treatment.active,
+                variation: data.treatment.variation,
+                gameSide: data.treatment.gameSide,
+                accentColor: data.treatment.accentColor,
+                artistName: data.treatment.artistName,
+                season: data.treatment.season,
+                buyPrice: data.treatment.buyPrice,
+                images: data.treatment.images,
+                videos: data.treatment.videos,
             },
         };
 
-        if (data.cardTemplate.game) {
-            card.template.game = {
-                id: data.cardTemplate.game.id,
-                name: data.cardTemplate.game.name,
-                startDate: DateUtils.convertToDate(data.cardTemplate.game.dateStart),
-                endDate: DateUtils.convertToDate(data.cardTemplate.game.dateEnd),
-                image: data.cardTemplate.game.image,
-                images: data.cardTemplate.game.images,
+        if (data.game) {
+            cardTemplate.game = {
+                id: data.game.id,
+                name: data.game.name,
+                startDate: DateUtils.convertToDate(data.game.dateStart),
+                endDate: DateUtils.convertToDate(data.game.dateEnd),
+                image: data.game.image,
+                images: data.game.images,
             };
         }
 
-        if (data.cardTemplate.team) {
-            card.template.team = {
-                id: data.cardTemplate.team.id,
-                country: data.cardTemplate.team.country,
-                birthDate: DateUtils.convertToDate(data.cardTemplate.team.dob),
-                name: data.cardTemplate.team.name,
-                gameId: data.cardTemplate.team.gameId,
-                active: data.cardTemplate.team.active,
-                image: data.cardTemplate.team.image,
-                images: data.cardTemplate.team.images,
-                bio: data.cardTemplate.team.bio,
-                startDate: DateUtils.convertToDate(data.cardTemplate.team.dateStart),
-                endDate: DateUtils.convertToDate(data.cardTemplate.team.dateEnd),
-                shortName: data.cardTemplate.team.shortName,
-                manager: data.cardTemplate.team.manager,
-                players: data.cardTemplate.team.playersIds,
+        if (data.team) {
+            cardTemplate.team = {
+                id: data.team.id,
+                country: data.team.country,
+                birthDate: DateUtils.convertToDate(data.team.dob),
+                name: data.team.name,
+                gameId: data.team.gameId,
+                active: data.team.active,
+                image: data.team.image,
+                images: data.team.images,
+                bio: data.team.bio,
+                startDate: DateUtils.convertToDate(data.team.dateStart),
+                endDate: DateUtils.convertToDate(data.team.dateEnd),
+                shortName: data.team.shortName,
+                manager: data.team.manager,
+                players: data.team.playersIds,
             };
         }
 
-        if (data.cardTemplate.player) {
-            card.template.player = {
-                id: data.cardTemplate.player.id,
-                country: data.cardTemplate.player.country,
-                birthDate: DateUtils.convertToDate(data.cardTemplate.player.dob),
-                age: data.cardTemplate.player.age,
-                name: data.cardTemplate.player.name,
-                gameId: data.cardTemplate.player.gameId,
-                teamId: data.cardTemplate.player.teamId,
-                nickname: data.cardTemplate.player.handle,
-                active: data.cardTemplate.player.active,
-                image: data.cardTemplate.player.image,
-                images: data.cardTemplate.player.images,
-                videos: data.cardTemplate.player.videos,
-                bio: data.cardTemplate.player.bio,
-                position: data.cardTemplate.player.position,
-                dateStart: DateUtils.convertToDate(data.cardTemplate.player.dateStart),
-                dateEnd: DateUtils.convertToDate(data.cardTemplate.player.dateEnd),
-                quote: data.cardTemplate.player.quote,
-                homeTown: data.cardTemplate.player.homeTown,
-                frameType: data.cardTemplate.player.frameType,
-                lastDate: DateUtils.convertToDate(data.cardTemplate.player.lastDate),
-                playerRoleId: data.cardTemplate.player.playerRoleId,
+        if (data.player) {
+            cardTemplate.player = {
+                id: data.player.id,
+                country: data.player.country,
+                birthDate: DateUtils.convertToDate(data.player.dob),
+                age: data.player.age,
+                name: data.player.name,
+                gameId: data.player.gameId,
+                teamId: data.player.teamId,
+                nickname: data.player.handle,
+                active: data.player.active,
+                image: data.player.image,
+                images: data.player.images,
+                videos: data.player.videos,
+                bio: data.player.bio,
+                position: data.player.position,
+                dateStart: DateUtils.convertToDate(data.player.dateStart),
+                dateEnd: DateUtils.convertToDate(data.player.dateEnd),
+                quote: data.player.quote,
+                homeTown: data.player.homeTown,
+                frameType: data.player.frameType,
+                lastDate: DateUtils.convertToDate(data.player.lastDate),
+                playerRoleId: data.player.playerRoleId,
             };
         }
 
-        if (data.cardTemplate.playerRole) {
-            card.template.playerRole = {
-                name: data.cardTemplate.playerRole.name,
-                gameSideIcon: data.cardTemplate.playerRole.gameSideIcon,
+        if (data.playerRole) {
+            cardTemplate.playerRole = {
+                name: data.playerRole.name,
+                gameSideIcon: data.playerRole.gameSideIcon,
             };
         }
 
-        if (data.cardTemplate.playerStats) {
-            card.template.playerStats = {
+        if (data.playerStats) {
+            cardTemplate.playerStats = {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                rating: data.cardTemplate.playerStats.filter((e: any): any => {
+                rating: data.playerStats.filter((e: any): any => {
                     return e.name === 'rating2';
                 })[0].value,
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                previousRating: data.cardTemplate.playerStats.filter((e: any): any => {
+                previousRating: data.playerStats.filter((e: any): any => {
                     return e.name === 'prevRating2';
                 })[0].value,
             };
-        } else if (data.cardTemplate.playerStatsV2) {
-            card.template.playerStats = {
-                rating: data.cardTemplate.playerStatsV2.rating,
-                accuracy: data.cardTemplate.playerStatsV2.accuracy,
-                impact: data.cardTemplate.playerStatsV2.impact,
-                assists: data.cardTemplate.playerStatsV2.assists,
-                entry: data.cardTemplate.playerStatsV2.entry,
-                utility: data.cardTemplate.playerStatsV2.utility,
-                experience: data.cardTemplate.playerStatsV2.experience,
+        } else if (data.playerStatsV2) {
+            cardTemplate.playerStats = {
+                rating: data.playerStatsV2.rating,
+                accuracy: data.playerStatsV2.accuracy,
+                impact: data.playerStatsV2.impact,
+                assists: data.playerStatsV2.assists,
+                entry: data.playerStatsV2.entry,
+                utility: data.playerStatsV2.utility,
+                experience: data.playerStatsV2.experience,
             };
         }
 
-        if (data.cardTemplate.insert) {
-            card.template.insert = {
-                id: data.cardTemplate.insert.id,
-                name: data.cardTemplate.insert.name,
-                images: data.cardTemplate.insert.images,
-                videos: data.cardTemplate.insert.videos,
-                isRedeemable: data.cardTemplate.insert.isRedeemable,
+        if (data.insert) {
+            cardTemplate.insert = {
+                id: data.insert.id,
+                name: data.insert.name,
+                images: data.insert.images,
+                videos: data.insert.videos,
+                isRedeemable: data.insert.isRedeemable,
                 properties: {
-                    playerIds: data.cardTemplate.insert.properties.player_ids,
-                    teamIds: data.cardTemplate.insert.properties.team_ids,
-                    streamerIds: data.cardTemplate.insert.properties.streamer_ids,
-                    externalItem: data.cardTemplate.insert.properties.external_item,
-                    expire: DateUtils.convertToDate(data.cardTemplate.insert.properties.expire),
-                    coins: data.cardTemplate.insert.properties.coins,
-                    silverCoins: data.cardTemplate.insert.properties.silvercoins,
-                    craftingCoins: data.cardTemplate.insert.properties.craftingcoins,
-                    packTemplateIds: data.cardTemplate.insert.properties.pack_template_ids,
+                    playerIds: data.insert.properties.player_ids,
+                    teamIds: data.insert.properties.team_ids,
+                    streamerIds: data.insert.properties.streamer_ids,
+                    externalItem: data.insert.properties.external_item,
+                    expire: DateUtils.convertToDate(data.insert.properties.expire),
+                    coins: data.insert.properties.coins,
+                    silverCoins: data.insert.properties.silvercoins,
+                    craftingCoins: data.insert.properties.craftingcoins,
+                    packTemplateIds: data.insert.properties.pack_template_ids,
                 },
             };
         }
 
-        return card;
+        return cardTemplate;
     }
 }
