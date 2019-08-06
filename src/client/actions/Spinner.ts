@@ -26,14 +26,16 @@ export default class Spinner {
                             images: result.items[i].images,
                         };
 
-                        if (result.items[i].properties.coins === 0) {
+                        if (result.items[i].properties.pack_templates.length !== 0) {
                             spinnerItem.properties.packs = {
                                 packId: result.items[i].properties.pack_templates[0].id,
                                 quantity: result.items[i].properties.pack_templates[0].quantity,
                             };
-                        } else {
-                            spinnerItem.properties.coins = result.items[i].properties.coins;
                         }
+
+                        spinnerItem.properties.coins = result.items[i].properties.coins;
+                        spinnerItem.properties.silverCoins = result.items[i].properties.silvercoins;
+                        spinnerItem.properties.craftingCoins = result.items[i].properties.craftingcoins;
 
                         data.items.push(spinnerItem);
                     }
