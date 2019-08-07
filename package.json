@@ -1,6 +1,25 @@
 {
   "name": "node-epicsgg",
   "version": "1.0.1",
+  "description": "An interface to communicate with Epics.gg API",
+  "keywords": ["epics.gg", "epics"],
+  "author": {
+    "url": "clmntw.fr",
+    "email": "github@clmntw.fr",
+    "name": "Roguyt"
+  },
+  "homepage": "https://github.com/Roguyt/node-epicsgg#readme",
+  "repository": {
+    "url": "https://github.com/Roguyt/node-epicsgg.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/Roguyt/node-epicsgg/issues",
+    "email": "github@clmntw.fr"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx} && yarn run lint && yarn run build",
     "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
