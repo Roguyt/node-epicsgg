@@ -1,4 +1,7 @@
-interface Treatment {
+import { Image } from './Image';
+import { Video } from './Video';
+
+export interface Treatment {
     id: number;
     categoryId: number;
 

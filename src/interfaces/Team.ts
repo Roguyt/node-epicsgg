@@ -1,4 +1,6 @@
-interface Team {
+import { Image } from './Image';
+
+export interface Team {
     id: number;
 
     name: string;

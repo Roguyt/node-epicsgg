@@ -1,4 +1,6 @@
-interface SpinnerItem {
+import { Image } from './Image';
+
+export interface SpinnerItem {
     id: number;
     name: string;
     chance: number;

@@ -1,4 +1,7 @@
-interface Card {
+import { Mint } from './Mint';
+import { CardTemplate } from './CardTemplate';
+
+export interface Card {
     id: number;
     uuid: string;
     images: Record<string, string>;
@@ -10,7 +13,7 @@ interface Card {
     isNewTemplate: boolean;
     isGhost: boolean;
     isOnMarket: boolean;
-    isOnTrade: boolean; // Doesn't know what is it
+    isOnTrade: boolean;
 
     template: CardTemplate;
 }

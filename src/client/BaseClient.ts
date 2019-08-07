@@ -1,16 +1,13 @@
+import { BaseClientOptions } from '../interfaces/BaseClientOptions';
+
 import axios, { AxiosResponse } from 'axios';
 import * as jwt from 'jsonwebtoken';
 
 import Timeout = NodeJS.Timeout;
 
-function timeout(ms: number): Promise<void> {
-    return new Promise(
-        (resolve): Timeout => {
-            return setTimeout(resolve, ms);
-        }
-    );
-}
-
+/**
+ * @hidden
+ */
 export default class BaseClient {
     private username: string;
     private password: string;
@@ -30,11 +27,19 @@ export default class BaseClient {
         this._validateOptions();
     }
 
-    private _validateOptions() {
+    private _validateOptions(): void {
         if (this.username === '' || this.password === '') {
             // Throw an error
             throw new Error('Missing epics.gg credentials');
         }
+    }
+
+    private _timeout(ms: number): Promise<void> {
+        return new Promise(
+            (resolve): Timeout => {
+                return setTimeout(resolve, ms);
+            }
+        );
     }
 
     public async login(): Promise<void> {
@@ -55,7 +60,7 @@ export default class BaseClient {
         } catch (e) {
             switch (e.response.status) {
                 case 429:
-                    await timeout(60 * 1000);
+                    await this._timeout(60 * 1000);
                     await this.login();
             }
         }

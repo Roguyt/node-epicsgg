@@ -1,5 +1,11 @@
+import { Card } from '../../interfaces/Card';
+import { CardTemplate } from '../../interfaces/CardTemplate';
+
 import DateUtils from './Date';
 
+/**
+ * @hidden
+ */
 export default class CardUtils {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createACard(data: any): Card {

@@ -1,4 +1,7 @@
-interface MarketListing {
+import { AveragePrice } from './AveragePrice';
+import { Card } from './Card';
+
+export interface MarketListing {
     marketId: number;
 
     price: number;

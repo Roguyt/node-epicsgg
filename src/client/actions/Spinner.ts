@@ -1,3 +1,6 @@
+import { SpinnerData } from '../../interfaces/SpinnerData';
+import { SpinnerItem } from '../../interfaces/SpinnerItem';
+
 import BaseClient from '../BaseClient';
 
 export default class Spinner {

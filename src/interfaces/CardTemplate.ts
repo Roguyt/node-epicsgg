@@ -1,4 +1,13 @@
-interface CardTemplate {
+import { Insert } from './Insert';
+import { Game } from './Game';
+import { Team } from './Team';
+import { Player } from './Player';
+import { PlayerStatsV2 } from './PlayerStatsV2';
+import { PlayerStats } from './PlayerStats';
+import { PlayerRole } from './PlayerRole';
+import { Treatment } from './Treatment';
+
+export interface CardTemplate {
     id: number;
     uuid: string;
 

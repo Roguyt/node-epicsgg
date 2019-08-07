@@ -1,4 +1,4 @@
-interface Image {
+export interface Image {
     id: number;
     parentType: string;
     parentId: number;

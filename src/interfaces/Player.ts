@@ -1,4 +1,7 @@
-interface Player {
+import { Image } from './Image';
+import { Video } from './Video';
+
+export interface Player {
     id: number;
     gameId: number;
     teamId: number;

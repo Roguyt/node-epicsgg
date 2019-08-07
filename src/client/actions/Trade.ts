@@ -1,4 +1,5 @@
 import BaseClient from '../BaseClient';
+import { Card } from '../../interfaces/Card';
 
 export default class Trade {
     private baseClient: BaseClient;
@@ -11,6 +12,8 @@ export default class Trade {
         const entities = [];
 
         for (let i = 0; i < cards.length; i += 1) {
+            // Should throw an error is isMarketList = true
+
             entities.push({
                 cardTemplateId: cards[i].template.id,
                 ethStatus: 'none',

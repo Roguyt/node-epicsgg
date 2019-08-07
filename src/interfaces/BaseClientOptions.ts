@@ -1,4 +1,4 @@
-interface BaseClientOptions {
+export interface BaseClientOptions {
     email: string;
     password: string;
 }

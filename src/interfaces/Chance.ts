@@ -1,4 +1,4 @@
-interface Chance {
+export interface Chance {
     name: string;
     tier: string;
 

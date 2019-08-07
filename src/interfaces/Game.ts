@@ -1,4 +1,6 @@
-interface Game {
+import { Image } from './Image';
+
+export interface Game {
     id: number;
     name: string;
 
