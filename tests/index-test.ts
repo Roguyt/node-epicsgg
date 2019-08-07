@@ -4,6 +4,6 @@ import obj = require('../src/index');
 
 const { describe, it } = global;
 
-describe('obj', () => {
-    it('works', () => expect(obj).to.be.ok);
+describe('obj', (): void => {
+    it('works', (): Chal.Assertion => expect(obj).to.be.ok);
 });

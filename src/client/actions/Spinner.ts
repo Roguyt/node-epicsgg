@@ -55,7 +55,7 @@ export default class Spinner {
                 spinnerId,
             })
             .then(
-                (result): Promise<null> => {
+                (): Promise<null> => {
                     return new Promise((resolve): void => {
                         resolve(null);
                     });

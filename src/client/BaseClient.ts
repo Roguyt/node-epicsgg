@@ -1,8 +1,8 @@
-import { BaseClientOptions } from '../interfaces/BaseClientOptions';
-
 import axios, { AxiosResponse } from 'axios';
 import * as jwt from 'jsonwebtoken';
 
+import { BaseClientOptions } from '../interfaces/BaseClientOptions';
+// eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
 
 /**
