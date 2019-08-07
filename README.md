@@ -2,7 +2,7 @@
 <p>
   <img alt="Version" src="https://img.shields.io/npm/v/node-epicsgg.svg">
   <img src="https://img.shields.io/badge/node-%3E%3D8.0.0-blue.svg" />
-  <a href="https://github.com/Roguyt/node-epicsgg#readme">
+  <a href="https://roguyt.github.io/node-epicsgg/">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
   </a>
   <a href="https://github.com/Roguyt/node-epicsgg/graphs/commit-activity">
@@ -19,6 +19,7 @@
 > An interface to communicate with Epics.gg API
 
 ### 🏠 [Homepage](https://github.com/Roguyt/node-epicsgg#readme)
+### 📝 [Documentation](https://roguyt.github.io/node-epicsgg/)
 
 ## Prerequisites
 
