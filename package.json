@@ -2,7 +2,10 @@
   "name": "node-epicsgg",
   "version": "1.0.2",
   "description": "An interface to communicate with Epics.gg API",
-  "keywords": ["epics.gg", "epics"],
+  "keywords": [
+    "epics.gg",
+    "epics"
+  ],
   "author": {
     "url": "clmntw.fr",
     "email": "github@clmntw.fr",
