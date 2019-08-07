@@ -1,4 +1,8 @@
-interface Pack {
+import { Chance } from './Chance';
+import { Image } from './Image';
+import { Video } from './Video';
+
+export interface Pack {
     id: number;
     name: string;
     description: string;

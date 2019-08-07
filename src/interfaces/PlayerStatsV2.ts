@@ -1,4 +1,6 @@
-interface PlayerStatsV2 {
+import { Rating } from './Rating';
+
+export interface PlayerStatsV2 {
     rating: Rating;
     accuracy: Rating;
     impact: Rating;

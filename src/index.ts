@@ -1,3 +1,5 @@
+import { BaseClientOptions } from './interfaces/BaseClientOptions';
+
 import BaseClient from './client/BaseClient';
 
 import User from './client/actions/User';

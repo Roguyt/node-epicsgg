@@ -1,4 +1,4 @@
-interface PlayerStats {
+export interface PlayerStats {
     rating: number;
     previousRating: number;
 }

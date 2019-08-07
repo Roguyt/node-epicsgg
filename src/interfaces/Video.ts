@@ -1,4 +1,4 @@
-interface Video {
+export interface Video {
     id: number;
     parentType: string;
     parentId: number;

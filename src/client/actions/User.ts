@@ -1,3 +1,7 @@
+import { Card } from '../../interfaces/Card';
+import { UserMarketListings } from '../../interfaces/UserMarketListings';
+import { MarketListing } from '../../interfaces/MarketListing';
+
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';

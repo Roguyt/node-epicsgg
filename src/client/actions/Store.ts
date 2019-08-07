@@ -1,3 +1,5 @@
+import { Pack } from '../../interfaces/Pack';
+
 import BaseClient from '../BaseClient';
 
 export default class Store {
