@@ -30,7 +30,7 @@
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
     "build:docs": "typedoc --out ./docs --tsconfig tsconfig.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
-    "prepare": "yarn run build"
+    "prepack": "yarn run build"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
