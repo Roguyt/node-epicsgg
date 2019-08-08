@@ -6,10 +6,19 @@ import BaseClient from '../BaseClient';
 export default class Spinner {
     private baseClient: BaseClient;
 
+    /**
+     * @hidden
+     */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Get the current Spinner's data
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getSpinner(categoryId: number = 1, gameId: number = 1): Promise<SpinnerData> {
         return this.baseClient.get('spinner?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
             (result): Promise<SpinnerData> => {
@@ -49,6 +58,11 @@ export default class Spinner {
         );
     }
 
+    /**
+     * Spin a Spinner with a given spinner id
+     * @param spinnerId spinner id to spin
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public spin(spinnerId: number = 166): Promise<null> {
         return this.baseClient
             .post('spinner/spin', {

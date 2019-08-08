@@ -1,6 +1,6 @@
-import { User } from './User';
+import { UserData } from './UserData';
 import { Ranking } from './Ranking';
 
-export interface CollectionRanking extends User {
+export interface CollectionRanking extends UserData {
     ranking: Ranking;
 }

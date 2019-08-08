@@ -6,10 +6,22 @@ import BaseClient from '../BaseClient';
 export default class Leaderboard {
     private baseClient: BaseClient;
 
+    /**
+     * @hidden
+     */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Get the global rankings of Epics.gg given a category id and game id
+     * @param page the page to get (1 page = 20 users)
+     * @param country the country to filter the leaderboard
+     * @param season the season to filter the leaderboard
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getLeaderboards(
         page: number = 1,
         country: string = null,
@@ -57,6 +69,16 @@ export default class Leaderboard {
         );
     }
 
+    /**
+     * Get the rankings of a given collection id
+     * @param collectionId the collection id to query
+     * @param page the page to get (1 page = 20 users)
+     * @param country the country to filter the leaderboard
+     * @param season the season to filter the leaderboard
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getCollectionLeaderboards(
         collectionId: number,
         page: number = 1,

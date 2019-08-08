@@ -11,6 +11,13 @@ export default class Library {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Get a list of CardTemplate given a collection id
+     * @param collectionId the collection id
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getCollectionCardTemplates(
         collectionId: number,
         categoryId: number = 1,

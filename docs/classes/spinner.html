@@ -2381,15 +2381,9 @@ img {
 		<li class=" tsd-kind-class">
 			<a href="library.html" class="tsd-kind-icon">Library</a>
 		</li>
-		<li class=" tsd-kind-class">
-			<a href="market.html" class="tsd-kind-icon">Market</a>
-		</li>
 		<li class="current tsd-kind-class">
 			<a href="spinner.html" class="tsd-kind-icon">Spinner</a>
 			<ul>
-				<li class=" tsd-kind-constructor tsd-parent-kind-class">
-					<a href="spinner.html#constructor" class="tsd-kind-icon">constructor</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="spinner.html#getspinner" class="tsd-kind-icon">get<wbr>Spinner</a>
 				</li>
@@ -2474,6 +2468,9 @@ img {
 			<a href="../interfaces/treatment.html" class="tsd-kind-icon">Treatment</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="../interfaces/userdata.html" class="tsd-kind-icon">User<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="../interfaces/usermarketlistings.html" class="tsd-kind-icon">User<wbr>Market<wbr>Listings</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2499,12 +2496,6 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Constructors</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="spinner.html#constructor" class="tsd-kind-icon">constructor</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="spinner.html#getspinner" class="tsd-kind-icon">get<wbr>Spinner</a></li>
@@ -2512,32 +2503,6 @@ img {
 						</ul>
 					</section>
 				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Constructors</h2>
-			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-				<a name="constructor" class="tsd-anchor"></a>
-				<h3>constructor</h3>
-				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Spinner<span class="tsd-signature-symbol">(</span>baseClient<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseClient</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="spinner.html" class="tsd-signature-type">Spinner</a></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/189a6f3/src/client/actions/Spinner.ts#L7">client/actions/Spinner.ts:7</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>baseClient: <span class="tsd-signature-type">BaseClient</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="spinner.html" class="tsd-signature-type">Spinner</a></h4>
-					</li>
-				</ul>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -2552,19 +2517,31 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/189a6f3/src/client/actions/Spinner.ts#L13">client/actions/Spinner.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/ca0aa91/src/client/actions/Spinner.ts#L22">client/actions/Spinner.ts:22</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the current Spinner&#39;s data</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the category id</p>
+								</div>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the game id</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/spinnerdata.html" class="tsd-signature-type">SpinnerData</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
 					</li>
 				</ul>
 			</section>
@@ -2578,16 +2555,25 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/189a6f3/src/client/actions/Spinner.ts#L52">client/actions/Spinner.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/ca0aa91/src/client/actions/Spinner.ts#L66">client/actions/Spinner.ts:66</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Spin a Spinner with a given spinner id</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> spinnerId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;166</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>spinner id to spin</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
 					</li>
 				</ul>
 			</section>

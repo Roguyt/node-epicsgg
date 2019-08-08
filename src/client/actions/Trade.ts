@@ -4,10 +4,21 @@ import { Card } from '../../interfaces/Card';
 export default class Trade {
     private baseClient: BaseClient;
 
+    /**
+     * @hidden
+     */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Create a trade offer and send it to a giver user id and a given array of cards
+     * @param userId
+     * @param cards
+     * @param categoryId
+     * @param gameId
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public createOffer(userId: number, cards: Card[], categoryId: number = 1, gameId: number = 1): Promise<number> {
         const entities = [];
 
