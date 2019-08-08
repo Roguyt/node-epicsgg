@@ -3,6 +3,6 @@ export interface UserData {
     username: string;
     avatar: string;
     group: number;
-    country: string;
-    joined: Date;
+    country?: string;
+    joined?: Date;
 }
