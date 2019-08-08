@@ -1,6 +1,7 @@
 import { Card } from '../../interfaces/Card';
-import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { MarketListing } from '../../interfaces/MarketListing';
+import { UserMarketListings } from '../../interfaces/UserMarketListings';
+import { UserData } from '../../interfaces/UserData';
 
 import BaseClient from '../BaseClient';
 
@@ -14,6 +15,38 @@ export default class User {
      */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
+    }
+
+    /**
+     * Search players with a given string
+     * @param search the text to search
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public searchUsers(search: string, categoryId: number, gameId: number): Promise<UserData[]> {
+        return this.baseClient
+            .get('users/search?username=' + search + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .then(
+                (result): Promise<UserData[]> => {
+                    return new Promise((resolve): void => {
+                        const data: UserData[] = [];
+
+                        for (let i = 0; i < result.length; i += 1) {
+                            let user = result[i];
+
+                            data.push({
+                                id: user.id,
+                                username: user.username,
+                                avatar: user.avatar,
+                                group: user.group,
+                            });
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
