@@ -9,10 +9,21 @@ import CardUtils from '../utils/Card';
 export default class User {
     private baseClient: BaseClient;
 
+    /**
+     * @hidden
+     */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Get the owned cards of a given user id and a given collection id
+     * @param userId the user id to get its cards
+     * @param collectionId the collection id to get its cards
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getOwnedCards(
         userId: number,
         collectionId: number,
@@ -49,6 +60,13 @@ export default class User {
             );
     }
 
+    /**
+     * Get the showcased cards of a given user id
+     * @param userId the user id to get its cards
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getShowcasedCards(userId: number, categoryId: number = 1, gameId: number = 1): Promise<Card[]> {
         return this.baseClient
             .get('showcase/' + userId + '/all?categoryId=' + categoryId + '&gameId=' + gameId + '')
@@ -70,6 +88,14 @@ export default class User {
             );
     }
 
+    /**
+     * Get the market listings of a given user id
+     * @param userId the user id to get its cards
+     * @param page the page to get (1 page = 40 Market listings)
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getMarketListings(
         userId: number,
         page: number = 1,

@@ -5,10 +5,20 @@ import BaseClient from '../BaseClient';
 export default class Store {
     private baseClient: BaseClient;
 
+    /**
+     * @hidden
+     */
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
     }
 
+    /**
+     * Get the packs from Epics.gg
+     * @param page the page to get
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getPacks(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Pack[]> {
         return this.baseClient.get('packs?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '').then(
             (result): Promise<Pack[]> => {
@@ -65,6 +75,14 @@ export default class Store {
         );
     }
 
+    /**
+     * Buy a given amount of a given packTemplateId
+     * @param packTemplateId
+     * @param amount the amount of packs to buy
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public buyPack(
         packTemplateId: number,
         amount: number = 1,
