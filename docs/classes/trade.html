@@ -2382,9 +2382,6 @@ img {
 			<a href="library.html" class="tsd-kind-icon">Library</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="market.html" class="tsd-kind-icon">Market</a>
-		</li>
-		<li class=" tsd-kind-class">
 			<a href="spinner.html" class="tsd-kind-icon">Spinner</a>
 		</li>
 		<li class=" tsd-kind-class">
@@ -2393,9 +2390,6 @@ img {
 		<li class="current tsd-kind-class">
 			<a href="trade.html" class="tsd-kind-icon">Trade</a>
 			<ul>
-				<li class=" tsd-kind-constructor tsd-parent-kind-class">
-					<a href="trade.html#constructor" class="tsd-kind-icon">constructor</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="trade.html#createoffer" class="tsd-kind-icon">create<wbr>Offer</a>
 				</li>
@@ -2471,6 +2465,9 @@ img {
 			<a href="../interfaces/treatment.html" class="tsd-kind-icon">Treatment</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="../interfaces/userdata.html" class="tsd-kind-icon">User<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="../interfaces/usermarketlistings.html" class="tsd-kind-icon">User<wbr>Market<wbr>Listings</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2496,44 +2493,12 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Constructors</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="trade.html#constructor" class="tsd-kind-icon">constructor</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="trade.html#createoffer" class="tsd-kind-icon">create<wbr>Offer</a></li>
 						</ul>
 					</section>
 				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Constructors</h2>
-			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-				<a name="constructor" class="tsd-anchor"></a>
-				<h3>constructor</h3>
-				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Trade<span class="tsd-signature-symbol">(</span>baseClient<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseClient</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="trade.html" class="tsd-signature-type">Trade</a></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/189a6f3/src/client/actions/Trade.ts#L5">client/actions/Trade.ts:5</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>baseClient: <span class="tsd-signature-type">BaseClient</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="trade.html" class="tsd-signature-type">Trade</a></h4>
-					</li>
-				</ul>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -2548,9 +2513,14 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/189a6f3/src/client/actions/Trade.ts#L11">client/actions/Trade.ts:11</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/ca0aa91/src/client/actions/Trade.ts#L22">client/actions/Trade.ts:22</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Create a trade offer and send it to a giver user id and a given array of cards</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -2567,6 +2537,7 @@ img {
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
 					</li>
 				</ul>
 			</section>
