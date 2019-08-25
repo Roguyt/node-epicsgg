@@ -58,6 +58,11 @@ export default class BaseClient {
             // @ts-ignore
             this.jwtExpiracy = jwt.decode(this.jwt).exp * 1000;
         } catch (e) {
+            if (!e.response) {
+                await this._timeout(5 * 1000);
+                await this.login();
+            }
+
             switch (e.response.status) {
                 case 429:
                     await this._timeout(60 * 1000);
@@ -89,6 +94,10 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            if (!e.response) {
+                throw new Error('Internet error');
+            }
+
             // Throw a custom error, not an axios one
             switch (e.response.status) {
                 case 429:
@@ -123,13 +132,17 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
-            // Throw a custom error, not an axios one
-            switch (e.response.status) {
-                case 429:
-                    throw new Error('Rate limit reached');
+            if (!e.response) {
+                throw new Error('Internet error');
+            } else {
+                // Throw a custom error, not an axios one
+                switch (e.response.status) {
+                    case 429:
+                        throw new Error('Rate limit reached');
 
-                case 403:
-                    throw new Error(e.response.data.error);
+                    case 403:
+                        throw new Error(e.response.data.error);
+                }
             }
         }
     }
