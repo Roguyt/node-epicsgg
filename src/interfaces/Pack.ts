@@ -37,8 +37,8 @@ export interface Pack {
         orderMessageMin: string;
     };
 
-    odds: Chance[];
+    odds?: Chance[];
 
-    images: Image[];
-    videos: Video[];
+    images?: Image[];
+    videos?: Video[];
 }
