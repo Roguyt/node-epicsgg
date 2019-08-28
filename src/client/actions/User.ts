@@ -2,10 +2,12 @@ import { Card } from '../../interfaces/Card';
 import { MarketListing } from '../../interfaces/MarketListing';
 import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserData } from '../../interfaces/UserData';
+import { UserPack } from '../../interfaces/UserPack';
 
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
+import PackUtils from '../utils/Pack';
 
 export default class User {
     private baseClient: BaseClient;
@@ -177,6 +179,59 @@ export default class User {
                             };
 
                             data.marketListings.push(marketListing);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
+
+    /**
+     * Get the owned packs of the currently authenticated user
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public getPacks(categoryId: number = 1, gameId: number = 1): Promise<UserPack[]> {
+        return this.baseClient.get('packs/user?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+            (result): Promise<UserPack[]> => {
+                return new Promise((resolve): void => {
+                    const data: UserPack[] = [];
+
+                    for (let i = 0; i < result.packs.length; i += 1) {
+                        data.push({
+                            id: result.packs[i].id,
+                            type: result.packs[i].type,
+                            packTemplate: PackUtils.createAPack(result.packs[i].packTemplate),
+                        });
+                    }
+
+                    resolve(data);
+                });
+            }
+        );
+    }
+
+    /**
+     * Open a given packId from the authenticated user
+     * @param packId the pack id to open
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public openPack(packId: number, categoryId: number = 1, gameId: number = 1): Promise<Card[]> {
+        return this.baseClient
+            .post('packs/open2?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                packId,
+            })
+            .then(
+                (result): Promise<Card[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Card[] = [];
+
+                        for (let i = 0; i < result.cards.length; i += 1) {
+                            data.push(CardUtils.createACard(result.cards[i]));
                         }
 
                         resolve(data);
