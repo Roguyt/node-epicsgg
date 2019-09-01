@@ -110,6 +110,9 @@ export default class BaseClient {
 
                     case 403:
                         throw new Error(e.response.data.error);
+
+                    default:
+                        throw new Error('Unhandled error. ' + e.response.data);
                 }
             }
         }
@@ -154,6 +157,9 @@ export default class BaseClient {
 
                     case 403:
                         throw new Error(e.response.data.error);
+
+                    default:
+                        throw new Error('Unhandled error. ' + e.response.data);
                 }
             }
         }
