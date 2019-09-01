@@ -88,14 +88,6 @@ export default class BaseClient {
                 // Throw an error
             }
 
-            if (response.data.success === false) {
-                throw {
-                    success: false,
-                    errorCode: response.data.errorCode,
-                    message: response.data.error,
-                };
-            }
-
             return response.data.data;
         } catch (e) {
             if (e.errorCode) {
@@ -107,6 +99,9 @@ export default class BaseClient {
                 switch (e.response.status) {
                     case 429:
                         throw new Error('Rate limit reached');
+
+                    case 409:
+                        throw new Error(e.response.data.error);
 
                     case 403:
                         throw new Error(e.response.data.error);
@@ -135,14 +130,6 @@ export default class BaseClient {
                 // Throw an error
             }
 
-            if (response.data.success === false) {
-                throw {
-                    success: false,
-                    errorCode: response.data.errorCode,
-                    message: response.data.error,
-                };
-            }
-
             return response.data.data;
         } catch (e) {
             if (e.errorCode) {
@@ -154,6 +141,9 @@ export default class BaseClient {
                 switch (e.response.status) {
                     case 429:
                         throw new Error('Rate limit reached');
+
+                    case 409:
+                        throw new Error(e.response.data.error);
 
                     case 403:
                         throw new Error(e.response.data.error);
