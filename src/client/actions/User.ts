@@ -8,6 +8,7 @@ import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
+import { UserFund } from '../../interfaces/UserFund';
 
 export default class User {
     private baseClient: BaseClient;
@@ -26,7 +27,7 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public searchUsers(search: string, categoryId: number, gameId: number): Promise<UserData[]> {
+    public searchUsers(search: string, categoryId: number = 1, gameId: number = 1): Promise<UserData[]> {
         return this.baseClient
             .get('users/search?username=' + search + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
             .then(
@@ -49,6 +50,28 @@ export default class User {
                     });
                 }
             );
+    }
+
+    /**
+     * Get the funds of the currently authenticated user
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public getFunds(categoryId: number = 1, gameId: number = 1): Promise<UserFund> {
+        return this.baseClient.get('user/funds?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+            (result): Promise<UserFund> => {
+                return new Promise((resolve): void => {
+                    const data: UserFund = {
+                        epiCoins: result.epicoins,
+                        silverCoins: result.silvercoins,
+                        craftingCoins: result.craftingcoins,
+                    };
+
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
