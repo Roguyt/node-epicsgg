@@ -9,6 +9,7 @@ import Trade from './client/actions/Trade';
 import Market from './client/actions/Market';
 import Spinner from './client/actions/Spinner';
 import Leaderboard from './client/actions/Leaderboard';
+import SocketClient from './client/SocketClient';
 
 export = class Index {
     private baseClient: BaseClient;
@@ -21,6 +22,8 @@ export = class Index {
     public Spinner: Spinner;
     public Leaderboard: Leaderboard;
 
+    public SocketClient: SocketClient;
+
     public constructor(options: BaseClientOptions) {
         this.baseClient = new BaseClient(options);
 
@@ -31,5 +34,7 @@ export = class Index {
         this.Market = new Market(this.baseClient);
         this.Spinner = new Spinner(this.baseClient);
         this.Leaderboard = new Leaderboard(this.baseClient);
+
+        this.SocketClient = new SocketClient();
     }
 };
