@@ -1,6 +1,6 @@
 {
   "name": "node-epicsgg",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "An interface to communicate with Epics.gg API",
   "keywords": [
     "epics.gg",
