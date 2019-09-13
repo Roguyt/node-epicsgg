@@ -1,4 +1,5 @@
 import { CardTemplate } from '../../interfaces/CardTemplate';
+import { Treatment } from '../../interfaces/Treatment';
 
 import BaseClient from '../BaseClient';
 
@@ -9,6 +10,44 @@ export default class Library {
 
     public constructor(baseClient: BaseClient) {
         this.baseClient = baseClient;
+    }
+
+    /**
+     * TODO:
+     */
+    public getTreatments(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Treatment[]> {
+        return this.baseClient
+            .get('treatments?page=' + page + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .then(
+                (result): Promise<Treatment[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Treatment[] = [];
+
+                        for (let i = 0; i < result.treatments.length; i += 1) {
+                            let treatment: Treatment = {
+                                id: result.treatments[i].id,
+                                name: result.treatments[i].name,
+                                categoryId: result.treatments[i].categoryId,
+                                designation: result.treatments[i].designation,
+                                tier: result.treatments[i].tier,
+                                active: result.treatments[i].active,
+                                variation: result.treatments[i].variation,
+                                gameSide: result.treatments[i].gameSide,
+                                accentColor: result.treatments[i].accentColor,
+                                artistName: result.treatments[i].artistName,
+                                season: result.treatments[i].season,
+                                buyPrice: result.treatments[i].buyPrice,
+                                images: result.treatments[i].images,
+                                videos: result.treatments[i].videos,
+                            };
+
+                            data.push(treatment);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
