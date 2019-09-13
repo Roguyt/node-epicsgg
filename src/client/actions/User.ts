@@ -3,6 +3,7 @@ import { MarketListing } from '../../interfaces/MarketListing';
 import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserData } from '../../interfaces/UserData';
 import { UserPack } from '../../interfaces/UserPack';
+import { Alert } from '../../interfaces/Alert';
 
 import BaseClient from '../BaseClient';
 
@@ -189,17 +190,32 @@ export default class User {
                                 marketId: result.market[i].marketId,
                                 price: result.market[i].price,
                                 currentAvgHourPrice: {
-                                    date: result.market[i].currentHourPrice.statDate,
-                                    value: result.market[i].currentHourPrice.statValue,
+                                    date: null,
+                                    value: null,
                                 },
                                 previousAvgPrice: {
-                                    date: result.market[i].previousAvgPrice.statDate,
-                                    value: result.market[i].previousAvgPrice.statValue,
+                                    date: null,
+                                    value: null,
                                 },
                                 createdAt: new Date(result.market[i].created),
                                 type: result.market[i].type,
                                 card: CardUtils.createACard(result.market[i].card),
                             };
+
+                            if (result.market[i].previousAvgPrice !== null) {
+                                marketListing.previousAvgPrice.value = result.market[i].previousAvgPrice.statValue;
+                                marketListing.previousAvgPrice.date = new Date(
+                                    result.market[i].previousAvgPrice.statDate
+                                );
+                            }
+
+                            if (result.market[i].currentHourPrice !== null) {
+                                marketListing.currentAvgHourPrice.value =
+                                    result.market[i].currentHourPrice.statValue;
+                                marketListing.currentAvgHourPrice.date = new Date(
+                                    result.market[i].currentHourPrice.statDate
+                                );
+                            }
 
                             data.marketListings.push(marketListing);
                         }
@@ -256,6 +272,27 @@ export default class User {
                         for (let i = 0; i < result.cards.length; i += 1) {
                             data.push(CardUtils.createACard(result.cards[i]));
                         }
+
+                        resolve(data);
+                    });
+                }
+            );
+    }
+
+    public getAlerts(
+        page: number = 1,
+        device: string = 'web',
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<Alert[]> {
+        return this.baseClient
+            .get('alerts?categoryId=' + categoryId + '&device=' + device + '&gameId=' + gameId + '&page=' + page + '')
+            .then(
+                (result): Promise<Alert[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Alert[] = [];
+
+                        console.log(result);
 
                         resolve(data);
                     });
