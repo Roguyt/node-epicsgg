@@ -103,8 +103,6 @@ export default class User {
                             collections: [],
                         };
 
-                        console.log(result);
-
                         for (let i = 0; i < result.length; i += 1) {
                             const temp: UserCollection = {
                                 count: result[i].count,
