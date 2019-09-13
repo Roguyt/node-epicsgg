@@ -10,6 +10,9 @@ import BaseClient from '../BaseClient';
 import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
 import { UserFund } from '../../interfaces/UserFund';
+import { UserSummary } from '../../interfaces/UserSummary';
+import { UserCollection } from '../../interfaces/UserCollection';
+import DateUtils from '../utils/Date';
 
 export default class User {
     private baseClient: BaseClient;
@@ -73,6 +76,66 @@ export default class User {
                 });
             }
         );
+    }
+
+    public getUserSummary(
+        userId: number,
+        season: number,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<UserSummary> {
+        return this.baseClient
+            .get(
+                'collections/users/' +
+                    userId +
+                    '/user-summary?seasons=' +
+                    season +
+                    '&categoryId=' +
+                    categoryId +
+                    '&gameId=' +
+                    gameId +
+                    ''
+            )
+            .then(
+                (result): Promise<UserSummary> => {
+                    return new Promise((resolve): void => {
+                        const data: UserSummary = {
+                            collections: [],
+                        };
+
+                        console.log(result);
+
+                        for (let i = 0; i < result.length; i += 1) {
+                            const temp: UserCollection = {
+                                count: result[i].count,
+                                rank: result[i].rank,
+                                score: result[i].score,
+                                total: result[i].total,
+                                collection: {
+                                    id: result[i].collection.id,
+                                    name: result[i].collection.name,
+                                    description: result[i].collection.description,
+                                    categoryId: result[i].collection.categoryId,
+                                    visible: result[i].collection.visible,
+                                    properties: {
+                                        tiers: result[i].collection.properties.tiers,
+                                        gameIds: result[i].collection.properties.game_ids,
+                                        seasons: result[i].collection.properties.seasons,
+                                        teamIds: result[i].collection.properties.team_ids,
+                                        types: result[i].collection.properties.types,
+                                    },
+                                    created: DateUtils.convertToDate(result[i].collection.created),
+                                    updated: DateUtils.convertToDate(result[i].collection.updated),
+                                    images: result[i].collection.images,
+                                },
+                            };
+                            data.collections.push(temp);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
@@ -210,8 +273,7 @@ export default class User {
                             }
 
                             if (result.market[i].currentHourPrice !== null) {
-                                marketListing.currentAvgHourPrice.value =
-                                    result.market[i].currentHourPrice.statValue;
+                                marketListing.currentAvgHourPrice.value = result.market[i].currentHourPrice.statValue;
                                 marketListing.currentAvgHourPrice.date = new Date(
                                     result.market[i].currentHourPrice.statDate
                                 );
