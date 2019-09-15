@@ -1,9 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as jwt from 'jsonwebtoken';
 
 import { BaseClientOptions } from '../interfaces/BaseClientOptions';
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
+
+const HttpsProxyAgent = require('https-proxy-agent');
 
 /**
  * @hidden
@@ -11,6 +13,8 @@ import Timeout = NodeJS.Timeout;
 export default class BaseClient {
     private username: string;
     private password: string;
+
+    private axios: AxiosInstance;
 
     private jwt: string;
     private jwtExpiracy: Date;
@@ -23,6 +27,16 @@ export default class BaseClient {
 
         this.username = options.email || '';
         this.password = options.password || '';
+
+        if (options.proxy) {
+            const agent = new HttpsProxyAgent({ host: options.proxy.host, port: options.proxy.port });
+
+            this.axios = axios.create({
+                httpsAgent: agent,
+            });
+        } else {
+            this.axios = axios.create();
+        }
 
         this._validateOptions();
     }
@@ -44,7 +58,7 @@ export default class BaseClient {
 
     public async login(): Promise<void> {
         try {
-            let response: AxiosResponse = await axios.post(
+            let response: AxiosResponse = await this.axios.post(
                 'https://api.epics.gg/api/v1/auth/login?categoryId=1&gameId=1',
                 { email: this.username, password: this.password }
             );
@@ -78,7 +92,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await axios.get('https://api.epics.gg/api/v1/' + path, {
+            let response: AxiosResponse = await this.axios.get('https://api.epics.gg/api/v1/' + path, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
@@ -120,7 +134,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await axios.post('https://api.epics.gg/api/v1/' + path, data, {
+            let response: AxiosResponse = await this.axios.post('https://api.epics.gg/api/v1/' + path, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
