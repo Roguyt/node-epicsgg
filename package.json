@@ -1,6 +1,6 @@
 {
   "name": "node-epicsgg",
-  "version": "1.0.14",
+  "version": "1.1.0",
   "description": "An interface to communicate with Epics.gg API",
   "keywords": [
     "epics.gg",
@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "https-proxy-agent": "^2.2.2",
     "jsonwebtoken": "^8.5.1",
     "socket.io-client": "^2.2.0",
     "socketio-wildcard": "^2.0.0"
