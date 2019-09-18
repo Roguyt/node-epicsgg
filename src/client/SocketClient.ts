@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+
 import { PackPurchasedFeed } from '../interfaces/PackPurchasedFeed';
 import { SpinnerFeed } from '../interfaces/SpinnerFeed';
 import { PackOpenedFeed } from '../interfaces/PackOpenedFeed';
@@ -12,6 +13,10 @@ export default class SocketClient {
     public event: EventEmitter;
 
     public constructor() {
+        this._connect();
+    }
+
+    private _connect(): void {
         this.socket = this.io('https://sockets.epics.gg/', {
             transports: ['websocket'],
         });
@@ -21,7 +26,9 @@ export default class SocketClient {
 
         this.event = new EventEmitter();
 
-        this.socket.on('connect', () => {
+        this.socket.on('connect', (): void => {
+            this.socket.emit('join-public-feed');
+
             this.socket.on('pack-opened', (data): void => {
                 let packOpenedFeed: PackOpenedFeed = {
                     id: data.id,
