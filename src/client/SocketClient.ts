@@ -26,6 +26,12 @@ export default class SocketClient {
 
         this.event = new EventEmitter();
 
+        this.socket.on('disconnect', () => {
+            this.socket.removeAllListeners('pack-opened');
+            this.socket.removeAllListeners('pack-purchased');
+            this.socket.removeAllListeners('spinner-feed');
+        });
+
         this.socket.on('connect', (): void => {
             this.socket.emit('join-public-feed');
 
