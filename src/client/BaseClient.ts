@@ -27,6 +27,7 @@ export default class BaseClient {
 
         this.username = options.email || '';
         this.password = options.password || '';
+        this.jwt = '';
 
         if (options.proxy) {
             const agent = new HttpsProxyAgent({ host: options.proxy.host, port: options.proxy.port });
@@ -38,11 +39,18 @@ export default class BaseClient {
             this.axios = axios.create();
         }
 
+        if (options.jwt) {
+            this.jwt = options.jwt;
+
+            // @ts-ignore
+            this.jwtExpiracy = jwt.decode(this.jwt).exp * 1000;
+        }
+
         this._validateOptions();
     }
 
     private _validateOptions(): void {
-        if (this.username === '' || this.password === '') {
+        if ((this.username === '' || this.password === '') && this.jwt === '') {
             // Throw an error
             throw new Error('Missing epics.gg credentials');
         }
