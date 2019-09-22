@@ -3,7 +3,6 @@ import { MarketListing } from '../../interfaces/MarketListing';
 import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserData } from '../../interfaces/UserData';
 import { UserPack } from '../../interfaces/UserPack';
-import { Alert } from '../../interfaces/Alert';
 
 import BaseClient from '../BaseClient';
 
@@ -332,27 +331,6 @@ export default class User {
                         for (let i = 0; i < result.cards.length; i += 1) {
                             data.push(CardUtils.createACard(result.cards[i]));
                         }
-
-                        resolve(data);
-                    });
-                }
-            );
-    }
-
-    public getAlerts(
-        page: number = 1,
-        device: string = 'web',
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<Alert[]> {
-        return this.baseClient
-            .get('alerts?categoryId=' + categoryId + '&device=' + device + '&gameId=' + gameId + '&page=' + page + '')
-            .then(
-                (result): Promise<Alert[]> => {
-                    return new Promise((resolve): void => {
-                        const data: Alert[] = [];
-
-                        console.log(result);
 
                         resolve(data);
                     });
