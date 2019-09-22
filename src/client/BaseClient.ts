@@ -1,11 +1,11 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as jwt from 'jsonwebtoken';
+import * as HttpsProxyAgent from 'https-proxy-agent';
 
 import { BaseClientOptions } from '../interfaces/BaseClientOptions';
+
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
-
-const HttpsProxyAgent = require('https-proxy-agent');
 
 /**
  * @hidden
@@ -83,6 +83,10 @@ export default class BaseClient {
                     await this.login();
             }
         }
+    }
+
+    public getJWT(): string {
+        return this.jwt;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
