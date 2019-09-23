@@ -97,6 +97,11 @@ export default class BaseClient {
         return this.jwt;
     }
 
+    public async loginAndGetJwt(): Promise<string> {
+        await this.login();
+        return this.getJWT();
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async get(path: string): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
