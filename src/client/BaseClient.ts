@@ -83,12 +83,16 @@ export default class BaseClient {
             if (!e.response) {
                 await this._timeout(5 * 1000);
                 await this.login();
-            }
-
-            switch (e.response.status) {
-                case 429:
+            } else {
+                if (e.response.status === 429) {
                     await this._timeout(60 * 1000);
                     await this.login();
+                } else {
+                    // eslint-disable-next-line no-console
+                    console.error(e);
+                    await this._timeout(60 * 1000);
+                    await this.login();
+                }
             }
         }
     }
@@ -138,7 +142,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + e.response.data);
+                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
                 }
             }
         }
@@ -180,7 +184,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + e.response.data);
+                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
                 }
             }
         }
