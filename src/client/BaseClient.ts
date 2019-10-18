@@ -82,18 +82,22 @@ export default class BaseClient {
         } catch (e) {
             if (!e.response) {
                 await this._timeout(5 * 1000);
-                await this.login();
             } else {
-                if (e.response.status === 429) {
-                    await this._timeout(60 * 1000);
-                    await this.login();
-                } else {
-                    // eslint-disable-next-line no-console
-                    console.error(e);
-                    await this._timeout(60 * 1000);
-                    await this.login();
+                switch (e.response.status) {
+                    case 429: {
+                        await this._timeout(60 * 1000);
+                        break;
+                    }
+                    case 400: {
+                        throw new Error('Credentials errors');
+                    }
+                    default: {
+                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                    }
                 }
             }
+
+            await this.login();
         }
     }
 
