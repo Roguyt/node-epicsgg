@@ -34,6 +34,7 @@ export default class BaseClient {
 
             this.axios = axios.create({
                 httpsAgent: agent,
+                timeout: 600000,
             });
         } else {
             this.axios = axios.create();
