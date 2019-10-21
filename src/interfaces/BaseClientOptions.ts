@@ -6,4 +6,5 @@ export interface BaseClientOptions {
         host: string;
         port: number;
     };
+    useSocket?: boolean;
 }
