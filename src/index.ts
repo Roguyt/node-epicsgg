@@ -35,6 +35,8 @@ export = class Index {
         this.Spinner = new Spinner(this.baseClient);
         this.Leaderboard = new Leaderboard(this.baseClient);
 
-        this.SocketClient = new SocketClient();
+        if (typeof options.useSocket === 'undefined' || options.useSocket === true) {
+            this.SocketClient = new SocketClient();
+        }
     }
 };
