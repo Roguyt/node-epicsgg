@@ -59,6 +59,24 @@ export default class Spinner {
     }
 
     /**
+     * Buy a Spin
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public buySpinner(): Promise<null> {
+        return this.baseClient
+            .post('spinner/buy-spin', {
+                amount: 1,
+            })
+            .then(
+                (): Promise<null> => {
+                    return new Promise((resolve): void => {
+                        resolve(null);
+                    });
+                }
+            );
+    }
+
+    /**
      * Spin a Spinner with a given spinner id
      * @param spinnerId spinner id to spin
      * @returns a Promise resolved with the response or rejected in case of error
