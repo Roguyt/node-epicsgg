@@ -1,4 +1,6 @@
+import { Owned } from '../../interfaces/Owned';
 import { Card } from '../../interfaces/Card';
+import { Sticker } from '../../interfaces/Sticker';
 import { MarketListing } from '../../interfaces/MarketListing';
 import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserData } from '../../interfaces/UserData';
@@ -7,11 +9,12 @@ import { UserPack } from '../../interfaces/UserPack';
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
+import StickerUtils from '../utils/Sticker';
 import PackUtils from '../utils/Pack';
+import DateUtils from '../utils/Date';
 import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
-import DateUtils from '../utils/Date';
 
 export default class User {
     private baseClient: BaseClient;
@@ -149,19 +152,14 @@ export default class User {
     }
 
     /**
-     * Get the owned cards of a given user id and a given collection id
+     * Get the owned cards and stickers of a given user id and a given collection id
      * @param userId the user id to get its cards
      * @param collectionId the collection id to get its cards
      * @param categoryId the category id
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getOwnedCards(
-        userId: number,
-        collectionId: number,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<Card[]> {
+    public getOwned(userId: number, collectionId: number, categoryId: number = 1, gameId: number = 1): Promise<Owned> {
         return this.baseClient
             .get(
                 'collections/' +
@@ -175,18 +173,30 @@ export default class User {
                     ''
             )
             .then(
-                (result): Promise<Card[]> => {
+                (result): Promise<Owned> => {
                     return new Promise((resolve): void => {
-                        const data: Card[] = [];
+                        const cards: Card[] = [];
 
                         for (let i = 0; i < result.cards.length; i += 1) {
                             let card = result.cards[i];
                             let cardData: Card = CardUtils.createACard(card);
 
-                            data.push(cardData);
+                            cards.push(cardData);
                         }
 
-                        resolve(data);
+                        const stickers: Sticker[] = [];
+
+                        for (let i = 0; i < result.stickers.length; i += 1) {
+                            let sticker = result.stickers[i];
+                            let stickerData: Sticker = StickerUtils.createASticker(sticker);
+
+                            stickers.push(stickerData);
+                        }
+
+                        resolve({
+                            cards,
+                            stickers,
+                        });
                     });
                 }
             );
