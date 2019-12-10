@@ -61,6 +61,12 @@ export default class Spinner {
         );
     }
 
+    /**
+     * Get the history of the user's spinner rewards
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public getHistory(categoryId: number = 1, gameId: number = 1): Promise<SpinnerHistory[]> {
         return this.baseClient.get('spinner/history?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
             (result): Promise<SpinnerHistory[]> => {

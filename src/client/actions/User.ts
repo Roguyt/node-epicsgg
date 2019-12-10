@@ -98,6 +98,8 @@ export default class User {
                 '&gameId=' +
                 gameId +
                 '&types';
+        } else if (season === '') {
+            url = 'collections/users/' + userId + '/user-summary/?categoryId=' + categoryId + '&gameId=' + gameId + '';
         } else {
             url =
                 'collections/users/' +
