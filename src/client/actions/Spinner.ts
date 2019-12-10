@@ -1,5 +1,8 @@
 import { SpinnerData } from '../../interfaces/SpinnerData';
 import { SpinnerItem } from '../../interfaces/SpinnerItem';
+import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
+
+import DateUtils from '../utils/Date';
 
 import BaseClient from '../BaseClient';
 
@@ -50,6 +53,28 @@ export default class Spinner {
                         spinnerItem.properties.craftingCoins = result.items[i].properties.craftingcoins;
 
                         data.items.push(spinnerItem);
+                    }
+
+                    resolve(data);
+                });
+            }
+        );
+    }
+
+    public getHistory(categoryId: number = 1, gameId: number = 1): Promise<SpinnerHistory[]> {
+        return this.baseClient.get('spinner/history?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+            (result): Promise<SpinnerHistory[]> => {
+                return new Promise((resolve): void => {
+                    const data: SpinnerHistory[] = [];
+
+                    for (let i = 0; i < result.spins.length; i += 1) {
+                        data.push({
+                            name: result.spins[i].name,
+                            chance: result.spins[i].chance,
+                            date: DateUtils.convertToDate(result.spins[i].created),
+                            images: result.spins[i].images,
+                            isPurchased: result.spins[i].isPurchased,
+                        });
                     }
 
                     resolve(data);
