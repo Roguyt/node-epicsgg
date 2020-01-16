@@ -41,8 +41,8 @@ export default class PackUtils {
             },
         };
 
-        if (data.treatmentChance) {
-            pack.odds = data.treatmentChance;
+        if (data.treatmentsChance) {
+            pack.odds = data.treatmentsChance;
         }
 
         if (data.images) {
