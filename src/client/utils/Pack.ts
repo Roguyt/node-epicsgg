@@ -41,7 +41,7 @@ export default class PackUtils {
             },
         };
 
-        if (data.odds) {
+        if (data.treatmentChance) {
             pack.odds = data.treatmentChance;
         }
 
