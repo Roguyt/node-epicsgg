@@ -12,7 +12,7 @@ import Leaderboard from './client/actions/Leaderboard';
 import SocketClient from './client/SocketClient';
 
 export = class Index {
-    private baseClient: BaseClient;
+    public baseClient: BaseClient;
 
     public User: User;
     public Library: Library;

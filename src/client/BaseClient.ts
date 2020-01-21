@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import * as HttpsProxyAgent from 'https-proxy-agent';
 
 import { BaseClientOptions } from '../interfaces/BaseClientOptions';
+import { CurrentUser } from '../interfaces/CurrentUser';
 
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
@@ -13,6 +14,8 @@ import Timeout = NodeJS.Timeout;
 export default class BaseClient {
     private username: string;
     private password: string;
+
+    public currentUser: CurrentUser = null;
 
     private axios: AxiosInstance;
 
@@ -75,6 +78,8 @@ export default class BaseClient {
             if (!response.data) {
                 // Throw an error
             }
+
+            this.currentUser = response.data.data.user;
 
             this.jwt = response.data.data.jwt;
 
