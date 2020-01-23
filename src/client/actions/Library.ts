@@ -13,7 +13,11 @@ export default class Library {
     }
 
     /**
-     * TODO:
+     * Get a list of Treatments
+     * @param page the page to get (1 page = 100 treatments)
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public getTreatments(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Treatment[]> {
         return this.baseClient

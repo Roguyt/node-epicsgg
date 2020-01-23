@@ -6,6 +6,9 @@ import { PackOpenedFeed } from '../interfaces/PackOpenedFeed';
 
 import SocketIO = require('socket.io');
 
+/**
+ * @hidden
+ */
 export default class SocketClient {
     private io = require('socket.io-client');
     private socket: SocketIO.Socket;

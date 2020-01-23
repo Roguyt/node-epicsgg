@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Chance | node-epicsgg</title>
+	<title>TradeUser | node-epicsgg</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2376,19 +2376,25 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface">
-			<a href="chance.html" class="tsd-kind-icon">Chance</a>
+			<a href="tradeuser.html" class="tsd-kind-icon">Trade<wbr>User</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="chance.html#chance-1" class="tsd-kind-icon">chance</a>
+					<a href="tradeuser.html#balance" class="tsd-kind-icon">balance</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="chance.html#name" class="tsd-kind-icon">name</a>
+					<a href="tradeuser.html#cards" class="tsd-kind-icon">cards</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="chance.html#tier" class="tsd-kind-icon">tier</a>
+					<a href="tradeuser.html#count" class="tsd-kind-icon">count</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="chance.html#treatmentid" class="tsd-kind-icon">treatment<wbr>Id</a>
+					<a href="tradeuser.html#packs" class="tsd-kind-icon">packs</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="tradeuser.html#stickers" class="tsd-kind-icon">stickers</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="tradeuser.html#user" class="tsd-kind-icon">user</a>
 				</li>
 			</ul>
 		</li>
@@ -2400,7 +2406,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">Chance</span>
+					<span class="target">TradeUser</span>
 				</li>
 			</ul>
 		</section>
@@ -2411,10 +2417,12 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chance.html#chance-1" class="tsd-kind-icon">chance</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chance.html#name" class="tsd-kind-icon">name</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chance.html#tier" class="tsd-kind-icon">tier</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chance.html#treatmentid" class="tsd-kind-icon">treatment<wbr>Id</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#balance" class="tsd-kind-icon">balance</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#cards" class="tsd-kind-icon">cards</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#count" class="tsd-kind-icon">count</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#packs" class="tsd-kind-icon">packs</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#stickers" class="tsd-kind-icon">stickers</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="tradeuser.html#user" class="tsd-kind-icon">user</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2423,42 +2431,62 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="chance-1" class="tsd-anchor"></a>
-				<h3>chance</h3>
-				<div class="tsd-signature tsd-kind-icon">chance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<a name="balance" class="tsd-anchor"></a>
+				<h3>balance</h3>
+				<div class="tsd-signature tsd-kind-icon">balance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/Chance.ts#L5">interfaces/Chance.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L9">interfaces/TradeUser.ts:9</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="name" class="tsd-anchor"></a>
-				<h3>name</h3>
-				<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="cards" class="tsd-anchor"></a>
+				<h3>cards</h3>
+				<div class="tsd-signature tsd-kind-icon">cards<span class="tsd-signature-symbol">:</span> <a href="card.html" class="tsd-signature-type">Card</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/Chance.ts#L2">interfaces/Chance.ts:2</a></li>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L11">interfaces/TradeUser.ts:11</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="tier" class="tsd-anchor"></a>
-				<h3>tier</h3>
-				<div class="tsd-signature tsd-kind-icon">tier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="count" class="tsd-anchor"></a>
+				<h3>count</h3>
+				<div class="tsd-signature tsd-kind-icon">count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/Chance.ts#L3">interfaces/Chance.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L15">interfaces/TradeUser.ts:15</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="treatmentid" class="tsd-anchor"></a>
-				<h3>treatment<wbr>Id</h3>
-				<div class="tsd-signature tsd-kind-icon">treatment<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<a name="packs" class="tsd-anchor"></a>
+				<h3>packs</h3>
+				<div class="tsd-signature tsd-kind-icon">packs<span class="tsd-signature-symbol">:</span> <a href="pack.html" class="tsd-signature-type">Pack</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/Chance.ts#L6">interfaces/Chance.ts:6</a></li>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L13">interfaces/TradeUser.ts:13</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="stickers" class="tsd-anchor"></a>
+				<h3>stickers</h3>
+				<div class="tsd-signature tsd-kind-icon">stickers<span class="tsd-signature-symbol">:</span> <a href="sticker.html" class="tsd-signature-type">Sticker</a><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L12">interfaces/TradeUser.ts:12</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="user" class="tsd-anchor"></a>
+				<h3>user</h3>
+				<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <a href="userdata.html" class="tsd-signature-type">UserData</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3fa917a/src/interfaces/TradeUser.ts#L7">interfaces/TradeUser.ts:7</a></li>
 					</ul>
 				</aside>
 			</section>
