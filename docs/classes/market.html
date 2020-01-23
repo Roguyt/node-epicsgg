@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UserRanking | node-epicsgg</title>
+	<title>Market | node-epicsgg</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2375,29 +2375,35 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class="current tsd-kind-interface">
-			<a href="userranking.html" class="tsd-kind-icon">User<wbr>Ranking</a>
+		<li class="current tsd-kind-class">
+			<a href="market.html" class="tsd-kind-icon">Market</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#avatar" class="tsd-kind-icon">avatar</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#acceptcounteroffer" class="tsd-kind-icon">accept<wbr>Counter<wbr>Offer</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#country" class="tsd-kind-icon">country</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#buy" class="tsd-kind-icon">buy</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#group" class="tsd-kind-icon">group</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#cancelcounteroffer" class="tsd-kind-icon">cancel<wbr>Counter<wbr>Offer</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#id" class="tsd-kind-icon">id</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#createlisting" class="tsd-kind-icon">create<wbr>Listing</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#joined" class="tsd-kind-icon">joined</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#declinecounteroffer" class="tsd-kind-icon">decline<wbr>Counter<wbr>Offer</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="userranking.html#ranking" class="tsd-kind-icon">ranking</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#getlistings" class="tsd-kind-icon">get<wbr>Listings</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="userranking.html#username" class="tsd-kind-icon">username</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#getmarketplacetemplates" class="tsd-kind-icon">get<wbr>Marketplace<wbr>Templates</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#makecounteroffer" class="tsd-kind-icon">make<wbr>Counter<wbr>Offer</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="market.html#removelisting" class="tsd-kind-icon">remove<wbr>Listing</a>
 				</li>
 			</ul>
 		</li>
@@ -2409,12 +2415,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<a href="userdata.html" class="tsd-signature-type">UserData</a>
-					<ul class="tsd-hierarchy">
-						<li>
-							<span class="target">UserRanking</span>
-						</li>
-					</ul>
+					<span class="target">Market</span>
 				</li>
 			</ul>
 		</section>
@@ -2423,97 +2424,418 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Properties</h3>
+						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#avatar" class="tsd-kind-icon">avatar</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#country" class="tsd-kind-icon">country</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#group" class="tsd-kind-icon">group</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#id" class="tsd-kind-icon">id</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#joined" class="tsd-kind-icon">joined</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="userranking.html#ranking" class="tsd-kind-icon">ranking</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="userranking.html#username" class="tsd-kind-icon">username</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#acceptcounteroffer" class="tsd-kind-icon">accept<wbr>Counter<wbr>Offer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#buy" class="tsd-kind-icon">buy</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#cancelcounteroffer" class="tsd-kind-icon">cancel<wbr>Counter<wbr>Offer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#createlisting" class="tsd-kind-icon">create<wbr>Listing</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#declinecounteroffer" class="tsd-kind-icon">decline<wbr>Counter<wbr>Offer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#getlistings" class="tsd-kind-icon">get<wbr>Listings</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#getmarketplacetemplates" class="tsd-kind-icon">get<wbr>Marketplace<wbr>Templates</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#makecounteroffer" class="tsd-kind-icon">make<wbr>Counter<wbr>Offer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="market.html#removelisting" class="tsd-kind-icon">remove<wbr>Listing</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="avatar" class="tsd-anchor"></a>
-				<h3>avatar</h3>
-				<div class="tsd-signature tsd-kind-icon">avatar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#avatar">avatar</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L4">interfaces/UserData.ts:4</a></li>
-					</ul>
-				</aside>
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="acceptcounteroffer" class="tsd-anchor"></a>
+				<h3>accept<wbr>Counter<wbr>Offer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">accept<wbr>Counter<wbr>Offer<span class="tsd-signature-symbol">(</span>counterOfferId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L280">client/actions/Market.ts:280</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>counterOfferId: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="country" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> country</h3>
-				<div class="tsd-signature tsd-kind-icon">country<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#country">country</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L6">interfaces/UserData.ts:6</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="buy" class="tsd-anchor"></a>
+				<h3>buy</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">buy<span class="tsd-signature-symbol">(</span>marketId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, price<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L211">client/actions/Market.ts:211</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Buy a market element</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>marketId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the marketId you want to buy</p>
+								</div>
+							</li>
+							<li>
+								<h5>price: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>it&#39;s price (?)</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the category id</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the game id</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="group" class="tsd-anchor"></a>
-				<h3>group</h3>
-				<div class="tsd-signature tsd-kind-icon">group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#group">group</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L5">interfaces/UserData.ts:5</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="cancelcounteroffer" class="tsd-anchor"></a>
+				<h3>cancel<wbr>Counter<wbr>Offer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">cancel<wbr>Counter<wbr>Offer<span class="tsd-signature-symbol">(</span>counterOfferId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L262">client/actions/Market.ts:262</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>counterOfferId: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="id" class="tsd-anchor"></a>
-				<h3>id</h3>
-				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#id">id</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L2">interfaces/UserData.ts:2</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="createlisting" class="tsd-anchor"></a>
+				<h3>create<wbr>Listing</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">create<wbr>Listing<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, price<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, minOffer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L158">client/actions/Market.ts:158</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>id: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>type: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>price: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> minOffer: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="joined" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> joined</h3>
-				<div class="tsd-signature tsd-kind-icon">joined<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#joined">joined</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L7">interfaces/UserData.ts:7</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="declinecounteroffer" class="tsd-anchor"></a>
+				<h3>decline<wbr>Counter<wbr>Offer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">decline<wbr>Counter<wbr>Offer<span class="tsd-signature-symbol">(</span>counterOfferId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L300">client/actions/Market.ts:300</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>counterOfferId: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="ranking" class="tsd-anchor"></a>
-				<h3>ranking</h3>
-				<div class="tsd-signature tsd-kind-icon">ranking<span class="tsd-signature-symbol">:</span> <a href="ranking.html" class="tsd-signature-type">Ranking</a></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserRanking.ts#L5">interfaces/UserRanking.ts:5</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getlistings" class="tsd-anchor"></a>
+				<h3>get<wbr>Listings</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Listings<span class="tsd-signature-symbol">(</span>cardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/marketlisting.html" class="tsd-signature-type">MarketListing</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L78">client/actions/Market.ts:78</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the market listings for a given cardId</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>cardId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the cardId of the listings you want to get</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> page: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the page to get</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the category id</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the game id</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/marketlisting.html" class="tsd-signature-type">MarketListing</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
+					</li>
+				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="username" class="tsd-anchor"></a>
-				<h3>username</h3>
-				<div class="tsd-signature tsd-kind-icon">username<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="userdata.html">UserData</a>.<a href="userdata.html#username">username</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/interfaces/UserData.ts#L3">interfaces/UserData.ts:3</a></li>
-					</ul>
-				</aside>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getmarketplacetemplates" class="tsd-anchor"></a>
+				<h3>get<wbr>Marketplace<wbr>Templates</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Marketplace<wbr>Templates<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, filters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/markettemplate.html" class="tsd-signature-type">MarketTemplate</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L36">client/actions/Market.ts:36</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the marketplace templates (list of CardTemplates with the lowest price)</p>
+								<a href="#list-of-filters" id="list-of-filters" style="color: inherit; text-decoration: none;">
+									<h4>List of filters</h4>
+								</a>
+								<ul>
+									<li>season: <code>Founders, 2017, 2018, 2019</code></li>
+									<li>price: <code>asc, desc</code></li>
+									<li>need (need only): boolean</li>
+									<li>signed: boolean</li>
+									<li>teamId</li>
+									<li>playerId</li>
+									<li>treatmentId</li>
+									<li>cardRarity: <code>To be updqted</code></li>
+									<li>tier: <code>To be updqted</code></li>
+								</ul>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> page: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the page to get</p>
+								</div>
+							</li>
+							<li>
+								<h5>filters: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the filters to be used in the request</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the category id</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the game id</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/markettemplate.html" class="tsd-signature-type">MarketTemplate</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>a Promise resolved with the response or rejected in case of error</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="makecounteroffer" class="tsd-anchor"></a>
+				<h3>make<wbr>Counter<wbr>Offer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">make<wbr>Counter<wbr>Offer<span class="tsd-signature-symbol">(</span>marketId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, currentPrice<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, counterPrice<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L234">client/actions/Market.ts:234</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>marketId: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>currentPrice: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>counterPrice: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="removelisting" class="tsd-anchor"></a>
+				<h3>remove<wbr>Listing</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">remove<wbr>Listing<span class="tsd-signature-symbol">(</span>listingId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f0ad9f8/src/client/actions/Market.ts#L191">client/actions/Market.ts:191</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO:</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>listingId: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
