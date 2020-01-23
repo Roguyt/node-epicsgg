@@ -147,6 +147,42 @@ export default class Market {
     }
 
     /**
+     * TODO:
+     * @param id
+     * @param type
+     * @param price
+     * @param minOffer
+     * @param categoryId
+     * @param gameId
+     */
+    public createListing(
+        id: number,
+        type: string,
+        price: number,
+        minOffer?: number,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<number> {
+        let data: Record<string, string | number> = {
+            id,
+            price,
+            type,
+        };
+
+        if (minOffer) {
+            data.minOffer = minOffer;
+        }
+
+        return this.baseClient.post('market/list?categoryId=' + categoryId + '&gameId=' + gameId + '', data).then(
+            (result): Promise<number> => {
+                return new Promise((resolve): void => {
+                    resolve(result.marketId);
+                });
+            }
+        );
+    }
+
+    /**
      * Buy a market element
      * @param marketId the marketId you want to buy
      * @param price it's price (?)
