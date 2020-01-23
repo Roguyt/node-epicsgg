@@ -253,4 +253,21 @@ export default class Market {
             );
     }
 
+    /**
+     * TODO:
+     * @param counterOfferId
+     * @param categoryId
+     * @param gameId
+     */
+    public cancelCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+        return this.baseClient
+            .delete('market/counter-offers/' + counterOfferId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
 }
