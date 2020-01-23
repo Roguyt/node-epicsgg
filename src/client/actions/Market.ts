@@ -290,4 +290,24 @@ export default class Market {
                 }
             );
     }
+
+    /**
+     * TODO:
+     * @param counterOfferId
+     * @param categoryId
+     * @param gameId
+     */
+    public declineCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+        return this.baseClient
+            .patch('market/counter-offers/decline?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                offerId: counterOfferId,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
 }
