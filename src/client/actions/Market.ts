@@ -183,6 +183,24 @@ export default class Market {
     }
 
     /**
+     * TODO:
+     * @param listingId
+     * @param categoryId
+     * @param gameId
+     */
+    public removeListing(listingId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+        return this.baseClient
+            .delete('market/listed/' + listingId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
+
+    /**
      * Buy a market element
      * @param marketId the marketId you want to buy
      * @param price it's price (?)
