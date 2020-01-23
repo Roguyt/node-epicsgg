@@ -93,15 +93,15 @@ export default class Spinner {
      * Buy a Spin
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buySpinner(): Promise<null> {
+    public buySpinner(): Promise<void> {
         return this.baseClient
             .post('spinner/buy-spin', {
                 amount: 1,
             })
             .then(
-                (): Promise<null> => {
+                (): Promise<void> => {
                     return new Promise((resolve): void => {
-                        resolve(null);
+                        resolve();
                     });
                 }
             );
@@ -112,15 +112,15 @@ export default class Spinner {
      * @param spinnerId spinner id to spin
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public spin(spinnerId: number = 166): Promise<null> {
+    public spin(spinnerId: number = 166): Promise<void> {
         return this.baseClient
             .post('spinner/spin', {
                 spinnerId,
             })
             .then(
-                (): Promise<null> => {
+                (): Promise<void> => {
                     return new Promise((resolve): void => {
-                        resolve(null);
+                        resolve();
                     });
                 }
             );
