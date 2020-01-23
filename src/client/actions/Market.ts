@@ -222,4 +222,35 @@ export default class Market {
                 }
             );
     }
+
+    /**
+     * TODO:
+     * @param marketId
+     * @param currentPrice
+     * @param counterPrice
+     * @param categoryId
+     * @param gameId
+     */
+    public makeCounterOffer(
+        marketId: number,
+        currentPrice: number,
+        counterPrice: number,
+        categoryId: number = 1,
+        gameId: number = 1
+    ): Promise<void> {
+        return this.baseClient
+            .post('market/counter-offers?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                marketId,
+                currentPrice,
+                counterPrice,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
+
 }
