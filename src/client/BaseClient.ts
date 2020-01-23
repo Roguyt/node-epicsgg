@@ -38,6 +38,9 @@ export default class BaseClient {
             this.axios = axios.create({
                 httpsAgent: agent,
                 timeout: 600000,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
         } else {
             this.axios = axios.create();
@@ -177,6 +180,54 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            if (e.errorCode) {
+                throw new Error(e.message);
+            } else if (!e.response) {
+                throw new Error('Internet error');
+            } else {
+                // Throw a custom error, not an axios one
+                switch (e.response.status) {
+                    case 429:
+                        throw new Error('Rate limit reached');
+
+                    case 409:
+                        throw new Error(e.response.data.error);
+
+                    case 403:
+                        throw new Error(e.response.data.error);
+
+                    default:
+                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                }
+            }
+        }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public async patch(path: string, data: Record<string, any>): Promise<any> {
+        if (!this.jwt || this.jwtExpiracy < new Date()) {
+            await this.login();
+        }
+
+        try {
+            let response: AxiosResponse = await this.axios.patch('https://api.epics.gg/api/v1/' + path, data, {
+                headers: {
+                    'X-User-JWT': this.jwt,
+                },
+            });
+
+            if (!response.data) {
+                // Throw an error
+            }
+
+            return response.data.data;
+        } catch (e) {
+            if (
+                (path.indexOf('accept-offer') !== -1 || path.indexOf('decline-offer') !== -1) &&
+                e.message.indexOf('Trade offer already sent.')
+            ) {
+                throw new Error("You can't accept your own offer.");
+            }
             if (e.errorCode) {
                 throw new Error(e.message);
             } else if (!e.response) {

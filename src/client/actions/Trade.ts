@@ -169,4 +169,44 @@ export default class Trade {
                 }
             );
     }
+
+    /**
+     * TODO:
+     * @param tradeId
+     * @param categoryId
+     * @param gameId
+     */
+    public acceptOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+        return this.baseClient
+            .patch('trade/accept-offer/?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                tradeId: tradeId,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
+
+    /**
+     * TODO:
+     * @param tradeId
+     * @param categoryId
+     * @param gameId
+     */
+    public declineOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+        return this.baseClient
+            .patch('trade/decline-offer/?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+                tradeId: tradeId,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
+    }
 }
