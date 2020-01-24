@@ -147,13 +147,14 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param id
-     * @param type
-     * @param price
-     * @param minOffer
-     * @param categoryId
-     * @param gameId
+     * Create a listing for the given entity id
+     * @param id the entity id
+     * @param type of the entity
+     * @param price price of the listing
+     * @param minOffer minOffer value (no minOffer if empty)
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public createListing(
         id: number,
@@ -183,10 +184,11 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param listingId
-     * @param categoryId
-     * @param gameId
+     * Remove a given listingId
+     * @param listingId listingId to remove
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public removeListing(listingId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient
@@ -224,12 +226,13 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param marketId
-     * @param currentPrice
-     * @param counterPrice
-     * @param categoryId
-     * @param gameId
+     * Create a counter offer for a given listing
+     * @param marketId listing id
+     * @param currentPrice the current price
+     * @param counterPrice the counter offer price
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public makeCounterOffer(
         marketId: number,
@@ -254,10 +257,11 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param counterOfferId
-     * @param categoryId
-     * @param gameId
+     * Withdraw a counter offer
+     * @param counterOfferId counterOfferId to withdraw
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public cancelCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient
@@ -272,10 +276,11 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param counterOfferId
-     * @param categoryId
-     * @param gameId
+     * Accept a counter offer
+     * @param counterOfferId the counterOfferId to accept
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public acceptCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient
@@ -292,10 +297,11 @@ export default class Market {
     }
 
     /**
-     * TODO:
-     * @param counterOfferId
-     * @param categoryId
-     * @param gameId
+     * Decline a given counter offer
+     * @param counterOfferId the counterOfferId to decline
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public declineCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient

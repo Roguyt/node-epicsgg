@@ -20,11 +20,12 @@ export default class Trade {
     }
 
     /**
-     * TODO:
-     * @param page
-     * @param status
-     * @param categoryId
-     * @param gameId
+     * Get a list of the current user's offers
+     * @param page the page to get (1 page = 100 treatments)
+     * @param status the status of the offers
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public getOffers(
         page: number = 1,
@@ -173,10 +174,11 @@ export default class Trade {
     }
 
     /**
-     * TODO:
-     * @param tradeId
-     * @param categoryId
-     * @param gameId
+     * Accept a given tradeId
+     * @param tradeId the tradeId to accept
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public acceptOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient
@@ -193,10 +195,11 @@ export default class Trade {
     }
 
     /**
-     * TODO:
+     * Decline a given tradeId
      * @param tradeId
-     * @param categoryId
-     * @param gameId
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
      */
     public declineOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
         return this.baseClient
