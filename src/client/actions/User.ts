@@ -362,4 +362,17 @@ export default class User {
                 }
             );
     }
+
+    // TODO:
+    public redeemCard(cardId: number, categoryId: number = 1, gameId: number = 1): Promise<null> {
+        return this.baseClient
+            .post('cards/redeem/' + cardId.toString() + '?categoryId=' + categoryId + '&gameId=' + gameId + '', {})
+            .then(
+                (): Promise<null> => {
+                    return new Promise((resolve): void => {
+                        resolve(null);
+                    });
+                }
+            );
+    }
 }
