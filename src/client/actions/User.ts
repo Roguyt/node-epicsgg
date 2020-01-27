@@ -363,7 +363,13 @@ export default class User {
             );
     }
 
-    // TODO:
+    /**
+     * Redeem a given card
+     * @param cardId the card id
+     * @param categoryId the category id
+     * @param gameId the game id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
     public redeemCard(cardId: number, categoryId: number = 1, gameId: number = 1): Promise<null> {
         return this.baseClient
             .post('cards/redeem/' + cardId.toString() + '?categoryId=' + categoryId + '&gameId=' + gameId + '', {})
