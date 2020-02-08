@@ -48,6 +48,7 @@ export default class SocketClient {
                     },
 
                     cards: [],
+                    stickers: [],
 
                     totalOpened: data.totalPacksOpened,
 
@@ -64,6 +65,19 @@ export default class SocketClient {
                         mint: {
                             batch: data.cards[i].mintBatch,
                             value: data.cards[i].mintNumber,
+                        },
+                    });
+                }
+
+                for (let i = 0; i < data.stickers.length; i += 1) {
+                    packOpenedFeed.stickers.push({
+                        id: data.stickers[i].id,
+                        stickerTemplateId: data.stickers[i].stickerTemplateId,
+                        images: data.stickers[i].images,
+                        title: data.stickers[i].title,
+                        mint: {
+                            batch: data.stickers[i].mintBatch,
+                            value: data.stickers[i].mintNumber,
                         },
                     });
                 }

@@ -16,6 +16,13 @@ export interface PackOpenedFeed {
         title: string;
         mint: Mint;
     }[];
+    stickers: {
+        id: number;
+        stickerTemplateId: number;
+        images: Record<string, string>;
+        title: string;
+        mint: Mint;
+    }[];
 
     totalOpened: number;
 
