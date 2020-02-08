@@ -24,9 +24,6 @@ export default class SocketClient {
             transports: ['websocket'],
         });
 
-        let patch = require('socketio-wildcard')(this.io.Manager);
-        patch(this.socket);
-
         this.event = new EventEmitter();
 
         this.socket.on('disconnect', () => {
