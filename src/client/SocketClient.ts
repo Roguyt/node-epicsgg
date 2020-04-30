@@ -113,7 +113,8 @@ export default class SocketClient {
                         epiCoins: data.properties.epicoins,
                         silverCoins: data.properties.silvercoins,
                         craftingCoins: data.properties.craftingcoins,
-                        packTemplates: data.properties.pack_template,
+                        cardTemplates: data.properties.card_templates,
+                        packTemplates: data.properties.pack_templates,
                     },
                     createdAt: new Date(data.created),
                     user: {
