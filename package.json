@@ -1,73 +1,74 @@
 {
-  "name": "node-epicsgg",
-  "version": "1.3.4",
-  "description": "An interface to communicate with Epics.gg API",
-  "keywords": [
-    "epics.gg",
-    "epics"
-  ],
-  "author": {
-    "url": "clmntw.fr",
-    "email": "github@clmntw.fr",
-    "name": "Roguyt"
-  },
-  "homepage": "https://github.com/Roguyt/node-epicsgg#readme",
-  "repository": {
-    "url": "https://github.com/Roguyt/node-epicsgg.git",
-    "type": "git"
-  },
-  "bugs": {
-    "url": "https://github.com/Roguyt/node-epicsgg/issues",
-    "email": "github@clmntw.fr"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "scripts": {
-    "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx} && yarn run lint && yarn run build",
-    "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
-    "build": "tsc -p tsconfig.json",
-    "build:watch": "tsc -w -p tsconfig.json",
-    "build:docs": "typedoc --out ./docs --tsconfig tsconfig.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
-    "prepack": "yarn run build"
-  },
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "license": "MIT",
-  "files": [
-    "lib/"
-  ],
-  "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/jsonwebtoken": "^8.3.2",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.0.12",
-    "@types/socket.io": "^2.1.2",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.11.0",
-    "chai": "^4.2.0",
-    "conventional-changelog-insurgent": "^5.2.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-typescript": "^2.0.0",
-    "eslint-formatter-pretty": "^2.1.1",
-    "eslint-import-resolver-typescript": "^1.1.1",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "mocha": "^6.1.4",
-    "mocha-clean": "^1.0.0",
-    "prettier": "^1.18.2",
-    "resolve": "^1.11.1",
-    "ts-node": "^8.3.0",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.5.2"
-  },
-  "dependencies": {
-    "axios": "^0.19.0",
-    "https-proxy-agent": "^5.0.0",
-    "jsonwebtoken": "^8.5.1",
-    "socket.io-client": "^2.2.0"
-  }
+    "name": "node-epicsgg",
+    "version": "1.3.4",
+    "description": "An interface to communicate with Epics.gg API",
+    "keywords": ["epics.gg", "epics"],
+    "author": {
+        "url": "clmntw.fr",
+        "email": "github@clmntw.fr",
+        "name": "Roguyt"
+    },
+    "homepage": "https://github.com/Roguyt/node-epicsgg#readme",
+    "repository": {
+        "url": "https://github.com/Roguyt/node-epicsgg.git",
+        "type": "git"
+    },
+    "bugs": {
+        "url": "https://github.com/Roguyt/node-epicsgg/issues",
+        "email": "github@clmntw.fr"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "scripts": {
+        "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx}",
+        "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
+        "format": "prettier --write 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
+        "build": "tsc -p tsconfig.json",
+        "build:watch": "tsc -w -p tsconfig.json",
+        "build:docs": "typedoc --out ./docs --tsconfig tsconfig.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
+        "prepack": "yarn run build"
+    },
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts",
+    "license": "MIT",
+    "files": ["lib/"],
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged --pattern '**/*'"
+        }
+    },
+    "devDependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/jsonwebtoken": "^8.3.2",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.0.12",
+        "@types/socket.io": "^2.1.2",
+        "@typescript-eslint/eslint-plugin": "^1.13.0",
+        "@typescript-eslint/parser": "^1.11.0",
+        "chai": "^4.2.0",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-config-prettier": "^6.0.0",
+        "eslint-config-typescript": "^2.0.0",
+        "eslint-formatter-pretty": "^2.1.1",
+        "eslint-import-resolver-typescript": "^1.1.1",
+        "eslint-plugin-import": "^2.18.0",
+        "eslint-plugin-prettier": "^3.1.0",
+        "husky": "^4.2.5",
+        "mocha": "^6.1.4",
+        "mocha-clean": "^1.0.0",
+        "prettier": "^2.0.5",
+        "pretty-quick": "^2.0.1",
+        "resolve": "^1.11.1",
+        "ts-node": "^8.3.0",
+        "typedoc": "^0.15.0",
+        "typescript": "^3.5.2"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "https-proxy-agent": "^5.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "socket.io-client": "^2.2.0"
+    }
 }

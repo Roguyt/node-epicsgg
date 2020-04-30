@@ -1,25 +1,25 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "extends": ["airbnb-base", "prettier", "typescript", "typescript/prettier"],
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "prettier/prettier": "error",
-    "import/extensions": 0,
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": ["webpack.config.js", "tests/**/*.{ts,tsx}"]
-      }
-    ],
-    "require-jsdoc": 0
-  },
-  "settings": {
-    "import/resolver": {
-      "node": true,
-      "typescript": true
+    "parser": "@typescript-eslint/parser",
+    "extends": ["typescript", "typescript/prettier", "airbnb-base", "prettier"],
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "prettier/prettier": "error",
+        "import/extensions": 0,
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": ["webpack.config.js", "tests/**/*.{ts,tsx}"]
+            }
+        ],
+        "require-jsdoc": 0
     },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx", { "comment": true }]
+    "settings": {
+        "import/resolver": {
+            "node": true,
+            "typescript": true
+        },
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx", { "comment": true }]
+        }
     }
-  }
 }
