@@ -8,6 +8,7 @@ import { CurrentUser } from '../interfaces/CurrentUser';
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
 import { QueryParams } from '../interfaces/QueryParams';
+import { BodyData } from '../interfaces/BodyData';
 
 /**
  * @hidden
@@ -85,10 +86,10 @@ export default class BaseClient {
 
     public async login(): Promise<void> {
         try {
-            const response: AxiosResponse = await this.axios.post(
-                'https://api.epics.gg/api/v1/auth/login?categoryId=1&gameId=1',
-                { email: this.username, password: this.password }
-            );
+            const response: AxiosResponse = await this.axios.post('https://api.epics.gg/api/v1/auth/login', {
+                email: this.username,
+                password: this.password,
+            });
 
             if (!response.data) {
                 // Throw an error
@@ -134,7 +135,7 @@ export default class BaseClient {
 
     public async get(
         path: string,
-        params: QueryParams = {}
+        params?: QueryParams
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
@@ -183,7 +184,7 @@ export default class BaseClient {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async post(path: string, data: Record<string, any>): Promise<any> {
+    public async post(path: string, data?: BodyData, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
@@ -192,6 +193,11 @@ export default class BaseClient {
             const response: AxiosResponse = await this.axios.post(`https://api.epics.gg/api/v1/${path}`, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
+                },
+                params: {
+                    ...params,
+                    categoryId: this.categoryId,
+                    gameId: this.gameId,
                 },
             });
 

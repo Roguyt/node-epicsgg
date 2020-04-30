@@ -9,6 +9,7 @@ import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
 import StickerUtils from '../utils/Sticker';
 import { QueryParams } from '../../interfaces/QueryParams';
+import { BodyData } from '../../interfaces/BodyData';
 
 export default class Trade {
     private baseClient: BaseClient;
@@ -124,21 +125,19 @@ export default class Trade {
      * @param userId
      * @param cards
      * @param stickers
-     * @param categoryId
-     * @param gameId
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public createOffer(
-        userId: number,
-        cards: Card[],
-        stickers: Sticker[],
-        categoryId = 1,
-        gameId = 1
-    ): Promise<number> {
+    public createOffer(userId: number, cards: Card[], stickers: Sticker[]): Promise<number> {
+        const body: BodyData = {
+            user1Balance: 0,
+            user2Balance: 0,
+            user2Id: userId.toString(),
+        };
+
         const entities = [];
 
         for (let i = 0; i < cards.length; i += 1) {
-            // Should throw an error is isMarketList = true
+            // TODO: Should throw an error is isMarketList = true
 
             entities.push({
                 id: cards[i].id,
@@ -153,20 +152,15 @@ export default class Trade {
             });
         }
 
-        return this.baseClient
-            .post(`trade/create-offer?categoryId=${categoryId}&gameId=${gameId}`, {
-                entities,
-                user1Balance: 0,
-                user2Balance: 0,
-                user2Id: `${userId}`,
-            })
-            .then(
-                (result): Promise<number> => {
-                    return new Promise((resolve): void => {
-                        resolve(result.tradeId as number);
-                    });
-                }
-            );
+        body.entities = entities;
+
+        return this.baseClient.post(`trade/create-offer`, body).then(
+            (result): Promise<number> => {
+                return new Promise((resolve): void => {
+                    resolve(result.tradeId as number);
+                });
+            }
+        );
     }
 
     /**

@@ -16,6 +16,7 @@ import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
 import { QueryParams } from '../../interfaces/QueryParams';
+import { BodyData } from '../../interfaces/BodyData';
 
 export default class User {
     private baseClient: BaseClient;
@@ -271,46 +272,40 @@ export default class User {
     /**
      * Open a given packId from the authenticated user
      * @param packId the pack id to open
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public openPack(packId: number, categoryId = 1, gameId = 1): Promise<Card[]> {
-        return this.baseClient
-            .post(`packs/open2?categoryId=${categoryId}&gameId=${gameId}`, {
-                packId,
-            })
-            .then(
-                (result): Promise<Card[]> => {
-                    return new Promise((resolve): void => {
-                        const data: Card[] = [];
+    public openPack(packId: number): Promise<Card[]> {
+        const body: BodyData = {
+            packId,
+        };
 
-                        for (let i = 0; i < result.cards.length; i += 1) {
-                            data.push(CardUtils.createACard(result.cards[i]));
-                        }
+        return this.baseClient.post(`packs/open2`, body).then(
+            (result): Promise<Card[]> => {
+                return new Promise((resolve): void => {
+                    const data: Card[] = [];
 
-                        resolve(data);
-                    });
-                }
-            );
+                    for (let i = 0; i < result.cards.length; i += 1) {
+                        data.push(CardUtils.createACard(result.cards[i]));
+                    }
+
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
      * Redeem a given card
      * @param cardId the card id
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public redeemCard(cardId: number, categoryId = 1, gameId = 1): Promise<null> {
-        return this.baseClient
-            .post(`cards/redeem/${cardId.toString()}?categoryId=${categoryId}&gameId=${gameId}`, {})
-            .then(
-                (): Promise<null> => {
-                    return new Promise((resolve): void => {
-                        resolve(null);
-                    });
-                }
-            );
+    public redeemCard(cardId: number): Promise<null> {
+        return this.baseClient.post(`cards/redeem/${cardId}`).then(
+            (): Promise<null> => {
+                return new Promise((resolve): void => {
+                    resolve(null);
+                });
+            }
+        );
     }
 }

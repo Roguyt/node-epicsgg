@@ -4,6 +4,7 @@ import PackUtils from '../utils/Pack';
 
 import { Pack } from '../../interfaces/Pack';
 import { QueryParams } from '../../interfaces/QueryParams';
+import { BodyData } from '../../interfaces/BodyData';
 
 export default class Store {
     private baseClient: BaseClient;
@@ -46,24 +47,22 @@ export default class Store {
      * Buy a given amount of a given packTemplateId
      * @param packTemplateId
      * @param amount the amount of packs to buy
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buyPack(packTemplateId: number, amount = 1, categoryId = 1, gameId = 1): Promise<number[]> {
-        return this.baseClient
-            .post(`packs/buy?categoryId=${categoryId}&gameId=${gameId}`, {
-                amount,
-                packTemplateId,
-            })
-            .then(
-                (result): Promise<number[]> => {
-                    return new Promise((resolve): void => {
-                        const data: number[] = result;
+    public buyPack(packTemplateId: number, amount = 1): Promise<number[]> {
+        const body: BodyData = {
+            amount,
+            packTemplateId,
+        };
 
-                        resolve(data);
-                    });
-                }
-            );
+        return this.baseClient.post(`packs/buy`, body).then(
+            (result): Promise<number[]> => {
+                return new Promise((resolve): void => {
+                    const resultData: number[] = result;
+
+                    resolve(resultData);
+                });
+            }
+        );
     }
 }

@@ -5,6 +5,7 @@ import CardUtils from '../utils/Card';
 import { MarketTemplate } from '../../interfaces/MarketTemplate';
 import { MarketListing } from '../../interfaces/MarketListing';
 import { QueryParams } from '../../interfaces/QueryParams';
+import { BodyData } from '../../interfaces/BodyData';
 
 export default class Market {
     private baseClient: BaseClient;
@@ -148,29 +149,20 @@ export default class Market {
      * @param type of the entity
      * @param price price of the listing
      * @param minOffer minOffer value (no minOffer if empty)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public createListing(
-        id: number,
-        type: string,
-        price: number,
-        minOffer?: number,
-        categoryId = 1,
-        gameId = 1
-    ): Promise<number> {
-        const data: Record<string, string | number> = {
+    public createListing(id: number, type: string, price: number, minOffer?: number): Promise<number> {
+        const body: BodyData = {
             id,
             price,
             type,
         };
 
         if (minOffer) {
-            data.minOffer = minOffer;
+            body.minOffer = minOffer;
         }
 
-        return this.baseClient.post(`market/list?categoryId=${categoryId}&gameId=${gameId}`, data).then(
+        return this.baseClient.post(`market/list`, body).then(
             (result): Promise<number> => {
                 return new Promise((resolve): void => {
                     resolve(result.marketId);
@@ -200,23 +192,21 @@ export default class Market {
      * Buy a market element
      * @param marketId the marketId you want to buy
      * @param price it's price (?)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buy(marketId: number, price: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .post(`market/buy?categoryId=${categoryId}&gameId=${gameId}`, {
-                marketId,
-                price,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public buy(marketId: number, price: number): Promise<void> {
+        const body: BodyData = {
+            marketId,
+            price,
+        };
+
+        return this.baseClient.post(`market/buy`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
@@ -224,30 +214,22 @@ export default class Market {
      * @param marketId listing id
      * @param currentPrice the current price
      * @param counterPrice the counter offer price
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public makeCounterOffer(
-        marketId: number,
-        currentPrice: number,
-        counterPrice: number,
-        categoryId = 1,
-        gameId = 1
-    ): Promise<void> {
-        return this.baseClient
-            .post(`market/counter-offers?categoryId=${categoryId}&gameId=${gameId}`, {
-                marketId,
-                currentPrice,
-                counterPrice,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public makeCounterOffer(marketId: number, currentPrice: number, counterPrice: number): Promise<void> {
+        const body: BodyData = {
+            marketId,
+            currentPrice,
+            counterPrice,
+        };
+
+        return this.baseClient.post(`market/counter-offers`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**

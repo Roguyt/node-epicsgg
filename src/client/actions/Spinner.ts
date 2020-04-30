@@ -5,6 +5,7 @@ import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
 import DateUtils from '../utils/Date';
 
 import BaseClient from '../BaseClient';
+import { BodyData } from '../../interfaces/BodyData';
 
 export default class Spinner {
     private baseClient: BaseClient;
@@ -90,17 +91,17 @@ export default class Spinner {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public buySpinner(): Promise<void> {
-        return this.baseClient
-            .post('spinner/buy-spin', {
-                amount: 1,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+        const body: BodyData = {
+            amount: 1,
+        };
+
+        return this.baseClient.post('spinner/buy-spin', body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
@@ -109,16 +110,16 @@ export default class Spinner {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public spin(spinnerId = 166): Promise<void> {
-        return this.baseClient
-            .post('spinner/spin', {
-                spinnerId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+        const body: BodyData = {
+            spinnerId,
+        };
+
+        return this.baseClient.post('spinner/spin', body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 }
