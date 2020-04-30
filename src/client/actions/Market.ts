@@ -233,8 +233,6 @@ export default class Market {
     /**
      * Withdraw a counter offer
      * @param counterOfferId counterOfferId to withdraw
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public cancelCounterOffer(counterOfferId: number): Promise<void> {
@@ -250,42 +248,38 @@ export default class Market {
     /**
      * Accept a counter offer
      * @param counterOfferId the counterOfferId to accept
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .patch(`market/counter-offers/accept?categoryId=${categoryId}&gameId=${gameId}`, {
-                offerId: counterOfferId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public acceptCounterOffer(counterOfferId: number): Promise<void> {
+        const body: BodyData = {
+            offerId: counterOfferId,
+        };
+
+        return this.baseClient.patch(`market/counter-offers/accept`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
      * Decline a given counter offer
      * @param counterOfferId the counterOfferId to decline
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .patch(`market/counter-offers/decline?categoryId=${categoryId}&gameId=${gameId}`, {
-                offerId: counterOfferId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public declineCounterOffer(counterOfferId: number): Promise<void> {
+        const body: BodyData = {
+            offerId: counterOfferId,
+        };
+
+        return this.baseClient.patch(`market/counter-offers/decline`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 }

@@ -166,42 +166,38 @@ export default class Trade {
     /**
      * Accept a given tradeId
      * @param tradeId the tradeId to accept
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptOffer(tradeId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .patch(`trade/accept-offer/?categoryId=${categoryId}&gameId=${gameId}`, {
-                tradeId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public acceptOffer(tradeId: number): Promise<void> {
+        const body: BodyData = {
+            tradeId,
+        };
+
+        return this.baseClient.patch(`trade/accept-offer`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
      * Decline a given tradeId
      * @param tradeId
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineOffer(tradeId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .patch(`trade/decline-offer/?categoryId=${categoryId}&gameId=${gameId}`, {
-                tradeId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public declineOffer(tradeId: number): Promise<void> {
+        const body: BodyData = {
+            tradeId,
+        };
+
+        return this.baseClient.patch(`trade/decline-offer`, body).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 }
