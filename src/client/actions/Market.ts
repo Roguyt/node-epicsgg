@@ -174,12 +174,10 @@ export default class Market {
     /**
      * Remove a given listingId
      * @param listingId listingId to remove
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public removeListing(listingId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient.delete(`market/listed/${listingId}?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public removeListing(listingId: number): Promise<void> {
+        return this.baseClient.delete(`market/listed/${listingId}`).then(
             (): Promise<void> => {
                 return new Promise((resolve): void => {
                     resolve();
@@ -239,16 +237,14 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public cancelCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
-        return this.baseClient
-            .delete(`market/counter-offers/${counterOfferId}?categoryId=${categoryId}&gameId=${gameId}`)
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public cancelCounterOffer(counterOfferId: number): Promise<void> {
+        return this.baseClient.delete(`market/counter-offers/${counterOfferId}`).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**

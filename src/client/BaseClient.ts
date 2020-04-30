@@ -231,7 +231,7 @@ export default class BaseClient {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async delete(path: string): Promise<any> {
+    public async delete(path: string, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
@@ -240,6 +240,11 @@ export default class BaseClient {
             const response: AxiosResponse = await this.axios.delete(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
+                },
+                params: {
+                    ...params,
+                    categoryId: this.categoryId,
+                    gameId: this.gameId,
                 },
             });
 
