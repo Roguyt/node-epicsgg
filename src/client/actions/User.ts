@@ -15,6 +15,7 @@ import DateUtils from '../utils/Date';
 import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
+import { QueryParams } from '../../interfaces/QueryParams';
 
 export default class User {
     private baseClient: BaseClient;
@@ -28,13 +29,15 @@ export default class User {
 
     /**
      * Search players with a given string
-     * @param search the text to search
-     * @param categoryId the category id
-     * @param gameId the game id
+     * @param username the username to search
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public searchUsers(search: string, categoryId = 1, gameId = 1): Promise<UserData[]> {
-        return this.baseClient.get(`users/search?username=${search}&categoryId=${categoryId}&gameId=${gameId}`).then(
+    public searchUsers(username: string): Promise<UserData[]> {
+        const params: QueryParams = {
+            username,
+        };
+
+        return this.baseClient.get(`users/search`, params).then(
             (result): Promise<UserData[]> => {
                 return new Promise((resolve): void => {
                     const data: UserData[] = [];
@@ -58,12 +61,10 @@ export default class User {
 
     /**
      * Get the funds of the currently authenticated user
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getFunds(categoryId = 1, gameId = 1): Promise<UserFund> {
-        return this.baseClient.get(`user/funds?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public getFunds(): Promise<UserFund> {
+        return this.baseClient.get(`user/funds`).then(
             (result): Promise<UserFund> => {
                 return new Promise((resolve): void => {
                     const data: UserFund = {
@@ -78,19 +79,12 @@ export default class User {
         );
     }
 
-    public getUserSummary(userId: number, season: number | string, categoryId = 1, gameId = 1): Promise<UserSummary> {
-        const seasonString = season.toString();
-        let url;
+    public getUserSummary(userId: number, season: number | string = ''): Promise<UserSummary> {
+        const params: QueryParams = {
+            season: season.toString(),
+        };
 
-        if (seasonString === 'full') {
-            url = `collections/users/${userId}/user-summary/?categoryId=${categoryId}&gameId=${gameId}&types`;
-        } else if (seasonString === '') {
-            url = `collections/users/${userId}/user-summary/?categoryId=${categoryId}&gameId=${gameId}`;
-        } else {
-            url = `collections/users/${userId}/user-summary?seasons=${seasonString}&categoryId=${categoryId}&gameId=${gameId}`;
-        }
-
-        return this.baseClient.get(url).then(
+        return this.baseClient.get(`collections/users/${userId}/user-summary`, params).then(
             (result): Promise<UserSummary> => {
                 return new Promise((resolve): void => {
                     const data: UserSummary = {
@@ -134,52 +128,46 @@ export default class User {
      * Get the owned cards and stickers of a given user id and a given collection id
      * @param userId the user id to get its cards
      * @param collectionId the collection id to get its cards
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getOwned(userId: number, collectionId: number, categoryId = 1, gameId = 1): Promise<Owned> {
-        return this.baseClient
-            .get(`collections/${collectionId}/users/${userId}/owned2?categoryId=${categoryId}&gameId=${gameId}`)
-            .then(
-                (result): Promise<Owned> => {
-                    return new Promise((resolve): void => {
-                        const cards: Card[] = [];
+    public getOwned(userId: number, collectionId: number): Promise<Owned> {
+        return this.baseClient.get(`collections/${collectionId}/users/${userId}/owned2`).then(
+            (result): Promise<Owned> => {
+                return new Promise((resolve): void => {
+                    const cards: Card[] = [];
 
-                        for (let i = 0; i < result.cards.length; i += 1) {
-                            const card = result.cards[i];
-                            const cardData: Card = CardUtils.createACard(card);
+                    for (let i = 0; i < result.cards.length; i += 1) {
+                        const card = result.cards[i];
+                        const cardData: Card = CardUtils.createACard(card);
 
-                            cards.push(cardData);
-                        }
+                        cards.push(cardData);
+                    }
 
-                        const stickers: Sticker[] = [];
+                    const stickers: Sticker[] = [];
 
-                        for (let i = 0; i < result.stickers.length; i += 1) {
-                            const sticker = result.stickers[i];
-                            const stickerData: Sticker = StickerUtils.createASticker(sticker);
+                    for (let i = 0; i < result.stickers.length; i += 1) {
+                        const sticker = result.stickers[i];
+                        const stickerData: Sticker = StickerUtils.createASticker(sticker);
 
-                            stickers.push(stickerData);
-                        }
+                        stickers.push(stickerData);
+                    }
 
-                        resolve({
-                            cards,
-                            stickers,
-                        });
+                    resolve({
+                        cards,
+                        stickers,
                     });
-                }
-            );
+                });
+            }
+        );
     }
 
     /**
      * Get the showcased cards of a given user id
      * @param userId the user id to get its cards
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getShowcasedCards(userId: number, categoryId = 1, gameId = 1): Promise<Card[]> {
-        return this.baseClient.get(`showcase/${userId}/all?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public getShowcasedCards(userId: number): Promise<Card[]> {
+        return this.baseClient.get(`showcase/${userId}/all`).then(
             (result): Promise<Card[]> => {
                 return new Promise((resolve): void => {
                     const data: Card[] = [];
@@ -201,72 +189,67 @@ export default class User {
      * Get the market listings of a given user id
      * @param userId the user id to get its cards
      * @param page the page to get (1 page = 40 Market listings)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getMarketListings(userId: number, page = 1, categoryId = 1, gameId = 1): Promise<UserMarketListings> {
-        return this.baseClient
-            .get(
-                `market/listed/users/${userId}?categoryId=${categoryId}&gameId=${gameId}&page=${page}&userId=${userId}`
-            )
-            .then(
-                (result): Promise<UserMarketListings> => {
-                    return new Promise((resolve): void => {
-                        const data: UserMarketListings = {
-                            count: result.count,
-                            total: result.total,
-                            marketListings: [],
+    public getMarketListings(userId: number, page = 1): Promise<UserMarketListings> {
+        const params: QueryParams = {
+            userId,
+            page,
+        };
+
+        return this.baseClient.get(`market/listed/users/${userId}`, params).then(
+            (result): Promise<UserMarketListings> => {
+                return new Promise((resolve): void => {
+                    const data: UserMarketListings = {
+                        count: result.count,
+                        total: result.total,
+                        marketListings: [],
+                    };
+
+                    for (let i = 0; i < result.market.length; i += 1) {
+                        const marketListing: MarketListing = {
+                            marketId: result.market[i].marketId,
+                            price: result.market[i].price,
+                            currentAvgHourPrice: {
+                                date: null,
+                                value: null,
+                            },
+                            previousAvgPrice: {
+                                date: null,
+                                value: null,
+                            },
+                            createdAt: new Date(result.market[i].created),
+                            type: result.market[i].type,
+                            card: CardUtils.createACard(result.market[i].card),
                         };
 
-                        for (let i = 0; i < result.market.length; i += 1) {
-                            const marketListing: MarketListing = {
-                                marketId: result.market[i].marketId,
-                                price: result.market[i].price,
-                                currentAvgHourPrice: {
-                                    date: null,
-                                    value: null,
-                                },
-                                previousAvgPrice: {
-                                    date: null,
-                                    value: null,
-                                },
-                                createdAt: new Date(result.market[i].created),
-                                type: result.market[i].type,
-                                card: CardUtils.createACard(result.market[i].card),
-                            };
-
-                            if (result.market[i].previousAvgPrice !== null) {
-                                marketListing.previousAvgPrice.value = result.market[i].previousAvgPrice.statValue;
-                                marketListing.previousAvgPrice.date = new Date(
-                                    result.market[i].previousAvgPrice.statDate
-                                );
-                            }
-
-                            if (result.market[i].currentHourPrice !== null) {
-                                marketListing.currentAvgHourPrice.value = result.market[i].currentHourPrice.statValue;
-                                marketListing.currentAvgHourPrice.date = new Date(
-                                    result.market[i].currentHourPrice.statDate
-                                );
-                            }
-
-                            data.marketListings.push(marketListing);
+                        if (result.market[i].previousAvgPrice !== null) {
+                            marketListing.previousAvgPrice.value = result.market[i].previousAvgPrice.statValue;
+                            marketListing.previousAvgPrice.date = new Date(result.market[i].previousAvgPrice.statDate);
                         }
 
-                        resolve(data);
-                    });
-                }
-            );
+                        if (result.market[i].currentHourPrice !== null) {
+                            marketListing.currentAvgHourPrice.value = result.market[i].currentHourPrice.statValue;
+                            marketListing.currentAvgHourPrice.date = new Date(
+                                result.market[i].currentHourPrice.statDate
+                            );
+                        }
+
+                        data.marketListings.push(marketListing);
+                    }
+
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
      * Get the owned packs of the currently authenticated user
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(categoryId = 1, gameId = 1): Promise<UserPack[]> {
-        return this.baseClient.get(`packs/user?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public getPacks(): Promise<UserPack[]> {
+        return this.baseClient.get(`packs/user`).then(
             (result): Promise<UserPack[]> => {
                 return new Promise((resolve): void => {
                     const data: UserPack[] = [];

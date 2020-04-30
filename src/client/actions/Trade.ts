@@ -8,6 +8,7 @@ import DateUtils from '../utils/Date';
 import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
 import StickerUtils from '../utils/Sticker';
+import { QueryParams } from '../../interfaces/QueryParams';
 
 export default class Trade {
     private baseClient: BaseClient;
@@ -23,18 +24,18 @@ export default class Trade {
      * Get a list of the current user's offers
      * @param page the page to get (1 page = 100 treatments)
      * @param status the status of the offers
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getOffers(page = 1, status = '', categoryId = 1, gameId = 1): Promise<TradeData[]> {
-        let url = `trade?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
+    public getOffers(page = 1, status: string = null): Promise<TradeData[]> {
+        const params: QueryParams = {
+            page,
+        };
 
-        if (status !== '') {
-            url += `&status=${status}`;
+        if (status !== null) {
+            params.status = status;
         }
 
-        return this.baseClient.get(url).then(
+        return this.baseClient.get('trade', params).then(
             (result): Promise<TradeData[]> => {
                 return new Promise((resolve): void => {
                     const trades: TradeData[] = [];

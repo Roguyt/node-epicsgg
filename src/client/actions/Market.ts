@@ -4,6 +4,7 @@ import CardUtils from '../utils/Card';
 
 import { MarketTemplate } from '../../interfaces/MarketTemplate';
 import { MarketListing } from '../../interfaces/MarketListing';
+import { QueryParams } from '../../interfaces/QueryParams';
 
 export default class Market {
     private baseClient: BaseClient;
@@ -29,23 +30,24 @@ export default class Market {
      *  - tier: ```To be updqted```
      * @param page the page to get
      * @param filters the filters to be used in the request
-     * @param categoryId the category id
-     * @param gameId the game id
+     * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getMarketplaceTemplates(
         page = 1,
         filters: Record<string, string | boolean>,
-        categoryId = 1,
-        gameId = 1
+        type: string = null
     ): Promise<MarketTemplate[]> {
-        let url = `market/templates?categoryId=${categoryId}&gameId=${gameId}&page${page}&type=card`;
+        const params: QueryParams = {
+            page,
+            ...filters,
+        };
 
-        Object.keys(filters).forEach((param): void => {
-            url += `&${param}=${filters[param]}`;
-        });
+        if (type !== null) {
+            params.type = type;
+        }
 
-        return this.baseClient.get(url).then(
+        return this.baseClient.get('market/templates', params).then(
             (result): Promise<MarketTemplate[]> => {
                 return new Promise((resolve): void => {
                     const data: MarketTemplate[] = [];
@@ -71,66 +73,73 @@ export default class Market {
      * Get the market listings for a given cardId
      * @param cardId the cardId of the listings you want to get
      * @param page the page to get
-     * @param categoryId the category id
-     * @param gameId the game id
+     * @param sort price / ?
+     * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getListings(cardId: number, page = 1, categoryId = 1, gameId = 1): Promise<MarketListing[]> {
-        return this.baseClient
-            .get(
-                `market/buy?categoryId=${categoryId}&gameId=${gameId}&page=${page}&sort=price&templateId=${cardId}&type=card`
-            )
-            .then(
-                (result): Promise<MarketListing[]> => {
-                    return new Promise((resolve): void => {
-                        const data: MarketListing[] = [];
+    public getListings(cardId: number, page = 1, sort: string = null, type: string = null): Promise<MarketListing[]> {
+        const params: QueryParams = {
+            page,
+        };
 
-                        if (!result.market[0]) {
-                            return resolve(data);
-                        }
+        if (sort !== null) {
+            params.sort = sort;
+        }
 
-                        for (let i = 0; i < result.market[0].length; i += 1) {
-                            const marketListing: MarketListing = {
-                                marketId: result.market[0][i].marketId,
+        if (type !== null) {
+            params.type = type;
+        }
 
-                                price: result.market[0][i].price,
-                                previousAvgPrice: {
-                                    value: null,
-                                    date: null,
-                                },
-                                currentAvgHourPrice: {
-                                    value: null,
-                                    date: null,
-                                },
+        return this.baseClient.get('market/buy', params).then(
+            (result): Promise<MarketListing[]> => {
+                return new Promise((resolve): void => {
+                    const data: MarketListing[] = [];
 
-                                createdAt: new Date(result.market[0][i].created),
-
-                                type: result.market[0][i].type,
-                                card: CardUtils.createACard(result.market[0][i].card),
-                            };
-
-                            if (result.market[0][i].previousAvgPrice !== null) {
-                                marketListing.previousAvgPrice.value = result.market[0][i].previousAvgPrice.statValue;
-                                marketListing.previousAvgPrice.date = new Date(
-                                    result.market[0][i].previousAvgPrice.statValue
-                                );
-                            }
-
-                            if (result.market[0][i].currentHourPrice !== null) {
-                                marketListing.currentAvgHourPrice.value =
-                                    result.market[0][i].currentHourPrice.statValue;
-                                marketListing.currentAvgHourPrice.date = new Date(
-                                    result.market[0][i].currentHourPrice.statValue
-                                );
-                            }
-
-                            data.push(marketListing);
-                        }
-
+                    if (!result.market[0]) {
                         return resolve(data);
-                    });
-                }
-            );
+                    }
+
+                    for (let i = 0; i < result.market[0].length; i += 1) {
+                        const marketListing: MarketListing = {
+                            marketId: result.market[0][i].marketId,
+
+                            price: result.market[0][i].price,
+                            previousAvgPrice: {
+                                value: null,
+                                date: null,
+                            },
+                            currentAvgHourPrice: {
+                                value: null,
+                                date: null,
+                            },
+
+                            createdAt: new Date(result.market[0][i].created),
+
+                            type: result.market[0][i].type,
+                            card: CardUtils.createACard(result.market[0][i].card),
+                        };
+
+                        if (result.market[0][i].previousAvgPrice !== null) {
+                            marketListing.previousAvgPrice.value = result.market[0][i].previousAvgPrice.statValue;
+                            marketListing.previousAvgPrice.date = new Date(
+                                result.market[0][i].previousAvgPrice.statValue
+                            );
+                        }
+
+                        if (result.market[0][i].currentHourPrice !== null) {
+                            marketListing.currentAvgHourPrice.value = result.market[0][i].currentHourPrice.statValue;
+                            marketListing.currentAvgHourPrice.date = new Date(
+                                result.market[0][i].currentHourPrice.statValue
+                            );
+                        }
+
+                        data.push(marketListing);
+                    }
+
+                    return resolve(data);
+                });
+            }
+        );
     }
 
     /**

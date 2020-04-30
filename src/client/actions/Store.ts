@@ -3,6 +3,7 @@ import BaseClient from '../BaseClient';
 import PackUtils from '../utils/Pack';
 
 import { Pack } from '../../interfaces/Pack';
+import { QueryParams } from '../../interfaces/QueryParams';
 
 export default class Store {
     private baseClient: BaseClient;
@@ -17,12 +18,14 @@ export default class Store {
     /**
      * Get the packs from Epics.gg
      * @param page the page to get
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(page = 1, categoryId = 1, gameId = 1): Promise<Pack[]> {
-        return this.baseClient.get(`packs?categoryId=${categoryId}&gameId=${gameId}&page=${page}`).then(
+    public getPacks(page = 1): Promise<Pack[]> {
+        const params: QueryParams = {
+            page,
+        };
+
+        return this.baseClient.get('packs', params).then(
             (result): Promise<Pack[]> => {
                 return new Promise((resolve): void => {
                     const data: Pack[] = [];

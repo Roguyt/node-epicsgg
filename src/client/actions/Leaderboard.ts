@@ -2,6 +2,7 @@ import { UserRanking } from '../../interfaces/UserRanking';
 import { CollectionRanking } from '../../interfaces/CollectionRanking';
 
 import BaseClient from '../BaseClient';
+import { QueryParams } from '../../interfaces/QueryParams';
 
 export default class Leaderboard {
     private baseClient: BaseClient;
@@ -18,28 +19,22 @@ export default class Leaderboard {
      * @param page the page to get (1 page = 20 users)
      * @param country the country to filter the leaderboard
      * @param season the season to filter the leaderboard
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getLeaderboards(
-        page = 1,
-        country: string = null,
-        season: string = null,
-        categoryId = 1,
-        gameId = 1
-    ): Promise<UserRanking[]> {
-        let url = `leaderboards/categories/1?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
+    public getLeaderboards(page = 1, country: string = null, season: string = null): Promise<UserRanking[]> {
+        const params: QueryParams = {
+            page,
+        };
 
         if (country !== null) {
-            url += `&country=${country}`;
+            params.country = country;
         }
 
         if (season !== null) {
-            url += `&season=${season}`;
+            params.season = season;
         }
 
-        return this.baseClient.get(url).then(
+        return this.baseClient.get('leaderboards/categories/1', params).then(
             (result): Promise<UserRanking[]> => {
                 return new Promise((resolve): void => {
                     const data: UserRanking[] = [];
@@ -75,29 +70,27 @@ export default class Leaderboard {
      * @param page the page to get (1 page = 20 users)
      * @param country the country to filter the leaderboard
      * @param season the season to filter the leaderboard
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getCollectionLeaderboards(
         collectionId: number,
         page = 1,
         country: string = null,
-        season: string = null,
-        categoryId = 1,
-        gameId = 1
+        season: string = null
     ): Promise<CollectionRanking[]> {
-        let url = `leaderboards/collections/${collectionId}?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
+        const params: QueryParams = {
+            page,
+        };
 
         if (country !== null) {
-            url += `&country=${country}`;
+            params.country = country;
         }
 
         if (season !== null) {
-            url += `&season=${season}`;
+            params.season = season;
         }
 
-        return this.baseClient.get(url).then(
+        return this.baseClient.get(`leaderboards/collections/${collectionId}`, params).then(
             (result): Promise<CollectionRanking[]> => {
                 return new Promise((resolve): void => {
                     const data: CollectionRanking[] = [];

@@ -18,12 +18,10 @@ export default class Spinner {
 
     /**
      * Get the current Spinner's data
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getSpinner(categoryId = 1, gameId = 1): Promise<SpinnerData> {
-        return this.baseClient.get(`spinner?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public getSpinner(): Promise<SpinnerData> {
+        return this.baseClient.get('spinner').then(
             (result): Promise<SpinnerData> => {
                 return new Promise((resolve): void => {
                     const data: SpinnerData = {
@@ -63,12 +61,10 @@ export default class Spinner {
 
     /**
      * Get the history of the user's spinner rewards
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getHistory(categoryId = 1, gameId = 1): Promise<SpinnerHistory[]> {
-        return this.baseClient.get(`spinner/history?categoryId=${categoryId}&gameId=${gameId}`).then(
+    public getHistory(): Promise<SpinnerHistory[]> {
+        return this.baseClient.get(`spinner/history`).then(
             (result): Promise<SpinnerHistory[]> => {
                 return new Promise((resolve): void => {
                     const data: SpinnerHistory[] = [];

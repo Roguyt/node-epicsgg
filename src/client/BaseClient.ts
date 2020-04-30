@@ -7,14 +7,20 @@ import { CurrentUser } from '../interfaces/CurrentUser';
 
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
+import { QueryParams } from '../interfaces/QueryParams';
 
 /**
  * @hidden
  */
 export default class BaseClient {
-    private username: string;
+    private readonly username: string;
 
-    private password: string;
+    private readonly password: string;
+
+    private categoryId: number;
+
+    // Currently not used by the API calls inside the webapp
+    private gameId: number;
 
     public currentUser: CurrentUser = null;
 
@@ -32,6 +38,9 @@ export default class BaseClient {
 
         this.username = options.email || '';
         this.password = options.password || '';
+        // TODO: Add a setter/getter
+        this.categoryId = options.categoryId || 1;
+        this.gameId = options.gameId || 1;
         this.jwt = '';
 
         if (options.proxy) {
@@ -123,8 +132,11 @@ export default class BaseClient {
         return this.getJWT();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async get(path: string): Promise<any> {
+    public async get(
+        path: string,
+        params: QueryParams = {}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
@@ -133,6 +145,11 @@ export default class BaseClient {
             const response: AxiosResponse = await this.axios.get(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
+                },
+                params: {
+                    ...params,
+                    categoryId: this.categoryId,
+                    gameId: this.gameId,
                 },
             });
 
