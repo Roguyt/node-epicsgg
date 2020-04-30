@@ -1,0 +1,22 @@
+{
+    "pinVersions": false,
+    "supportPolicy": ["active"],
+    "semanticCommits": true,
+    "semanticPrefix": "build",
+    "separateMajorMinor": false,
+    "prHourlyLimit": 2,
+    "labels": ["PR target: master-only", "PR action: merge"],
+    "timezone": "Europe/Paris",
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "schedule": ["after 4am every day", "before 6am every day"],
+    "baseBranches": ["master"],
+    "packageFiles": ["package.json"],
+    "major": {
+        "devDependencies": {
+            "enabled": true
+        }
+    },
+    "extends": ["config:base"]
+}
