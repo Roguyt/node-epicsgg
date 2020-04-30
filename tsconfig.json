@@ -1,25 +1,19 @@
 {
-  "compilerOptions": {
-    "outDir": "lib/",
-    "sourceMap": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "target": "es2015",
-    "declaration": true,
-    "removeComments": false,
-    "noImplicitAny": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "pretty": true
-  },
-  "include": [
-    "src/**/*",
-    "__tests__/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "tests",
-    "examples"
-  ]
+    "compilerOptions": {
+        "outDir": "lib/",
+        "sourceMap": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "target": "es2015",
+        "declaration": true,
+        "removeComments": false,
+        "noImplicitAny": true,
+        "forceConsistentCasingInFileNames": true,
+        "noUnusedLocals": true,
+        "pretty": true,
+        "esModuleInterop": true
+    },
+    "include": ["src/**/*", "__tests__/**/*"],
+    "exclude": ["node_modules", "tests", "examples"]
 }
