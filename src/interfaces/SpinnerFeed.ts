@@ -9,6 +9,10 @@ export interface SpinnerFeed {
         epiCoins: number;
         silverCoins: number;
         craftingCoins: number;
+        cardTemplates: {
+            id: number;
+            quantity: number;
+        }[];
         packTemplates: {
             id: number;
             quantity: number;
