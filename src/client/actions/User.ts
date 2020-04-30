@@ -33,29 +33,27 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public searchUsers(search: string, categoryId: number = 1, gameId: number = 1): Promise<UserData[]> {
-        return this.baseClient
-            .get('users/search?username=' + search + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (result): Promise<UserData[]> => {
-                    return new Promise((resolve): void => {
-                        const data: UserData[] = [];
+    public searchUsers(search: string, categoryId = 1, gameId = 1): Promise<UserData[]> {
+        return this.baseClient.get(`users/search?username=${search}&categoryId=${categoryId}&gameId=${gameId}`).then(
+            (result): Promise<UserData[]> => {
+                return new Promise((resolve): void => {
+                    const data: UserData[] = [];
 
-                        for (let i = 0; i < result.length; i += 1) {
-                            let user = result[i];
+                    for (let i = 0; i < result.length; i += 1) {
+                        const user = result[i];
 
-                            data.push({
-                                id: user.id,
-                                username: user.username,
-                                avatar: user.avatar,
-                                group: user.group,
-                            });
-                        }
+                        data.push({
+                            id: user.id,
+                            username: user.username,
+                            avatar: user.avatar,
+                            group: user.group,
+                        });
+                    }
 
-                        resolve(data);
-                    });
-                }
-            );
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
@@ -64,8 +62,8 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getFunds(categoryId: number = 1, gameId: number = 1): Promise<UserFund> {
-        return this.baseClient.get('user/funds?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+    public getFunds(categoryId = 1, gameId = 1): Promise<UserFund> {
+        return this.baseClient.get(`user/funds?categoryId=${categoryId}&gameId=${gameId}`).then(
             (result): Promise<UserFund> => {
                 return new Promise((resolve): void => {
                     const data: UserFund = {
@@ -80,37 +78,16 @@ export default class User {
         );
     }
 
-    public getUserSummary(
-        userId: number,
-        season: number | string,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<UserSummary> {
-        season = season as string;
+    public getUserSummary(userId: number, season: number | string, categoryId = 1, gameId = 1): Promise<UserSummary> {
+        const seasonString = season.toString();
         let url;
 
-        if (season === 'full') {
-            url =
-                'collections/users/' +
-                userId +
-                '/user-summary/?categoryId=' +
-                categoryId +
-                '&gameId=' +
-                gameId +
-                '&types';
-        } else if (season === '') {
-            url = 'collections/users/' + userId + '/user-summary/?categoryId=' + categoryId + '&gameId=' + gameId + '';
+        if (seasonString === 'full') {
+            url = `collections/users/${userId}/user-summary/?categoryId=${categoryId}&gameId=${gameId}&types`;
+        } else if (seasonString === '') {
+            url = `collections/users/${userId}/user-summary/?categoryId=${categoryId}&gameId=${gameId}`;
         } else {
-            url =
-                'collections/users/' +
-                userId +
-                '/user-summary?seasons=' +
-                season +
-                '&categoryId=' +
-                categoryId +
-                '&gameId=' +
-                gameId +
-                '';
+            url = `collections/users/${userId}/user-summary?seasons=${seasonString}&categoryId=${categoryId}&gameId=${gameId}`;
         }
 
         return this.baseClient.get(url).then(
@@ -161,27 +138,17 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getOwned(userId: number, collectionId: number, categoryId: number = 1, gameId: number = 1): Promise<Owned> {
+    public getOwned(userId: number, collectionId: number, categoryId = 1, gameId = 1): Promise<Owned> {
         return this.baseClient
-            .get(
-                'collections/' +
-                    collectionId +
-                    '/users/' +
-                    userId +
-                    '/owned2?categoryId=' +
-                    categoryId +
-                    '&gameId=' +
-                    gameId +
-                    ''
-            )
+            .get(`collections/${collectionId}/users/${userId}/owned2?categoryId=${categoryId}&gameId=${gameId}`)
             .then(
                 (result): Promise<Owned> => {
                     return new Promise((resolve): void => {
                         const cards: Card[] = [];
 
                         for (let i = 0; i < result.cards.length; i += 1) {
-                            let card = result.cards[i];
-                            let cardData: Card = CardUtils.createACard(card);
+                            const card = result.cards[i];
+                            const cardData: Card = CardUtils.createACard(card);
 
                             cards.push(cardData);
                         }
@@ -189,8 +156,8 @@ export default class User {
                         const stickers: Sticker[] = [];
 
                         for (let i = 0; i < result.stickers.length; i += 1) {
-                            let sticker = result.stickers[i];
-                            let stickerData: Sticker = StickerUtils.createASticker(sticker);
+                            const sticker = result.stickers[i];
+                            const stickerData: Sticker = StickerUtils.createASticker(sticker);
 
                             stickers.push(stickerData);
                         }
@@ -211,25 +178,23 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getShowcasedCards(userId: number, categoryId: number = 1, gameId: number = 1): Promise<Card[]> {
-        return this.baseClient
-            .get('showcase/' + userId + '/all?categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (result): Promise<Card[]> => {
-                    return new Promise((resolve): void => {
-                        const data: Card[] = [];
+    public getShowcasedCards(userId: number, categoryId = 1, gameId = 1): Promise<Card[]> {
+        return this.baseClient.get(`showcase/${userId}/all?categoryId=${categoryId}&gameId=${gameId}`).then(
+            (result): Promise<Card[]> => {
+                return new Promise((resolve): void => {
+                    const data: Card[] = [];
 
-                        for (let i = 0; i < result.cards.length; i += 1) {
-                            let card = result.cards[i];
-                            let cardData: Card = CardUtils.createACard(card);
+                    for (let i = 0; i < result.cards.length; i += 1) {
+                        const card = result.cards[i];
+                        const cardData: Card = CardUtils.createACard(card);
 
-                            data.push(cardData);
-                        }
+                        data.push(cardData);
+                    }
 
-                        resolve(data);
-                    });
-                }
-            );
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
@@ -240,38 +205,22 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getMarketListings(
-        userId: number,
-        page: number = 1,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<UserMarketListings> {
+    public getMarketListings(userId: number, page = 1, categoryId = 1, gameId = 1): Promise<UserMarketListings> {
         return this.baseClient
             .get(
-                'market/listed/users/' +
-                    userId +
-                    '?categoryId=' +
-                    categoryId +
-                    '&gameId=' +
-                    gameId +
-                    '&page=' +
-                    page +
-                    '&userId=' +
-                    userId
+                `market/listed/users/${userId}?categoryId=${categoryId}&gameId=${gameId}&page=${page}&userId=${userId}`
             )
             .then(
                 (result): Promise<UserMarketListings> => {
                     return new Promise((resolve): void => {
-                        let data: UserMarketListings = {
+                        const data: UserMarketListings = {
                             count: result.count,
                             total: result.total,
                             marketListings: [],
                         };
 
                         for (let i = 0; i < result.market.length; i += 1) {
-                            let marketListing: MarketListing;
-
-                            marketListing = {
+                            const marketListing: MarketListing = {
                                 marketId: result.market[i].marketId,
                                 price: result.market[i].price,
                                 currentAvgHourPrice: {
@@ -316,8 +265,8 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(categoryId: number = 1, gameId: number = 1): Promise<UserPack[]> {
-        return this.baseClient.get('packs/user?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+    public getPacks(categoryId = 1, gameId = 1): Promise<UserPack[]> {
+        return this.baseClient.get(`packs/user?categoryId=${categoryId}&gameId=${gameId}`).then(
             (result): Promise<UserPack[]> => {
                 return new Promise((resolve): void => {
                     const data: UserPack[] = [];
@@ -343,9 +292,9 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public openPack(packId: number, categoryId: number = 1, gameId: number = 1): Promise<Card[]> {
+    public openPack(packId: number, categoryId = 1, gameId = 1): Promise<Card[]> {
         return this.baseClient
-            .post('packs/open2?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`packs/open2?categoryId=${categoryId}&gameId=${gameId}`, {
                 packId,
             })
             .then(
@@ -370,9 +319,9 @@ export default class User {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public redeemCard(cardId: number, categoryId: number = 1, gameId: number = 1): Promise<null> {
+    public redeemCard(cardId: number, categoryId = 1, gameId = 1): Promise<null> {
         return this.baseClient
-            .post('cards/redeem/' + cardId.toString() + '?categoryId=' + categoryId + '&gameId=' + gameId + '', {})
+            .post(`cards/redeem/${cardId.toString()}?categoryId=${categoryId}&gameId=${gameId}`, {})
             .then(
                 (): Promise<null> => {
                     return new Promise((resolve): void => {

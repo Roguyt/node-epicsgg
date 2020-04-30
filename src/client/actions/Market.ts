@@ -34,16 +34,16 @@ export default class Market {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getMarketplaceTemplates(
-        page: number = 1,
+        page = 1,
         filters: Record<string, string | boolean>,
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<MarketTemplate[]> {
-        let url = 'market/templates?categoryId=' + categoryId + '&gameId=' + gameId + '&page' + page + '&type=card';
+        let url = `market/templates?categoryId=${categoryId}&gameId=${gameId}&page${page}&type=card`;
 
-        for (let param in filters) {
+        Object.keys(filters).forEach((param): void => {
             url += `&${param}=${filters[param]}`;
-        }
+        });
 
         return this.baseClient.get(url).then(
             (result): Promise<MarketTemplate[]> => {
@@ -75,23 +75,10 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getListings(
-        cardId: number,
-        page: number = 1,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<MarketListing[]> {
+    public getListings(cardId: number, page = 1, categoryId = 1, gameId = 1): Promise<MarketListing[]> {
         return this.baseClient
             .get(
-                'market/buy?categoryId=' +
-                    categoryId +
-                    '&gameId=' +
-                    gameId +
-                    '&page=' +
-                    page +
-                    '&sort=price&templateId=' +
-                    cardId +
-                    '&type=card'
+                `market/buy?categoryId=${categoryId}&gameId=${gameId}&page=${page}&sort=price&templateId=${cardId}&type=card`
             )
             .then(
                 (result): Promise<MarketListing[]> => {
@@ -103,7 +90,7 @@ export default class Market {
                         }
 
                         for (let i = 0; i < result.market[0].length; i += 1) {
-                            let marketListing: MarketListing = {
+                            const marketListing: MarketListing = {
                                 marketId: result.market[0][i].marketId,
 
                                 price: result.market[0][i].price,
@@ -140,7 +127,7 @@ export default class Market {
                             data.push(marketListing);
                         }
 
-                        resolve(data);
+                        return resolve(data);
                     });
                 }
             );
@@ -161,10 +148,10 @@ export default class Market {
         type: string,
         price: number,
         minOffer?: number,
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<number> {
-        let data: Record<string, string | number> = {
+        const data: Record<string, string | number> = {
             id,
             price,
             type,
@@ -174,7 +161,7 @@ export default class Market {
             data.minOffer = minOffer;
         }
 
-        return this.baseClient.post('market/list?categoryId=' + categoryId + '&gameId=' + gameId + '', data).then(
+        return this.baseClient.post(`market/list?categoryId=${categoryId}&gameId=${gameId}`, data).then(
             (result): Promise<number> => {
                 return new Promise((resolve): void => {
                     resolve(result.marketId);
@@ -190,16 +177,14 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public removeListing(listingId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
-        return this.baseClient
-            .delete('market/listed/' + listingId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public removeListing(listingId: number, categoryId = 1, gameId = 1): Promise<void> {
+        return this.baseClient.delete(`market/listed/${listingId}?categoryId=${categoryId}&gameId=${gameId}`).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
@@ -210,9 +195,9 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buy(marketId: number, price: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public buy(marketId: number, price: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .post('market/buy?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`market/buy?categoryId=${categoryId}&gameId=${gameId}`, {
                 marketId,
                 price,
             })
@@ -238,11 +223,11 @@ export default class Market {
         marketId: number,
         currentPrice: number,
         counterPrice: number,
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<void> {
         return this.baseClient
-            .post('market/counter-offers?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`market/counter-offers?categoryId=${categoryId}&gameId=${gameId}`, {
                 marketId,
                 currentPrice,
                 counterPrice,
@@ -263,9 +248,9 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public cancelCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public cancelCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .delete('market/counter-offers/' + counterOfferId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .delete(`market/counter-offers/${counterOfferId}?categoryId=${categoryId}&gameId=${gameId}`)
             .then(
                 (): Promise<void> => {
                     return new Promise((resolve): void => {
@@ -282,9 +267,9 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public acceptCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .patch('market/counter-offers/accept?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .patch(`market/counter-offers/accept?categoryId=${categoryId}&gameId=${gameId}`, {
                 offerId: counterOfferId,
             })
             .then(
@@ -303,9 +288,9 @@ export default class Market {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public declineCounterOffer(counterOfferId: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .patch('market/counter-offers/decline?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .patch(`market/counter-offers/decline?categoryId=${categoryId}&gameId=${gameId}`, {
                 offerId: counterOfferId,
             })
             .then(

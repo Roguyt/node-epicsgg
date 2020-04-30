@@ -30,7 +30,7 @@ export default class CardUtils {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createCardTemplate(data: any): CardTemplate {
-        let cardTemplate: CardTemplate = {
+        const cardTemplate: CardTemplate = {
             id: data.id,
             uuid: data.uuid,
             title: data.title,

@@ -13,6 +13,7 @@ import Timeout = NodeJS.Timeout;
  */
 export default class BaseClient {
     private username: string;
+
     private password: string;
 
     public currentUser: CurrentUser = null;
@@ -20,6 +21,7 @@ export default class BaseClient {
     private axios: AxiosInstance;
 
     private jwt: string;
+
     private jwtExpiracy: Date;
 
     public constructor(options: BaseClientOptions) {
@@ -49,21 +51,22 @@ export default class BaseClient {
         if (options.jwt) {
             this.jwt = options.jwt;
 
-            // @ts-ignore
-            this.jwtExpiracy = jwt.decode(this.jwt).exp * 1000;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const jwtData = jwt.decode(this.jwt) as { [key: string]: any };
+            this.jwtExpiracy = new Date(jwtData.exp * 1000);
         }
 
-        this._validateOptions();
+        this.validateOptions();
     }
 
-    private _validateOptions(): void {
+    private validateOptions(): void {
         if ((this.username === '' || this.password === '') && this.jwt === '') {
             // Throw an error
             throw new Error('Missing epics.gg credentials');
         }
     }
 
-    private _timeout(ms: number): Promise<void> {
+    private static timeout(ms: number): Promise<void> {
         return new Promise(
             (resolve): Timeout => {
                 return setTimeout(resolve, ms);
@@ -73,7 +76,7 @@ export default class BaseClient {
 
     public async login(): Promise<void> {
         try {
-            let response: AxiosResponse = await this.axios.post(
+            const response: AxiosResponse = await this.axios.post(
                 'https://api.epics.gg/api/v1/auth/login?categoryId=1&gameId=1',
                 { email: this.username, password: this.password }
             );
@@ -86,22 +89,23 @@ export default class BaseClient {
 
             this.jwt = response.data.data.jwt;
 
-            // @ts-ignore
-            this.jwtExpiracy = jwt.decode(this.jwt).exp * 1000;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const jwtData = jwt.decode(this.jwt) as { [key: string]: any };
+            this.jwtExpiracy = new Date(jwtData.exp * 1000);
         } catch (e) {
             if (!e.response) {
-                await this._timeout(5 * 1000);
+                await BaseClient.timeout(5 * 1000);
             } else {
                 switch (e.response.status) {
                     case 429: {
-                        await this._timeout(60 * 1000);
+                        await BaseClient.timeout(60 * 1000);
                         break;
                     }
                     case 400: {
                         throw new Error('Credentials errors');
                     }
                     default: {
-                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
                     }
                 }
             }
@@ -126,7 +130,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await this.axios.get('https://api.epics.gg/api/v1/' + path, {
+            const response: AxiosResponse = await this.axios.get(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
@@ -155,7 +159,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
                 }
             }
         }
@@ -168,7 +172,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await this.axios.post('https://api.epics.gg/api/v1/' + path, data, {
+            const response: AxiosResponse = await this.axios.post(`https://api.epics.gg/api/v1/${path}`, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
@@ -197,7 +201,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
                 }
             }
         }
@@ -210,7 +214,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await this.axios.delete('https://api.epics.gg/api/v1/' + path, {
+            const response: AxiosResponse = await this.axios.delete(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
@@ -239,7 +243,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
                 }
             }
         }
@@ -252,7 +256,7 @@ export default class BaseClient {
         }
 
         try {
-            let response: AxiosResponse = await this.axios.patch('https://api.epics.gg/api/v1/' + path, data, {
+            const response: AxiosResponse = await this.axios.patch(`https://api.epics.gg/api/v1/${path}`, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
                 },
@@ -287,7 +291,7 @@ export default class BaseClient {
                         throw new Error(e.response.data.error);
 
                     default:
-                        throw new Error('Unhandled error. ' + JSON.stringify(e.response.data));
+                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
                 }
             }
         }

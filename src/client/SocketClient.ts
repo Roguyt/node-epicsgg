@@ -10,23 +10,25 @@ import SocketIO = require('socket.io');
  * @hidden
  */
 export default class SocketClient {
+    // eslint-disable-next-line global-require
     private io = require('socket.io-client');
+
     private socket: SocketIO.Socket;
 
     public event: EventEmitter;
 
     public constructor() {
-        this._connect();
+        this.connect();
     }
 
-    private _connect(): void {
+    private connect(): void {
         this.socket = this.io('https://sockets.epics.gg/', {
             transports: ['websocket'],
         });
 
         this.event = new EventEmitter();
 
-        this.socket.on('disconnect', () => {
+        this.socket.on('disconnect', (): void => {
             this.socket.removeAllListeners('pack-opened');
             this.socket.removeAllListeners('pack-purchased');
             this.socket.removeAllListeners('spinner-feed');
@@ -36,7 +38,7 @@ export default class SocketClient {
             this.socket.emit('join-public-feed');
 
             this.socket.on('pack-opened', (data): void => {
-                let packOpenedFeed: PackOpenedFeed = {
+                const packOpenedFeed: PackOpenedFeed = {
                     id: data.id,
                     packTemplateId: data.packTemplateId,
 
@@ -86,7 +88,7 @@ export default class SocketClient {
             });
 
             this.socket.on('pack-purchased', (data): void => {
-                let packPurchasedFeed: PackPurchasedFeed = {
+                const packPurchasedFeed: PackPurchasedFeed = {
                     packTemplateId: data.packTemplateId,
                     amount: data.amount,
                     createdAt: new Date(data.created),
@@ -102,7 +104,7 @@ export default class SocketClient {
             });
 
             this.socket.on('spinner-feed', (data): void => {
-                let spinnerFeed: SpinnerFeed = {
+                const spinnerFeed: SpinnerFeed = {
                     name: data.name,
                     chance: data.chance,
                     images: {

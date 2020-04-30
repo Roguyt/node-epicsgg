@@ -21,14 +21,14 @@ export default class Store {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Pack[]> {
-        return this.baseClient.get('packs?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '').then(
+    public getPacks(page = 1, categoryId = 1, gameId = 1): Promise<Pack[]> {
+        return this.baseClient.get(`packs?categoryId=${categoryId}&gameId=${gameId}&page=${page}`).then(
             (result): Promise<Pack[]> => {
                 return new Promise((resolve): void => {
                     const data: Pack[] = [];
 
                     for (let i = 0; i < result.length; i += 1) {
-                        let pack: Pack = PackUtils.createAPack(result[i]);
+                        const pack: Pack = PackUtils.createAPack(result[i]);
 
                         data.push(pack);
                     }
@@ -47,14 +47,9 @@ export default class Store {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buyPack(
-        packTemplateId: number,
-        amount: number = 1,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<number[]> {
+    public buyPack(packTemplateId: number, amount = 1, categoryId = 1, gameId = 1): Promise<number[]> {
         return this.baseClient
-            .post('packs/buy?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`packs/buy?categoryId=${categoryId}&gameId=${gameId}`, {
                 amount,
                 packTemplateId,
             })

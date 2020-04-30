@@ -23,20 +23,20 @@ export default class Leaderboard {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getLeaderboards(
-        page: number = 1,
+        page = 1,
         country: string = null,
         season: string = null,
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<UserRanking[]> {
-        let url = 'leaderboards/categories/1?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '';
+        let url = `leaderboards/categories/1?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
 
         if (country !== null) {
-            url += '&country=' + country;
+            url += `&country=${country}`;
         }
 
         if (season !== null) {
-            url += '&season=' + season;
+            url += `&season=${season}`;
         }
 
         return this.baseClient.get(url).then(
@@ -45,7 +45,7 @@ export default class Leaderboard {
                     const data: UserRanking[] = [];
 
                     for (let i = 0; i < result.length; i += 1) {
-                        let ranking = result[i];
+                        const ranking = result[i];
 
                         data.push({
                             id: ranking.user.id,
@@ -81,29 +81,20 @@ export default class Leaderboard {
      */
     public getCollectionLeaderboards(
         collectionId: number,
-        page: number = 1,
+        page = 1,
         country: string = null,
         season: string = null,
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<CollectionRanking[]> {
-        let url =
-            'leaderboards/collections/' +
-            collectionId +
-            '?categoryId=' +
-            categoryId +
-            '&gameId=' +
-            gameId +
-            '&page=' +
-            page +
-            '';
+        let url = `leaderboards/collections/${collectionId}?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
 
         if (country !== null) {
-            url += '&country=' + country;
+            url += `&country=${country}`;
         }
 
         if (season !== null) {
-            url += '&season=' + season;
+            url += `&season=${season}`;
         }
 
         return this.baseClient.get(url).then(
@@ -112,7 +103,7 @@ export default class Leaderboard {
                     const data: CollectionRanking[] = [];
 
                     for (let i = 0; i < result.length; i += 1) {
-                        let ranking = result[i];
+                        const ranking = result[i];
 
                         data.push({
                             id: ranking.user.id,

@@ -19,39 +19,37 @@ export default class Library {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getTreatments(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Treatment[]> {
-        return this.baseClient
-            .get('treatments?page=' + page + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (result): Promise<Treatment[]> => {
-                    return new Promise((resolve): void => {
-                        const data: Treatment[] = [];
+    public getTreatments(page = 1, categoryId = 1, gameId = 1): Promise<Treatment[]> {
+        return this.baseClient.get(`treatments?page=${page}&categoryId=${categoryId}&gameId=${gameId}`).then(
+            (result): Promise<Treatment[]> => {
+                return new Promise((resolve): void => {
+                    const data: Treatment[] = [];
 
-                        for (let i = 0; i < result.treatments.length; i += 1) {
-                            let treatment: Treatment = {
-                                id: result.treatments[i].id,
-                                name: result.treatments[i].name,
-                                categoryId: result.treatments[i].categoryId,
-                                designation: result.treatments[i].designation,
-                                tier: result.treatments[i].tier,
-                                active: result.treatments[i].active,
-                                variation: result.treatments[i].variation,
-                                gameSide: result.treatments[i].gameSide,
-                                accentColor: result.treatments[i].accentColor,
-                                artistName: result.treatments[i].artistName,
-                                season: result.treatments[i].season,
-                                buyPrice: result.treatments[i].buyPrice,
-                                images: result.treatments[i].images,
-                                videos: result.treatments[i].videos,
-                            };
+                    for (let i = 0; i < result.treatments.length; i += 1) {
+                        const treatment: Treatment = {
+                            id: result.treatments[i].id,
+                            name: result.treatments[i].name,
+                            categoryId: result.treatments[i].categoryId,
+                            designation: result.treatments[i].designation,
+                            tier: result.treatments[i].tier,
+                            active: result.treatments[i].active,
+                            variation: result.treatments[i].variation,
+                            gameSide: result.treatments[i].gameSide,
+                            accentColor: result.treatments[i].accentColor,
+                            artistName: result.treatments[i].artistName,
+                            season: result.treatments[i].season,
+                            buyPrice: result.treatments[i].buyPrice,
+                            images: result.treatments[i].images,
+                            videos: result.treatments[i].videos,
+                        };
 
-                            data.push(treatment);
-                        }
+                        data.push(treatment);
+                    }
 
-                        resolve(data);
-                    });
-                }
-            );
+                    resolve(data);
+                });
+            }
+        );
     }
 
     /**
@@ -61,21 +59,17 @@ export default class Library {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getCollectionCardTemplates(
-        collectionId: number,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<CardTemplate[]> {
+    public getCollectionCardTemplates(collectionId: number, categoryId = 1, gameId = 1): Promise<CardTemplate[]> {
         return this.baseClient
-            .get('collections/' + collectionId + '/card-templates?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .get(`collections/${collectionId}/card-templates?categoryId=${categoryId}&gameId=${gameId}`)
             .then(
                 (result): Promise<CardTemplate[]> => {
                     return new Promise((resolve): void => {
                         const data: CardTemplate[] = [];
 
                         for (let i = 0; i < result.length; i += 1) {
-                            let cardTemplate = result[i];
-                            let cardTemplateData = CardUtils.createCardTemplate(cardTemplate);
+                            const cardTemplate = result[i];
+                            const cardTemplateData = CardUtils.createCardTemplate(cardTemplate);
 
                             data.push(cardTemplateData);
                         }

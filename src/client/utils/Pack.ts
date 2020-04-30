@@ -6,7 +6,7 @@ import { Pack } from '../../interfaces/Pack';
 export default class PackUtils {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createAPack(data: any): Pack {
-        let pack: Pack = {
+        const pack: Pack = {
             id: data.id,
             name: data.name,
             description: data.description,

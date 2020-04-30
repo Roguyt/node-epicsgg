@@ -22,8 +22,8 @@ export default class Spinner {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getSpinner(categoryId: number = 1, gameId: number = 1): Promise<SpinnerData> {
-        return this.baseClient.get('spinner?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+    public getSpinner(categoryId = 1, gameId = 1): Promise<SpinnerData> {
+        return this.baseClient.get(`spinner?categoryId=${categoryId}&gameId=${gameId}`).then(
             (result): Promise<SpinnerData> => {
                 return new Promise((resolve): void => {
                     const data: SpinnerData = {
@@ -67,8 +67,8 @@ export default class Spinner {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getHistory(categoryId: number = 1, gameId: number = 1): Promise<SpinnerHistory[]> {
-        return this.baseClient.get('spinner/history?categoryId=' + categoryId + '&gameId=' + gameId + '').then(
+    public getHistory(categoryId = 1, gameId = 1): Promise<SpinnerHistory[]> {
+        return this.baseClient.get(`spinner/history?categoryId=${categoryId}&gameId=${gameId}`).then(
             (result): Promise<SpinnerHistory[]> => {
                 return new Promise((resolve): void => {
                     const data: SpinnerHistory[] = [];
@@ -112,7 +112,7 @@ export default class Spinner {
      * @param spinnerId spinner id to spin
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public spin(spinnerId: number = 166): Promise<void> {
+    public spin(spinnerId = 166): Promise<void> {
         return this.baseClient
             .post('spinner/spin', {
                 spinnerId,

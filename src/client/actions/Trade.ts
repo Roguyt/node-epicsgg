@@ -27,27 +27,22 @@ export default class Trade {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getOffers(
-        page: number = 1,
-        status: string = '',
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<TradeData[]> {
-        let url = 'trade?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '';
+    public getOffers(page = 1, status = '', categoryId = 1, gameId = 1): Promise<TradeData[]> {
+        let url = `trade?categoryId=${categoryId}&gameId=${gameId}&page=${page}`;
 
         if (status !== '') {
-            url += '&status=' + status;
+            url += `&status=${status}`;
         }
 
         return this.baseClient.get(url).then(
             (result): Promise<TradeData[]> => {
                 return new Promise((resolve): void => {
-                    let trades: TradeData[] = [];
+                    const trades: TradeData[] = [];
 
                     for (let i = 0; i < result.trades.length; i += 1) {
-                        let currentTrade = result.trades[i];
+                        const currentTrade = result.trades[i];
 
-                        let tradeData: TradeData = {
+                        const tradeData: TradeData = {
                             id: currentTrade.id,
                             status: currentTrade.status,
                             offeredBy: currentTrade.offeredBy,
@@ -136,8 +131,8 @@ export default class Trade {
         userId: number,
         cards: Card[],
         stickers: Sticker[],
-        categoryId: number = 1,
-        gameId: number = 1
+        categoryId = 1,
+        gameId = 1
     ): Promise<number> {
         const entities = [];
 
@@ -158,11 +153,11 @@ export default class Trade {
         }
 
         return this.baseClient
-            .post('trade/create-offer?categoryId=' + categoryId + '&gameId=' + gameId + '', {
-                entities: entities,
+            .post(`trade/create-offer?categoryId=${categoryId}&gameId=${gameId}`, {
+                entities,
                 user1Balance: 0,
                 user2Balance: 0,
-                user2Id: '' + userId + '',
+                user2Id: `${userId}`,
             })
             .then(
                 (result): Promise<number> => {
@@ -180,10 +175,10 @@ export default class Trade {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public acceptOffer(tradeId: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .patch('trade/accept-offer/?categoryId=' + categoryId + '&gameId=' + gameId + '', {
-                tradeId: tradeId,
+            .patch(`trade/accept-offer/?categoryId=${categoryId}&gameId=${gameId}`, {
+                tradeId,
             })
             .then(
                 (): Promise<void> => {
@@ -201,10 +196,10 @@ export default class Trade {
      * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineOffer(tradeId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public declineOffer(tradeId: number, categoryId = 1, gameId = 1): Promise<void> {
         return this.baseClient
-            .patch('trade/decline-offer/?categoryId=' + categoryId + '&gameId=' + gameId + '', {
-                tradeId: tradeId,
+            .patch(`trade/decline-offer/?categoryId=${categoryId}&gameId=${gameId}`, {
+                tradeId,
             })
             .then(
                 (): Promise<void> => {
