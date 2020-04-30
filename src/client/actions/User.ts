@@ -15,8 +15,6 @@ import DateUtils from '../utils/Date';
 import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
-import { QueryParams } from '../../interfaces/QueryParams';
-import { BodyData } from '../../interfaces/BodyData';
 
 export default class User {
     private baseClient: BaseClient;
@@ -34,30 +32,30 @@ export default class User {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public searchUsers(username: string): Promise<UserData[]> {
-        const params: QueryParams = {
-            username,
-        };
+        return this.baseClient
+            .get(`users/search`, {
+                username,
+            })
+            .then(
+                (result): Promise<UserData[]> => {
+                    return new Promise((resolve): void => {
+                        const data: UserData[] = [];
 
-        return this.baseClient.get(`users/search`, params).then(
-            (result): Promise<UserData[]> => {
-                return new Promise((resolve): void => {
-                    const data: UserData[] = [];
+                        for (let i = 0; i < result.length; i += 1) {
+                            const user = result[i];
 
-                    for (let i = 0; i < result.length; i += 1) {
-                        const user = result[i];
+                            data.push({
+                                id: user.id,
+                                username: user.username,
+                                avatar: user.avatar,
+                                group: user.group,
+                            });
+                        }
 
-                        data.push({
-                            id: user.id,
-                            username: user.username,
-                            avatar: user.avatar,
-                            group: user.group,
-                        });
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
@@ -81,48 +79,48 @@ export default class User {
     }
 
     public getUserSummary(userId: number, season: number | string = ''): Promise<UserSummary> {
-        const params: QueryParams = {
-            season: season.toString(),
-        };
-
-        return this.baseClient.get(`collections/users/${userId}/user-summary`, params).then(
-            (result): Promise<UserSummary> => {
-                return new Promise((resolve): void => {
-                    const data: UserSummary = {
-                        collections: [],
-                    };
-
-                    for (let i = 0; i < result.length; i += 1) {
-                        const temp: UserCollection = {
-                            count: result[i].count,
-                            rank: result[i].rank,
-                            score: result[i].score,
-                            total: result[i].total,
-                            collection: {
-                                id: result[i].collection.id,
-                                name: result[i].collection.name,
-                                description: result[i].collection.description,
-                                categoryId: result[i].collection.categoryId,
-                                visible: result[i].collection.visible,
-                                properties: {
-                                    tiers: result[i].collection.properties.tiers,
-                                    gameIds: result[i].collection.properties.game_ids,
-                                    seasons: result[i].collection.properties.seasons,
-                                    teamIds: result[i].collection.properties.team_ids,
-                                    types: result[i].collection.properties.types,
-                                },
-                                created: DateUtils.convertToDate(result[i].collection.created),
-                                updated: DateUtils.convertToDate(result[i].collection.updated),
-                                images: result[i].collection.images,
-                            },
+        return this.baseClient
+            .get(`collections/users/${userId}/user-summary`, {
+                season: season.toString(),
+            })
+            .then(
+                (result): Promise<UserSummary> => {
+                    return new Promise((resolve): void => {
+                        const data: UserSummary = {
+                            collections: [],
                         };
-                        data.collections.push(temp);
-                    }
 
-                    resolve(data);
-                });
-            }
-        );
+                        for (let i = 0; i < result.length; i += 1) {
+                            const temp: UserCollection = {
+                                count: result[i].count,
+                                rank: result[i].rank,
+                                score: result[i].score,
+                                total: result[i].total,
+                                collection: {
+                                    id: result[i].collection.id,
+                                    name: result[i].collection.name,
+                                    description: result[i].collection.description,
+                                    categoryId: result[i].collection.categoryId,
+                                    visible: result[i].collection.visible,
+                                    properties: {
+                                        tiers: result[i].collection.properties.tiers,
+                                        gameIds: result[i].collection.properties.game_ids,
+                                        seasons: result[i].collection.properties.seasons,
+                                        teamIds: result[i].collection.properties.team_ids,
+                                        types: result[i].collection.properties.types,
+                                    },
+                                    created: DateUtils.convertToDate(result[i].collection.created),
+                                    updated: DateUtils.convertToDate(result[i].collection.updated),
+                                    images: result[i].collection.images,
+                                },
+                            };
+                            data.collections.push(temp);
+                        }
+
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
@@ -193,56 +191,58 @@ export default class User {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getMarketListings(userId: number, page = 1): Promise<UserMarketListings> {
-        const params: QueryParams = {
-            userId,
-            page,
-        };
-
-        return this.baseClient.get(`market/listed/users/${userId}`, params).then(
-            (result): Promise<UserMarketListings> => {
-                return new Promise((resolve): void => {
-                    const data: UserMarketListings = {
-                        count: result.count,
-                        total: result.total,
-                        marketListings: [],
-                    };
-
-                    for (let i = 0; i < result.market.length; i += 1) {
-                        const marketListing: MarketListing = {
-                            marketId: result.market[i].marketId,
-                            price: result.market[i].price,
-                            currentAvgHourPrice: {
-                                date: null,
-                                value: null,
-                            },
-                            previousAvgPrice: {
-                                date: null,
-                                value: null,
-                            },
-                            createdAt: new Date(result.market[i].created),
-                            type: result.market[i].type,
-                            card: CardUtils.createACard(result.market[i].card),
+        return this.baseClient
+            .get(`market/listed/users/${userId}`, {
+                userId,
+                page,
+            })
+            .then(
+                (result): Promise<UserMarketListings> => {
+                    return new Promise((resolve): void => {
+                        const data: UserMarketListings = {
+                            count: result.count,
+                            total: result.total,
+                            marketListings: [],
                         };
 
-                        if (result.market[i].previousAvgPrice !== null) {
-                            marketListing.previousAvgPrice.value = result.market[i].previousAvgPrice.statValue;
-                            marketListing.previousAvgPrice.date = new Date(result.market[i].previousAvgPrice.statDate);
+                        for (let i = 0; i < result.market.length; i += 1) {
+                            const marketListing: MarketListing = {
+                                marketId: result.market[i].marketId,
+                                price: result.market[i].price,
+                                currentAvgHourPrice: {
+                                    date: null,
+                                    value: null,
+                                },
+                                previousAvgPrice: {
+                                    date: null,
+                                    value: null,
+                                },
+                                createdAt: new Date(result.market[i].created),
+                                type: result.market[i].type,
+                                card: CardUtils.createACard(result.market[i].card),
+                            };
+
+                            if (result.market[i].previousAvgPrice !== null) {
+                                marketListing.previousAvgPrice.value = result.market[i].previousAvgPrice.statValue;
+                                marketListing.previousAvgPrice.date = new Date(
+                                    result.market[i].previousAvgPrice.statDate
+                                );
+                            }
+
+                            if (result.market[i].currentHourPrice !== null) {
+                                marketListing.currentAvgHourPrice.value = result.market[i].currentHourPrice.statValue;
+                                marketListing.currentAvgHourPrice.date = new Date(
+                                    result.market[i].currentHourPrice.statDate
+                                );
+                            }
+
+                            data.marketListings.push(marketListing);
                         }
 
-                        if (result.market[i].currentHourPrice !== null) {
-                            marketListing.currentAvgHourPrice.value = result.market[i].currentHourPrice.statValue;
-                            marketListing.currentAvgHourPrice.date = new Date(
-                                result.market[i].currentHourPrice.statDate
-                            );
-                        }
-
-                        data.marketListings.push(marketListing);
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
@@ -275,23 +275,23 @@ export default class User {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public openPack(packId: number): Promise<Card[]> {
-        const body: BodyData = {
-            packId,
-        };
+        return this.baseClient
+            .post(`packs/open2`, {
+                packId,
+            })
+            .then(
+                (result): Promise<Card[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Card[] = [];
 
-        return this.baseClient.post(`packs/open2`, body).then(
-            (result): Promise<Card[]> => {
-                return new Promise((resolve): void => {
-                    const data: Card[] = [];
+                        for (let i = 0; i < result.cards.length; i += 1) {
+                            data.push(CardUtils.createACard(result.cards[i]));
+                        }
 
-                    for (let i = 0; i < result.cards.length; i += 1) {
-                        data.push(CardUtils.createACard(result.cards[i]));
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**

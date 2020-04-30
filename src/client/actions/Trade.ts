@@ -8,8 +8,6 @@ import DateUtils from '../utils/Date';
 import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
 import StickerUtils from '../utils/Sticker';
-import { QueryParams } from '../../interfaces/QueryParams';
-import { BodyData } from '../../interfaces/BodyData';
 
 export default class Trade {
     private baseClient: BaseClient;
@@ -28,96 +26,95 @@ export default class Trade {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getOffers(page = 1, status: string = null): Promise<TradeData[]> {
-        const params: QueryParams = {
-            page,
-        };
+        return this.baseClient
+            .get('trade', {
+                page,
+                status,
+            })
+            .then(
+                (result): Promise<TradeData[]> => {
+                    return new Promise((resolve): void => {
+                        const trades: TradeData[] = [];
 
-        if (status !== null) {
-            params.status = status;
-        }
+                        for (let i = 0; i < result.trades.length; i += 1) {
+                            const currentTrade = result.trades[i];
 
-        return this.baseClient.get('trade', params).then(
-            (result): Promise<TradeData[]> => {
-                return new Promise((resolve): void => {
-                    const trades: TradeData[] = [];
+                            const tradeData: TradeData = {
+                                id: currentTrade.id,
+                                status: currentTrade.status,
+                                offeredBy: currentTrade.offeredBy,
+                                message: currentTrade.message,
 
-                    for (let i = 0; i < result.trades.length; i += 1) {
-                        const currentTrade = result.trades[i];
+                                sender: {
+                                    user: {
+                                        id: currentTrade.user1.id,
+                                        username: currentTrade.user1.username,
+                                        avatar: currentTrade.user1.avatar,
+                                        group: currentTrade.user1.group,
+                                    },
+                                    balance: currentTrade.user1.tradeBalance,
+                                    count: currentTrade.user1.count,
 
-                        const tradeData: TradeData = {
-                            id: currentTrade.id,
-                            status: currentTrade.status,
-                            offeredBy: currentTrade.offeredBy,
-                            message: currentTrade.message,
-
-                            sender: {
-                                user: {
-                                    id: currentTrade.user1.id,
-                                    username: currentTrade.user1.username,
-                                    avatar: currentTrade.user1.avatar,
-                                    group: currentTrade.user1.group,
-                                },
-                                balance: currentTrade.user1.tradeBalance,
-                                count: currentTrade.user1.count,
-
-                                cards: [],
-                                stickers: [],
-                                packs: [],
-                            },
-
-                            receiver: {
-                                user: {
-                                    id: currentTrade.user2.id,
-                                    username: currentTrade.user2.username,
-                                    avatar: currentTrade.user2.avatar,
-                                    group: currentTrade.user2.group,
+                                    cards: [],
+                                    stickers: [],
+                                    packs: [],
                                 },
 
-                                balance: currentTrade.user2.tradeBalance,
-                                count: currentTrade.user2.count,
+                                receiver: {
+                                    user: {
+                                        id: currentTrade.user2.id,
+                                        username: currentTrade.user2.username,
+                                        avatar: currentTrade.user2.avatar,
+                                        group: currentTrade.user2.group,
+                                    },
 
-                                cards: [],
-                                stickers: [],
-                                packs: [],
-                            },
+                                    balance: currentTrade.user2.tradeBalance,
+                                    count: currentTrade.user2.count,
 
-                            createdAt: DateUtils.convertToDate(currentTrade.created),
-                            updatedAt: DateUtils.convertToDate(currentTrade.updated),
-                        };
+                                    cards: [],
+                                    stickers: [],
+                                    packs: [],
+                                },
 
-                        for (let j = 0; j < currentTrade.user1.cards.length; j += 1) {
-                            tradeData.sender.cards.push(CardUtils.createACard(currentTrade.user1.cards[j]));
+                                createdAt: DateUtils.convertToDate(currentTrade.created),
+                                updatedAt: DateUtils.convertToDate(currentTrade.updated),
+                            };
+
+                            for (let j = 0; j < currentTrade.user1.cards.length; j += 1) {
+                                tradeData.sender.cards.push(CardUtils.createACard(currentTrade.user1.cards[j]));
+                            }
+
+                            for (let j = 0; j < currentTrade.user1.packs.length; j += 1) {
+                                tradeData.sender.packs.push(PackUtils.createAPack(currentTrade.user1.packs[j]));
+                            }
+
+                            for (let j = 0; j < currentTrade.user1.stickers.length; j += 1) {
+                                tradeData.sender.stickers.push(
+                                    StickerUtils.createASticker(currentTrade.user1.stickers[j])
+                                );
+                            }
+
+                            for (let j = 0; j < currentTrade.user2.cards.length; j += 1) {
+                                tradeData.receiver.cards.push(CardUtils.createACard(currentTrade.user2.cards[j]));
+                            }
+
+                            for (let j = 0; j < currentTrade.user2.packs.length; j += 1) {
+                                tradeData.receiver.packs.push(PackUtils.createAPack(currentTrade.user2.packs[j]));
+                            }
+
+                            for (let j = 0; j < currentTrade.user2.stickers.length; j += 1) {
+                                tradeData.receiver.stickers.push(
+                                    StickerUtils.createASticker(currentTrade.user2.stickers[j])
+                                );
+                            }
+
+                            trades.push(tradeData);
                         }
 
-                        for (let j = 0; j < currentTrade.user1.packs.length; j += 1) {
-                            tradeData.sender.packs.push(PackUtils.createAPack(currentTrade.user1.packs[j]));
-                        }
-
-                        for (let j = 0; j < currentTrade.user1.stickers.length; j += 1) {
-                            tradeData.sender.stickers.push(StickerUtils.createASticker(currentTrade.user1.stickers[j]));
-                        }
-
-                        for (let j = 0; j < currentTrade.user2.cards.length; j += 1) {
-                            tradeData.receiver.cards.push(CardUtils.createACard(currentTrade.user2.cards[j]));
-                        }
-
-                        for (let j = 0; j < currentTrade.user2.packs.length; j += 1) {
-                            tradeData.receiver.packs.push(PackUtils.createAPack(currentTrade.user2.packs[j]));
-                        }
-
-                        for (let j = 0; j < currentTrade.user2.stickers.length; j += 1) {
-                            tradeData.receiver.stickers.push(
-                                StickerUtils.createASticker(currentTrade.user2.stickers[j])
-                            );
-                        }
-
-                        trades.push(tradeData);
-                    }
-
-                    resolve(trades);
-                });
-            }
-        );
+                        resolve(trades);
+                    });
+                }
+            );
     }
 
     /**
@@ -128,12 +125,6 @@ export default class Trade {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public createOffer(userId: number, cards: Card[], stickers: Sticker[]): Promise<number> {
-        const body: BodyData = {
-            user1Balance: 0,
-            user2Balance: 0,
-            user2Id: userId.toString(),
-        };
-
         const entities = [];
 
         for (let i = 0; i < cards.length; i += 1) {
@@ -152,15 +143,20 @@ export default class Trade {
             });
         }
 
-        body.entities = entities;
-
-        return this.baseClient.post(`trade/create-offer`, body).then(
-            (result): Promise<number> => {
-                return new Promise((resolve): void => {
-                    resolve(result.tradeId as number);
-                });
-            }
-        );
+        return this.baseClient
+            .post(`trade/create-offer`, {
+                user1Balance: 0,
+                user2Balance: 0,
+                user2Id: userId.toString(),
+                entities: entities,
+            })
+            .then(
+                (result): Promise<number> => {
+                    return new Promise((resolve): void => {
+                        resolve(result.tradeId as number);
+                    });
+                }
+            );
     }
 
     /**
@@ -169,17 +165,17 @@ export default class Trade {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public acceptOffer(tradeId: number): Promise<void> {
-        const body: BodyData = {
-            tradeId,
-        };
-
-        return this.baseClient.patch(`trade/accept-offer`, body).then(
-            (): Promise<void> => {
-                return new Promise((resolve): void => {
-                    resolve();
-                });
-            }
-        );
+        return this.baseClient
+            .patch(`trade/accept-offer`, {
+                tradeId,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
     }
 
     /**
@@ -188,16 +184,16 @@ export default class Trade {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public declineOffer(tradeId: number): Promise<void> {
-        const body: BodyData = {
-            tradeId,
-        };
-
-        return this.baseClient.patch(`trade/decline-offer`, body).then(
-            (): Promise<void> => {
-                return new Promise((resolve): void => {
-                    resolve();
-                });
-            }
-        );
+        return this.baseClient
+            .patch(`trade/decline-offer`, {
+                tradeId,
+            })
+            .then(
+                (): Promise<void> => {
+                    return new Promise((resolve): void => {
+                        resolve();
+                    });
+                }
+            );
     }
 }
