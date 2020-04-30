@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import * as jwt from 'jsonwebtoken';
-import * as HttpsProxyAgent from 'https-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 import { BaseClientOptions } from '../interfaces/BaseClientOptions';
 import { CurrentUser } from '../interfaces/CurrentUser';
