@@ -2406,13 +2406,13 @@ img {
 				<a name="getcollectionleaderboards" class="tsd-anchor"></a>
 				<h3>get<wbr>Collection<wbr>Leaderboards</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Collection<wbr>Leaderboards<span class="tsd-signature-symbol">(</span>collectionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, season<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/collectionranking.html" class="tsd-signature-type">CollectionRanking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Collection<wbr>Leaderboards<span class="tsd-signature-symbol">(</span>collectionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, season<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/collectionranking.html" class="tsd-signature-type">CollectionRanking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f5bdaa1/src/client/actions/Leaderboard.ts#L82">client/actions/Leaderboard.ts:82</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/8405491/src/client/actions/Leaderboard.ts#L68">client/actions/Leaderboard.ts:68</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2446,18 +2446,6 @@ img {
 									<p>the season to filter the leaderboard</p>
 								</div>
 							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the category id</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the game id</p>
-								</div>
-							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/collectionranking.html" class="tsd-signature-type">CollectionRanking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						<p>a Promise resolved with the response or rejected in case of error</p>
@@ -2468,13 +2456,13 @@ img {
 				<a name="getleaderboards" class="tsd-anchor"></a>
 				<h3>get<wbr>Leaderboards</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Leaderboards<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, season<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/userranking.html" class="tsd-signature-type">UserRanking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Leaderboards<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, season<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/userranking.html" class="tsd-signature-type">UserRanking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f5bdaa1/src/client/actions/Leaderboard.ts#L25">client/actions/Leaderboard.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/8405491/src/client/actions/Leaderboard.ts#L23">client/actions/Leaderboard.ts:23</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2500,18 +2488,6 @@ img {
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> season: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;null</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>the season to filter the leaderboard</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the category id</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the game id</p>
 								</div>
 							</li>
 						</ul>

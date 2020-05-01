@@ -2406,13 +2406,13 @@ img {
 				<a name="buypack" class="tsd-anchor"></a>
 				<h3>buy<wbr>Pack</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">buy<wbr>Pack<span class="tsd-signature-symbol">(</span>packTemplateId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, amount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">buy<wbr>Pack<span class="tsd-signature-symbol">(</span>packTemplateId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, amount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f5bdaa1/src/client/actions/Store.ts#L50">client/actions/Store.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/8405491/src/client/actions/Store.ts#L50">client/actions/Store.ts:50</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2431,18 +2431,6 @@ img {
 									<p>the amount of packs to buy</p>
 								</div>
 							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the category id</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the game id</p>
-								</div>
-							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						<p>a Promise resolved with the response or rejected in case of error</p>
@@ -2453,13 +2441,13 @@ img {
 				<a name="getpacks" class="tsd-anchor"></a>
 				<h3>get<wbr>Packs</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Packs<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, categoryId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/pack.html" class="tsd-signature-type">Pack</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Packs<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/pack.html" class="tsd-signature-type">Pack</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/f5bdaa1/src/client/actions/Store.ts#L24">client/actions/Store.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/8405491/src/client/actions/Store.ts#L22">client/actions/Store.ts:22</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2473,18 +2461,6 @@ img {
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> page: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>the page to get</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> categoryId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the category id</p>
-								</div>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> gameId: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>the game id</p>
 								</div>
 							</li>
 						</ul>

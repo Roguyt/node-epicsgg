@@ -1,3 +1,21 @@
+# [2.0.0](https://github.com/Roguyt/node-epicsgg/compare/v1.3.4...v2.0.0) (2020-05-01)
+
+
+### Bug Fixes
+
+* **BaseClient:** fix https-proxy-agent import ([f1190f1](https://github.com/Roguyt/node-epicsgg/commit/f1190f14447370e776ed4badd8cdaef61f0f1e2a))
+* **test:** import Chai correctly ([2e4933d](https://github.com/Roguyt/node-epicsgg/commit/2e4933d7a45fea432c6c25c98c811330fc150717))
+
+
+### Codebase Improvements
+
+* spring clean-up ([#22](https://github.com/Roguyt/node-epicsgg/issues/22)) ([3ba92ac](https://github.com/Roguyt/node-epicsgg/commit/3ba92ace47d2ca7a9060bedb3beaa58236b1252d))
+
+
+### BREAKING CHANGES
+
+* Removed categoryId and gameId from every method.
+
 ## [1.3.4](https://github.com/Roguyt/node-epicsgg/compare/v1.3.3...v1.3.4) (2020-05-01)
 
 
@@ -272,6 +290,3 @@
 * **UserActions:** implement getMarketListings ([b66e999](https://github.com/Roguyt/node-epicsgg/commit/b66e9999eb69d55872394e11381356a905f20c5d))
 * **UserActions:** implement getOwnedCards ([0f5a8f5](https://github.com/Roguyt/node-epicsgg/commit/0f5a8f5ab50d9fb6e916fa89c058fe530f5c1f77))
 * **UserActions:** implement getShowcasedCards ([4d87be4](https://github.com/Roguyt/node-epicsgg/commit/4d87be4d3efe75dd75b5a911b866c0c19d783353))
-
-
-
