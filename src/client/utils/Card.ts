@@ -24,7 +24,7 @@ export default class CardUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: this.createCardTemplate(data.cardTemplate),
+            template: CardUtils.createCardTemplate(data.cardTemplate),
         };
     }
 

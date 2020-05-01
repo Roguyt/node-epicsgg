@@ -155,6 +155,17 @@ export default class User {
     }
 
     /**
+     * Get the cards of a given user and a given cardTemplate
+     * @param userId the user id to get its cards
+     * @param cardTemplateId the cardTemplateId of the cards to get
+     */
+    public async getCards(userId: number, cardTemplateId: number): Promise<Card[]> {
+        const result = await this.baseClient.get(`collections/users/${userId}/card-templates/${cardTemplateId}/cards`);
+
+        return result.map(CardUtils.createACard);
+    }
+
+    /**
      * Get the stickers ids of a given user and a given collection
      * @param userId the user id to get its stickers ids
      * @param collectionId the collection of the stickers to get
