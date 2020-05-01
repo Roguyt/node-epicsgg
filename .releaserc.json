@@ -6,7 +6,8 @@
         [
             "@semantic-release/commit-analyzer",
             {
-                "config": "conventional-changelog-insurgent"
+                "config": "conventional-changelog-insurgent",
+                "releaseRules": "./node_modules/conventional-changelog-insurgent/release-rules.js"
             }
         ],
         [
