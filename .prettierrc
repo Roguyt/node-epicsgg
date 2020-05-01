@@ -9,8 +9,18 @@
   "useTabs": false,
   "overrides": [
     {
-      "files": [".*", "*.json"],
-      "options": { "parser": "json" }
+      "files": ["*.json"],
+      "options": {
+        "parser": "json",
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": ["*.yml"],
+      "options": {
+        "parser": "yaml",
+        "tabWidth": 2
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@ name: Test, Release & Publish
 
 on:
   push:
-    branches:    
+    branches:
       - master
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [13.8]
+        node-version: [12.16]
 
     steps:
       - name: Checkout project
@@ -28,14 +28,13 @@ jobs:
       - name: Run tests
         run: yarn run test
 
-
   publish:
     needs: test
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [13.2]
+        node-version: [12.16]
 
     steps:
       - name: Checkout project
@@ -46,8 +45,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install packages
         run: yarn install --frozen-lockfile
-      - name: Build documentation
-        run: yarn run build:docs
       - name: Run Semantic Release
         run: yarn run release
         env:
