@@ -16,6 +16,7 @@ import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
 import { CardIds } from '../../interfaces/CardIds';
+import { StickerIds } from '../../interfaces/StickerIds';
 
 export default class User {
     private baseClient: BaseClient;
@@ -151,6 +152,46 @@ export default class User {
             templateId: cardIds.cardTemplateId,
             ids: cardIds.cardIds,
         }));
+    }
+
+    /**
+     * Get the cards of a given user and a given cardTemplate
+     * @param userId the user id to get its cards
+     * @param cardTemplateId the cardTemplateId of the cards to get
+     */
+    public async getCards(userId: number, cardTemplateId: number): Promise<Card[]> {
+        const result = await this.baseClient.get(`collections/users/${userId}/card-templates/${cardTemplateId}/cards`);
+
+        return result.map(CardUtils.createACard);
+    }
+
+    /**
+     * Get the stickers ids of a given user and a given collection
+     * @param userId the user id to get its stickers ids
+     * @param collectionId the collection of the stickers to get
+     */
+    public async getStickerIds(userId: number, collectionId: number): Promise<StickerIds[]> {
+        const result = await this.baseClient.get(`collections/users/${userId}/stickerids`, {
+            collectionId,
+        });
+
+        return result.map((stickerIds: any) => ({
+            templateId: stickerIds.stickerTemplateId,
+            ids: stickerIds.stickerIds,
+        }));
+    }
+
+    /**
+     * Get the stickers of a given user and a given stickerTemplate
+     * @param userId the user id to get its stickers
+     * @param stickerTemplateId the stickerTemplateId of the stickers to get
+     */
+    public async getStickers(userId: number, stickerTemplateId: number): Promise<Sticker[]> {
+        const result = await this.baseClient.get(
+            `collections/users/${userId}/sticker-templates/${stickerTemplateId}/stickers`
+        );
+
+        return result.map(StickerUtils.createASticker);
     }
 
     /**
