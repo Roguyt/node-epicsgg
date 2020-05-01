@@ -15,11 +15,17 @@ export = class Index {
     public baseClient: BaseClient;
 
     public User: User;
+
     public Library: Library;
+
     public Store: Store;
+
     public Trade: Trade;
+
     public Market: Market;
+
     public Spinner: Spinner;
+
     public Leaderboard: Leaderboard;
 
     public SocketClient: SocketClient;

@@ -18,55 +18,43 @@ export default class Leaderboard {
      * @param page the page to get (1 page = 20 users)
      * @param country the country to filter the leaderboard
      * @param season the season to filter the leaderboard
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getLeaderboards(
-        page: number = 1,
-        country: string = null,
-        season: string = null,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<UserRanking[]> {
-        let url = 'leaderboards/categories/1?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '';
+    public getLeaderboards(page = 1, country: string = null, season: string = null): Promise<UserRanking[]> {
+        return this.baseClient
+            .get('leaderboards/categories/1', {
+                page,
+                country,
+                season,
+            })
+            .then(
+                (result): Promise<UserRanking[]> => {
+                    return new Promise((resolve): void => {
+                        const data: UserRanking[] = [];
 
-        if (country !== null) {
-            url += '&country=' + country;
-        }
+                        for (let i = 0; i < result.length; i += 1) {
+                            const ranking = result[i];
 
-        if (season !== null) {
-            url += '&season=' + season;
-        }
+                            data.push({
+                                id: ranking.user.id,
+                                username: ranking.user.username,
+                                avatar: ranking.user.avatar,
+                                group: ranking.user.group,
+                                country: ranking.user.country,
+                                joined: ranking.user.created,
+                                ranking: {
+                                    rank: ranking.rank,
+                                    score: ranking.score,
+                                    cardCount: ranking.cardCount,
+                                    entityCount: ranking.entityCount,
+                                },
+                            });
+                        }
 
-        return this.baseClient.get(url).then(
-            (result): Promise<UserRanking[]> => {
-                return new Promise((resolve): void => {
-                    const data: UserRanking[] = [];
-
-                    for (let i = 0; i < result.length; i += 1) {
-                        let ranking = result[i];
-
-                        data.push({
-                            id: ranking.user.id,
-                            username: ranking.user.username,
-                            avatar: ranking.user.avatar,
-                            group: ranking.user.group,
-                            country: ranking.user.country,
-                            joined: ranking.user.created,
-                            ranking: {
-                                rank: ranking.rank,
-                                score: ranking.score,
-                                cardCount: ranking.cardCount,
-                                entityCount: ranking.entityCount,
-                            },
-                        });
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
@@ -75,64 +63,47 @@ export default class Leaderboard {
      * @param page the page to get (1 page = 20 users)
      * @param country the country to filter the leaderboard
      * @param season the season to filter the leaderboard
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getCollectionLeaderboards(
         collectionId: number,
-        page: number = 1,
+        page = 1,
         country: string = null,
-        season: string = null,
-        categoryId: number = 1,
-        gameId: number = 1
+        season: string = null
     ): Promise<CollectionRanking[]> {
-        let url =
-            'leaderboards/collections/' +
-            collectionId +
-            '?categoryId=' +
-            categoryId +
-            '&gameId=' +
-            gameId +
-            '&page=' +
-            page +
-            '';
+        return this.baseClient
+            .get(`leaderboards/collections/${collectionId}`, {
+                page,
+                country,
+                season,
+            })
+            .then(
+                (result): Promise<CollectionRanking[]> => {
+                    return new Promise((resolve): void => {
+                        const data: CollectionRanking[] = [];
 
-        if (country !== null) {
-            url += '&country=' + country;
-        }
+                        for (let i = 0; i < result.length; i += 1) {
+                            const ranking = result[i];
 
-        if (season !== null) {
-            url += '&season=' + season;
-        }
+                            data.push({
+                                id: ranking.user.id,
+                                username: ranking.user.username,
+                                avatar: ranking.user.avatar,
+                                group: ranking.user.group,
+                                country: ranking.user.country,
+                                joined: ranking.user.created,
+                                ranking: {
+                                    rank: ranking.rank,
+                                    score: ranking.score,
+                                    cardCount: ranking.cardCount,
+                                    entityCount: ranking.entityCount,
+                                },
+                            });
+                        }
 
-        return this.baseClient.get(url).then(
-            (result): Promise<CollectionRanking[]> => {
-                return new Promise((resolve): void => {
-                    const data: CollectionRanking[] = [];
-
-                    for (let i = 0; i < result.length; i += 1) {
-                        let ranking = result[i];
-
-                        data.push({
-                            id: ranking.user.id,
-                            username: ranking.user.username,
-                            avatar: ranking.user.avatar,
-                            group: ranking.user.group,
-                            country: ranking.user.country,
-                            joined: ranking.user.created,
-                            ranking: {
-                                rank: ranking.rank,
-                                score: ranking.score,
-                                cardCount: ranking.cardCount,
-                                entityCount: ranking.entityCount,
-                            },
-                        });
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 }

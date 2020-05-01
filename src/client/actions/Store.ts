@@ -17,53 +17,48 @@ export default class Store {
     /**
      * Get the packs from Epics.gg
      * @param page the page to get
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Pack[]> {
-        return this.baseClient.get('packs?categoryId=' + categoryId + '&gameId=' + gameId + '&page=' + page + '').then(
-            (result): Promise<Pack[]> => {
-                return new Promise((resolve): void => {
-                    const data: Pack[] = [];
+    public getPacks(page = 1): Promise<Pack[]> {
+        return this.baseClient
+            .get('packs', {
+                page,
+            })
+            .then(
+                (result): Promise<Pack[]> => {
+                    return new Promise((resolve): void => {
+                        const data: Pack[] = [];
 
-                    for (let i = 0; i < result.length; i += 1) {
-                        let pack: Pack = PackUtils.createAPack(result[i]);
+                        for (let i = 0; i < result.length; i += 1) {
+                            const pack: Pack = PackUtils.createAPack(result[i]);
 
-                        data.push(pack);
-                    }
+                            data.push(pack);
+                        }
 
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
      * Buy a given amount of a given packTemplateId
      * @param packTemplateId
      * @param amount the amount of packs to buy
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buyPack(
-        packTemplateId: number,
-        amount: number = 1,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<number[]> {
+    public buyPack(packTemplateId: number, amount = 1): Promise<number[]> {
         return this.baseClient
-            .post('packs/buy?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`packs/buy`, {
                 amount,
                 packTemplateId,
             })
             .then(
                 (result): Promise<number[]> => {
                     return new Promise((resolve): void => {
-                        const data: number[] = result;
+                        const resultData: number[] = result;
 
-                        resolve(data);
+                        resolve(resultData);
                     });
                 }
             );

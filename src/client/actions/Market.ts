@@ -29,70 +29,57 @@ export default class Market {
      *  - tier: ```To be updqted```
      * @param page the page to get
      * @param filters the filters to be used in the request
-     * @param categoryId the category id
-     * @param gameId the game id
+     * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public getMarketplaceTemplates(
-        page: number = 1,
+        page = 1,
         filters: Record<string, string | boolean>,
-        categoryId: number = 1,
-        gameId: number = 1
+        type: string = null
     ): Promise<MarketTemplate[]> {
-        let url = 'market/templates?categoryId=' + categoryId + '&gameId=' + gameId + '&page' + page + '&type=card';
+        return this.baseClient
+            .get('market/templates', {
+                page,
+                type,
+                ...filters,
+            })
+            .then(
+                (result): Promise<MarketTemplate[]> => {
+                    return new Promise((resolve): void => {
+                        const data: MarketTemplate[] = [];
 
-        for (let param in filters) {
-            url += `&${param}=${filters[param]}`;
-        }
+                        for (let i = 0; i < result.templates.length; i += 1) {
+                            const marketTemplate: MarketTemplate = {
+                                entityTemplateId: result.templates[i].entityTemplateId,
+                                isUserNeed: result.templates[i].isUserNeed,
+                                lowestPrice: result.templates[i].lowestPrice,
+                                cardTemplate: CardUtils.createCardTemplate(result.templates[i].cardTemplate),
+                            };
 
-        return this.baseClient.get(url).then(
-            (result): Promise<MarketTemplate[]> => {
-                return new Promise((resolve): void => {
-                    const data: MarketTemplate[] = [];
+                            data.push(marketTemplate);
+                        }
 
-                    for (let i = 0; i < result.templates.length; i += 1) {
-                        const marketTemplate: MarketTemplate = {
-                            entityTemplateId: result.templates[i].entityTemplateId,
-                            isUserNeed: result.templates[i].isUserNeed,
-                            lowestPrice: result.templates[i].lowestPrice,
-                            cardTemplate: CardUtils.createCardTemplate(result.templates[i].cardTemplate),
-                        };
-
-                        data.push(marketTemplate);
-                    }
-
-                    resolve(data);
-                });
-            }
-        );
+                        resolve(data);
+                    });
+                }
+            );
     }
 
     /**
      * Get the market listings for a given cardId
      * @param cardId the cardId of the listings you want to get
      * @param page the page to get
-     * @param categoryId the category id
-     * @param gameId the game id
+     * @param sort price / ?
+     * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getListings(
-        cardId: number,
-        page: number = 1,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<MarketListing[]> {
+    public getListings(cardId: number, page = 1, sort: string = null, type: string = null): Promise<MarketListing[]> {
         return this.baseClient
-            .get(
-                'market/buy?categoryId=' +
-                    categoryId +
-                    '&gameId=' +
-                    gameId +
-                    '&page=' +
-                    page +
-                    '&sort=price&templateId=' +
-                    cardId +
-                    '&type=card'
-            )
+            .get('market/buy', {
+                page,
+                sort,
+                type,
+            })
             .then(
                 (result): Promise<MarketListing[]> => {
                     return new Promise((resolve): void => {
@@ -103,7 +90,7 @@ export default class Market {
                         }
 
                         for (let i = 0; i < result.market[0].length; i += 1) {
-                            let marketListing: MarketListing = {
+                            const marketListing: MarketListing = {
                                 marketId: result.market[0][i].marketId,
 
                                 price: result.market[0][i].price,
@@ -140,7 +127,7 @@ export default class Market {
                             data.push(marketListing);
                         }
 
-                        resolve(data);
+                        return resolve(data);
                     });
                 }
             );
@@ -152,67 +139,49 @@ export default class Market {
      * @param type of the entity
      * @param price price of the listing
      * @param minOffer minOffer value (no minOffer if empty)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public createListing(
-        id: number,
-        type: string,
-        price: number,
-        minOffer?: number,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<number> {
-        let data: Record<string, string | number> = {
-            id,
-            price,
-            type,
-        };
-
-        if (minOffer) {
-            data.minOffer = minOffer;
-        }
-
-        return this.baseClient.post('market/list?categoryId=' + categoryId + '&gameId=' + gameId + '', data).then(
-            (result): Promise<number> => {
-                return new Promise((resolve): void => {
-                    resolve(result.marketId);
-                });
-            }
-        );
-    }
-
-    /**
-     * Remove a given listingId
-     * @param listingId listingId to remove
-     * @param categoryId the category id
-     * @param gameId the game id
-     * @returns a Promise resolved with the response or rejected in case of error
-     */
-    public removeListing(listingId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public createListing(id: number, type: string, price: number, minOffer?: number): Promise<number> {
         return this.baseClient
-            .delete('market/listed/' + listingId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .post(`market/list`, {
+                id,
+                price,
+                type,
+                minOffer,
+            })
             .then(
-                (): Promise<void> => {
+                (result): Promise<number> => {
                     return new Promise((resolve): void => {
-                        resolve();
+                        resolve(result.marketId);
                     });
                 }
             );
     }
 
     /**
+     * Remove a given listingId
+     * @param listingId listingId to remove
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public removeListing(listingId: number): Promise<void> {
+        return this.baseClient.delete(`market/listed/${listingId}`).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
+    }
+
+    /**
      * Buy a market element
      * @param marketId the marketId you want to buy
      * @param price it's price (?)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buy(marketId: number, price: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public buy(marketId: number, price: number): Promise<void> {
         return this.baseClient
-            .post('market/buy?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`market/buy`, {
                 marketId,
                 price,
             })
@@ -230,19 +199,11 @@ export default class Market {
      * @param marketId listing id
      * @param currentPrice the current price
      * @param counterPrice the counter offer price
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public makeCounterOffer(
-        marketId: number,
-        currentPrice: number,
-        counterPrice: number,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<void> {
+    public makeCounterOffer(marketId: number, currentPrice: number, counterPrice: number): Promise<void> {
         return this.baseClient
-            .post('market/counter-offers?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .post(`market/counter-offers`, {
                 marketId,
                 currentPrice,
                 counterPrice,
@@ -259,32 +220,26 @@ export default class Market {
     /**
      * Withdraw a counter offer
      * @param counterOfferId counterOfferId to withdraw
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public cancelCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
-        return this.baseClient
-            .delete('market/counter-offers/' + counterOfferId + '?categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public cancelCounterOffer(counterOfferId: number): Promise<void> {
+        return this.baseClient.delete(`market/counter-offers/${counterOfferId}`).then(
+            (): Promise<void> => {
+                return new Promise((resolve): void => {
+                    resolve();
+                });
+            }
+        );
     }
 
     /**
      * Accept a counter offer
      * @param counterOfferId the counterOfferId to accept
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public acceptCounterOffer(counterOfferId: number): Promise<void> {
         return this.baseClient
-            .patch('market/counter-offers/accept?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .patch(`market/counter-offers/accept`, {
                 offerId: counterOfferId,
             })
             .then(
@@ -299,13 +254,11 @@ export default class Market {
     /**
      * Decline a given counter offer
      * @param counterOfferId the counterOfferId to decline
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineCounterOffer(counterOfferId: number, categoryId: number = 1, gameId: number = 1): Promise<void> {
+    public declineCounterOffer(counterOfferId: number): Promise<void> {
         return this.baseClient
-            .patch('market/counter-offers/decline?categoryId=' + categoryId + '&gameId=' + gameId + '', {
+            .patch(`market/counter-offers/decline`, {
                 offerId: counterOfferId,
             })
             .then(

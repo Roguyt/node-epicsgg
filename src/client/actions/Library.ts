@@ -15,20 +15,20 @@ export default class Library {
     /**
      * Get a list of Treatments
      * @param page the page to get (1 page = 100 treatments)
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getTreatments(page: number = 1, categoryId: number = 1, gameId: number = 1): Promise<Treatment[]> {
+    public getTreatments(page = 1): Promise<Treatment[]> {
         return this.baseClient
-            .get('treatments?page=' + page + '&categoryId=' + categoryId + '&gameId=' + gameId + '')
+            .get(`treatments`, {
+                page,
+            })
             .then(
                 (result): Promise<Treatment[]> => {
                     return new Promise((resolve): void => {
                         const data: Treatment[] = [];
 
                         for (let i = 0; i < result.treatments.length; i += 1) {
-                            let treatment: Treatment = {
+                            const treatment: Treatment = {
                                 id: result.treatments[i].id,
                                 name: result.treatments[i].name,
                                 categoryId: result.treatments[i].categoryId,
@@ -57,32 +57,24 @@ export default class Library {
     /**
      * Get a list of CardTemplate given a collection id
      * @param collectionId the collection id
-     * @param categoryId the category id
-     * @param gameId the game id
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getCollectionCardTemplates(
-        collectionId: number,
-        categoryId: number = 1,
-        gameId: number = 1
-    ): Promise<CardTemplate[]> {
-        return this.baseClient
-            .get('collections/' + collectionId + '/card-templates?categoryId=' + categoryId + '&gameId=' + gameId + '')
-            .then(
-                (result): Promise<CardTemplate[]> => {
-                    return new Promise((resolve): void => {
-                        const data: CardTemplate[] = [];
+    public getCollectionCardTemplates(collectionId: number): Promise<CardTemplate[]> {
+        return this.baseClient.get(`collections/${collectionId}/card-templates`).then(
+            (result): Promise<CardTemplate[]> => {
+                return new Promise((resolve): void => {
+                    const data: CardTemplate[] = [];
 
-                        for (let i = 0; i < result.length; i += 1) {
-                            let cardTemplate = result[i];
-                            let cardTemplateData = CardUtils.createCardTemplate(cardTemplate);
+                    for (let i = 0; i < result.length; i += 1) {
+                        const cardTemplate = result[i];
+                        const cardTemplateData = CardUtils.createCardTemplate(cardTemplate);
 
-                            data.push(cardTemplateData);
-                        }
+                        data.push(cardTemplateData);
+                    }
 
-                        resolve(data);
-                    });
-                }
-            );
+                    resolve(data);
+                });
+            }
+        );
     }
 }
