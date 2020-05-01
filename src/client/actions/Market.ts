@@ -1,6 +1,7 @@
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
+import MarketUtils from '../utils/Market';
 
 import { MarketTemplate } from '../../interfaces/MarketTemplate';
 import { MarketListing } from '../../interfaces/MarketListing';
@@ -35,25 +36,20 @@ export default class Market {
     public async getMarketplaceTemplates(
         page = 1,
         filters: Record<string, string | boolean>,
-        type: string = null
+        type = 'card'
     ): Promise<MarketTemplate[]> {
         const result = await this.baseClient.get('market/templates', {
             page,
             type,
             ...filters,
         });
-        const data: MarketTemplate[] = [];
 
-        for (let i = 0; i < result.templates.length; i += 1) {
-            const marketTemplate: MarketTemplate = {
-                entityTemplateId: result.templates[i].entityTemplateId,
-                isUserNeed: result.templates[i].isUserNeed,
-                lowestPrice: result.templates[i].lowestPrice,
-                cardTemplate: CardUtils.createCardTemplate(result.templates[i].cardTemplate),
-            };
-
-            data.push(marketTemplate);
-        }
+        const data: MarketTemplate[] = result.templates.map((template: any) => ({
+            entityTemplateId: template.entityTemplateId,
+            isUserNeed: template.isUserNeed,
+            lowestPrice: template.lowestPrice,
+            cardTemplate: CardUtils.createACardTemplate(template.cardTemplate),
+        }));
 
         return data;
     }
@@ -66,56 +62,19 @@ export default class Market {
      * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getListings(
-        templateId: number,
-        page = 1,
-        sort: string = null,
-        type: string = null
-    ): Promise<MarketListing[]> {
+    public async getListings(templateId: number, page = 1, sort?: string, type = 'card'): Promise<MarketListing[]> {
         const result = await this.baseClient.get('market/buy', {
             templateId,
             page,
             sort,
             type,
         });
-        const data: MarketListing[] = [];
 
         if (!result.market[0]) {
-            return data;
+            return [];
         }
 
-        for (let i = 0; i < result.market[0].length; i += 1) {
-            const marketListing: MarketListing = {
-                marketId: result.market[0][i].marketId,
-
-                price: result.market[0][i].price,
-                previousAvgPrice: {
-                    value: null,
-                    date: null,
-                },
-                currentAvgHourPrice: {
-                    value: null,
-                    date: null,
-                },
-
-                createdAt: new Date(result.market[0][i].created),
-
-                type: result.market[0][i].type,
-                card: CardUtils.createACard(result.market[0][i].card),
-            };
-
-            if (result.market[0][i].previousAvgPrice !== null) {
-                marketListing.previousAvgPrice.value = result.market[0][i].previousAvgPrice.statValue;
-                marketListing.previousAvgPrice.date = new Date(result.market[0][i].previousAvgPrice.statValue);
-            }
-
-            if (result.market[0][i].currentHourPrice !== null) {
-                marketListing.currentAvgHourPrice.value = result.market[0][i].currentHourPrice.statValue;
-                marketListing.currentAvgHourPrice.date = new Date(result.market[0][i].currentHourPrice.statValue);
-            }
-
-            data.push(marketListing);
-        }
+        const data: MarketListing[] = result.market[0].map(MarketUtils.createMarketListing);
 
         return data;
     }
@@ -135,6 +94,7 @@ export default class Market {
             type,
             minOffer,
         });
+
         return result.marketId;
     }
 

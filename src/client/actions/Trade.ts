@@ -25,83 +25,52 @@ export default class Trade {
      * @param status the status of the offers
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getOffers(page = 1, status: string = null): Promise<TradeData[]> {
+    public async getOffers(page = 1, status?: string): Promise<TradeData[]> {
         const result = await this.baseClient.get('trade', {
             page,
             status,
         });
-        const trades: TradeData[] = [];
 
-        for (let i = 0; i < result.trades.length; i += 1) {
-            const currentTrade = result.trades[i];
+        const trades: TradeData[] = result.trades.map((trade: any) => ({
+            id: trade.id,
+            status: trade.status,
+            offeredBy: trade.offeredBy,
+            message: trade.message,
 
-            const tradeData: TradeData = {
-                id: currentTrade.id,
-                status: currentTrade.status,
-                offeredBy: currentTrade.offeredBy,
-                message: currentTrade.message,
+            sender: {
+                user: {
+                    id: trade.user1.id,
+                    username: trade.user1.username,
+                    avatar: trade.user1.avatar,
+                    group: trade.user1.group,
+                },
+                balance: trade.user1.tradeBalance,
+                count: trade.user1.count,
 
-                sender: {
-                    user: {
-                        id: currentTrade.user1.id,
-                        username: currentTrade.user1.username,
-                        avatar: currentTrade.user1.avatar,
-                        group: currentTrade.user1.group,
-                    },
-                    balance: currentTrade.user1.tradeBalance,
-                    count: currentTrade.user1.count,
+                cards: trade.user1.cards.map(CardUtils.createACard),
+                stickers: trade.user1.stickers.map(StickerUtils.createASticker),
+                packs: trade.user1.packs.map(PackUtils.createAPack),
+            },
 
-                    cards: [],
-                    stickers: [],
-                    packs: [],
+            receiver: {
+                user: {
+                    id: trade.user2.id,
+                    username: trade.user2.username,
+                    avatar: trade.user2.avatar,
+                    group: trade.user2.group,
                 },
 
-                receiver: {
-                    user: {
-                        id: currentTrade.user2.id,
-                        username: currentTrade.user2.username,
-                        avatar: currentTrade.user2.avatar,
-                        group: currentTrade.user2.group,
-                    },
+                balance: trade.user2.tradeBalance,
+                count: trade.user2.count,
 
-                    balance: currentTrade.user2.tradeBalance,
-                    count: currentTrade.user2.count,
+                cards: trade.user2.cards.map(CardUtils.createACard),
+                stickers: trade.user2.stickers.map(StickerUtils.createASticker),
+                packs: trade.user2.packs.map(PackUtils.createAPack),
+            },
 
-                    cards: [],
-                    stickers: [],
-                    packs: [],
-                },
-
-                createdAt: DateUtils.convertToDate(currentTrade.created),
-                updatedAt: DateUtils.convertToDate(currentTrade.updated),
-            };
-
-            for (let j = 0; j < currentTrade.user1.cards.length; j += 1) {
-                tradeData.sender.cards.push(CardUtils.createACard(currentTrade.user1.cards[j]));
-            }
-
-            for (let j = 0; j < currentTrade.user1.packs.length; j += 1) {
-                tradeData.sender.packs.push(PackUtils.createAPack(currentTrade.user1.packs[j]));
-            }
-
-            for (let j = 0; j < currentTrade.user1.stickers.length; j += 1) {
-                tradeData.sender.stickers.push(StickerUtils.createASticker(currentTrade.user1.stickers[j]));
-            }
-
-            for (let j = 0; j < currentTrade.user2.cards.length; j += 1) {
-                tradeData.receiver.cards.push(CardUtils.createACard(currentTrade.user2.cards[j]));
-            }
-
-            for (let j = 0; j < currentTrade.user2.packs.length; j += 1) {
-                tradeData.receiver.packs.push(PackUtils.createAPack(currentTrade.user2.packs[j]));
-            }
-
-            for (let j = 0; j < currentTrade.user2.stickers.length; j += 1) {
-                tradeData.receiver.stickers.push(StickerUtils.createASticker(currentTrade.user2.stickers[j]));
-            }
-
-            trades.push(tradeData);
-        }
+            createdAt: DateUtils.convertToDate(trade.created),
+            updatedAt: DateUtils.convertToDate(trade.updated),
+        }));
 
         return trades;
     }
@@ -113,24 +82,18 @@ export default class Trade {
      * @param stickers
      * @returns a Promise resolved with the response or rejected in case of error
      */
+    // TODO: Should throw an error if isMarketList = true (or rework to require id arrays only and get error from the API ?)
     public async createOffer(userId: number, cards: Card[], stickers: Sticker[]): Promise<number> {
-        const entities = [];
-
-        for (let i = 0; i < cards.length; i += 1) {
-            // TODO: Should throw an error is isMarketList = true
-
-            entities.push({
-                id: cards[i].id,
+        const entities = [
+            ...cards.map((card: any) => ({
+                id: card.id,
                 type: 'card',
-            });
-        }
-
-        for (let i = 0; i < stickers.length; i += 1) {
-            entities.push({
-                id: stickers[i].id,
+            })),
+            ...stickers.map((sticker: any) => ({
+                id: sticker.id,
                 type: 'sticker',
-            });
-        }
+            })),
+        ];
 
         const result = await this.baseClient.post(`trade/create-offer`, {
             user1Balance: 0,

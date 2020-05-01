@@ -5,7 +5,6 @@ import { StickerTemplate } from '../../interfaces/StickerTemplate';
  * @hidden
  */
 export default class StickerUtils {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createASticker(data: any): Sticker {
         return {
             id: data.id,
@@ -19,12 +18,11 @@ export default class StickerUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: StickerUtils.createStickerTemplate(data.stickerTemplate),
+            template: StickerUtils.createAStickerTemplate(data.stickerTemplate),
         };
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public static createStickerTemplate(data: any): StickerTemplate {
+    public static createAStickerTemplate(data: any): StickerTemplate {
         return {
             id: data.id,
             uuid: data.uuid,

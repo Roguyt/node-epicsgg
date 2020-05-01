@@ -23,13 +23,8 @@ export default class Store {
         const result = await this.baseClient.get('packs', {
             page,
         });
-        const data: Pack[] = [];
 
-        for (let i = 0; i < result.length; i += 1) {
-            const pack: Pack = PackUtils.createAPack(result[i]);
-
-            data.push(pack);
-        }
+        const data: Pack[] = result.map(PackUtils.createAPack);
 
         return data;
     }
@@ -45,6 +40,7 @@ export default class Store {
             amount,
             packTemplateId,
         });
+
         return result;
     }
 }
