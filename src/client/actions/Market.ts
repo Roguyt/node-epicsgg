@@ -67,15 +67,21 @@ export default class Market {
 
     /**
      * Get the market listings for a given cardId
-     * @param cardId the cardId of the listings you want to get
+     * @param templateId the templateId of the listings you want to get
      * @param page the page to get
      * @param sort price / ?
      * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getListings(cardId: number, page = 1, sort: string = null, type: string = null): Promise<MarketListing[]> {
+    public getListings(
+        templateId: number,
+        page = 1,
+        sort: string = null,
+        type: string = null
+    ): Promise<MarketListing[]> {
         return this.baseClient
             .get('market/buy', {
+                templateId,
                 page,
                 sort,
                 type,
