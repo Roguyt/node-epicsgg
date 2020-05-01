@@ -4,6 +4,7 @@ npm-debug.log
 
 # IDE
 .idea/
+.vscode/
 
 # Examples
 examples/
