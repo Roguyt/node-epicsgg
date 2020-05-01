@@ -27,7 +27,8 @@
         "build": "tsc -p tsconfig.json",
         "build:watch": "tsc -w -p tsconfig.json",
         "build:docs": "typedoc --out ./docs --tsconfig tsconfig.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
-        "prepack": "yarn run build"
+        "prepack": "yarn run build",
+        "release": "semantic-release"
     },
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
@@ -39,6 +40,12 @@
         }
     },
     "devDependencies": {
+        "@semantic-release/changelog": "^5.0.1",
+        "@semantic-release/commit-analyzer": "^8.0.1",
+        "@semantic-release/git": "^9.0.0",
+        "@semantic-release/github": "^7.0.5",
+        "@semantic-release/npm": "^7.0.5",
+        "@semantic-release/release-notes-generator": "^9.0.1",
         "@types/chai": "^4.1.7",
         "@types/jsonwebtoken": "^8.3.9",
         "@types/mocha": "^5.2.7",
@@ -47,6 +54,7 @@
         "@typescript-eslint/eslint-plugin": "^2.30.0",
         "@typescript-eslint/parser": "^2.30.0",
         "chai": "^4.2.0",
+        "conventional-changelog-insurgent": "^5.2.0",
         "eslint": "^5.16.0",
         "eslint-config-airbnb-base": "^13.1.0",
         "eslint-config-prettier": "^6.0.0",
@@ -61,6 +69,7 @@
         "prettier": "^2.0.5",
         "pretty-quick": "^2.0.1",
         "resolve": "^1.11.1",
+        "semantic-release": "^17.0.7",
         "ts-node": "^8.3.0",
         "typedoc": "^0.15.0",
         "typescript": "^3.5.2"
