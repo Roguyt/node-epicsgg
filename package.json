@@ -5,9 +5,16 @@
     "keywords": ["epics.gg", "epics"],
     "author": {
         "url": "https://clmntw.fr",
-        "email": "github@clmntw.fr",
+        "email": "git@clmntw.fr",
         "name": "Roguyt"
     },
+    "contributors": [
+        {
+            "url": "https://sherlox.io",
+            "email": "me@sherlox.io",
+            "name": "Pierre Cavin"
+        }
+    ],
     "homepage": "https://github.com/Roguyt/node-epicsgg#readme",
     "repository": {
         "url": "https://github.com/Roguyt/node-epicsgg.git",
@@ -15,7 +22,7 @@
     },
     "bugs": {
         "url": "https://github.com/Roguyt/node-epicsgg/issues",
-        "email": "github@clmntw.fr"
+        "email": "git@clmntw.fr"
     },
     "engines": {
         "node": ">=8.0.0"

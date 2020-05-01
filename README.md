@@ -19,11 +19,12 @@
 > An interface to communicate with Epics.gg API
 
 ### 🏠 [Homepage](https://github.com/Roguyt/node-epicsgg#readme)
+
 ### 📝 [Documentation](https://roguyt.github.io/node-epicsgg/)
 
 ## Prerequisites
 
-- node >=8.0.0
+-   node >=8.0.0
 
 ## Install
 
@@ -48,8 +49,12 @@ npm run test
 
 👤 **Roguyt**
 
-* Twitter: [@ClmntW](https://twitter.com/ClmntW)
-* Github: [@Roguyt](https://github.com/Roguyt)
+-   Twitter: [@ClmntW](https://twitter.com/ClmntW)
+-   Github: [@Roguyt](https://github.com/Roguyt)
+
+## Contributors
+
+-   **SherloxTV** ([Github](https://github.com/SherloxTV), [Twitch](https://twitch.tv/SherloxTV), [Twitter](https://twitter.com/SherloxTV))
 
 ## 🤝 Contributing
 
@@ -64,5 +69,6 @@ Give a ⭐️ if this project helped you!
 Copyright © 2019 [Roguyt](https://github.com/Roguyt).<br />
 This project is [MIT](https://github.com/Roguyt/node-epicsgg/blob/master/LICENSE) licensed.
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
