@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/Roguyt/node-epicsgg/compare/v2.0.1...v2.0.2) (2020-05-01)
+
+
+### Reverts
+
+* Revert "ci: fix release rights (#28)" (#29) ([8af6a02](https://github.com/Roguyt/node-epicsgg/commit/8af6a02c17f6001c9fa34530379ee67bdfbb4095)), closes [#28](https://github.com/Roguyt/node-epicsgg/issues/28) [#29](https://github.com/Roguyt/node-epicsgg/issues/29)
+
 ## [2.0.1](https://github.com/Roguyt/node-epicsgg/compare/v2.0.0...v2.0.1) (2020-05-01)
 
 # [2.0.0](https://github.com/Roguyt/node-epicsgg/compare/v1.3.4...v2.0.0) (2020-05-01)
