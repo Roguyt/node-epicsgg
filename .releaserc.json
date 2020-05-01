@@ -1,0 +1,26 @@
+{
+    "repositoryUrl": "git@github.com:Roguyt/node-epicsgg.git",
+    "branch": "master",
+    "tagFormat": "v${version}",
+    "plugins": [
+        ["@semantic-release/commit-analyzer", {
+            "preset": "insurgent"
+        }],
+        ["@semantic-release/release-notes-generator", {
+            "preset": "insurgent"
+        }],
+        ["@semantic-release/changelog", {
+            "changelogFile": "CHANGELOG.md"
+        }],
+        "@semantic-release/npm",
+        ["@semantic-release/git", {
+            "assets": [
+                "CHANGELOG.md",
+                "package.json",
+                "docs/**"
+            ],
+            "message": "Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }],
+        "@semantic-release/github"
+    ]
+}

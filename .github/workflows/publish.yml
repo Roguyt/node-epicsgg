@@ -1,0 +1,55 @@
+name: Test, Release & Publish
+
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [13.8]
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+      - name: Build project
+        run: yarn run build
+      - name: Check codestyle compliance
+        run: yarn run lint
+      - name: Run tests
+        run: yarn run test
+
+
+  publish:
+    needs: test
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [13.2]
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+      - name: Build documentation
+        run: yarn run build:docs
+      - name: Run Semantic Release
+        run: yarn run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
