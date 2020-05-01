@@ -20,87 +20,69 @@ export default class Spinner {
      * Get the current Spinner's data
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getSpinner(): Promise<SpinnerData> {
-        return this.baseClient.get('spinner').then(
-            (result): Promise<SpinnerData> => {
-                return new Promise((resolve): void => {
-                    const data: SpinnerData = {
-                        id: result.id,
-                        name: result.name,
-                        items: [],
-                    };
+    public async getSpinner(): Promise<SpinnerData> {
+        const result = await this.baseClient.get('spinner');
+        const data: SpinnerData = {
+            id: result.id,
+            name: result.name,
+            items: [],
+        };
 
-                    for (let i = 0; i < result.items.length; i += 1) {
-                        const spinnerItem: SpinnerItem = {
-                            id: result.items[i].id,
-                            name: result.items[i].name,
-                            chance: result.items[i].chance,
-                            properties: {},
-                            images: result.items[i].images,
-                        };
+        for (let i = 0; i < result.items.length; i += 1) {
+            const spinnerItem: SpinnerItem = {
+                id: result.items[i].id,
+                name: result.items[i].name,
+                chance: result.items[i].chance,
+                properties: {},
+                images: result.items[i].images,
+            };
 
-                        if (result.items[i].properties.pack_templates.length !== 0) {
-                            spinnerItem.properties.packs = {
-                                packId: result.items[i].properties.pack_templates[0].id,
-                                quantity: result.items[i].properties.pack_templates[0].quantity,
-                            };
-                        }
-
-                        spinnerItem.properties.coins = result.items[i].properties.coins;
-                        spinnerItem.properties.silverCoins = result.items[i].properties.silvercoins;
-                        spinnerItem.properties.craftingCoins = result.items[i].properties.craftingcoins;
-
-                        data.items.push(spinnerItem);
-                    }
-
-                    resolve(data);
-                });
+            if (result.items[i].properties.pack_templates.length !== 0) {
+                spinnerItem.properties.packs = {
+                    packId: result.items[i].properties.pack_templates[0].id,
+                    quantity: result.items[i].properties.pack_templates[0].quantity,
+                };
             }
-        );
+
+            spinnerItem.properties.coins = result.items[i].properties.coins;
+            spinnerItem.properties.silverCoins = result.items[i].properties.silvercoins;
+            spinnerItem.properties.craftingCoins = result.items[i].properties.craftingcoins;
+
+            data.items.push(spinnerItem);
+        }
+
+        return data;
     }
 
     /**
      * Get the history of the user's spinner rewards
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getHistory(): Promise<SpinnerHistory[]> {
-        return this.baseClient.get(`spinner/history`).then(
-            (result): Promise<SpinnerHistory[]> => {
-                return new Promise((resolve): void => {
-                    const data: SpinnerHistory[] = [];
+    public async getHistory(): Promise<SpinnerHistory[]> {
+        const result = await this.baseClient.get(`spinner/history`);
+        const data: SpinnerHistory[] = [];
 
-                    for (let i = 0; i < result.spins.length; i += 1) {
-                        data.push({
-                            name: result.spins[i].name,
-                            chance: result.spins[i].chance,
-                            date: DateUtils.convertToDate(result.spins[i].created),
-                            images: result.spins[i].images,
-                            isPurchased: result.spins[i].isPurchased,
-                        });
-                    }
+        for (let i = 0; i < result.spins.length; i += 1) {
+            data.push({
+                name: result.spins[i].name,
+                chance: result.spins[i].chance,
+                date: DateUtils.convertToDate(result.spins[i].created),
+                images: result.spins[i].images,
+                isPurchased: result.spins[i].isPurchased,
+            });
+        }
 
-                    resolve(data);
-                });
-            }
-        );
+        return data;
     }
 
     /**
      * Buy a Spin
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buySpinner(): Promise<void> {
-        return this.baseClient
-            .post('spinner/buy-spin', {
-                amount: 1,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async buySpinner(): Promise<void> {
+        await this.baseClient.post('spinner/buy-spin', {
+            amount: 1,
+        });
     }
 
     /**
@@ -108,17 +90,9 @@ export default class Spinner {
      * @param spinnerId spinner id to spin
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public spin(spinnerId = 166): Promise<void> {
-        return this.baseClient
-            .post('spinner/spin', {
-                spinnerId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async spin(spinnerId = 166): Promise<void> {
+        await this.baseClient.post('spinner/spin', {
+            spinnerId,
+        });
     }
 }

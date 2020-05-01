@@ -20,41 +20,34 @@ export default class Leaderboard {
      * @param season the season to filter the leaderboard
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getLeaderboards(page = 1, country: string = null, season: string = null): Promise<UserRanking[]> {
-        return this.baseClient
-            .get('leaderboards/categories/1', {
-                page,
-                country,
-                season,
-            })
-            .then(
-                (result): Promise<UserRanking[]> => {
-                    return new Promise((resolve): void => {
-                        const data: UserRanking[] = [];
+    public async getLeaderboards(page = 1, country: string = null, season: string = null): Promise<UserRanking[]> {
+        const result = await this.baseClient.get('leaderboards/categories/1', {
+            page,
+            country,
+            season,
+        });
+        const data: UserRanking[] = [];
 
-                        for (let i = 0; i < result.length; i += 1) {
-                            const ranking = result[i];
+        for (let i = 0; i < result.length; i += 1) {
+            const ranking = result[i];
 
-                            data.push({
-                                id: ranking.user.id,
-                                username: ranking.user.username,
-                                avatar: ranking.user.avatar,
-                                group: ranking.user.group,
-                                country: ranking.user.country,
-                                joined: ranking.user.created,
-                                ranking: {
-                                    rank: ranking.rank,
-                                    score: ranking.score,
-                                    cardCount: ranking.cardCount,
-                                    entityCount: ranking.entityCount,
-                                },
-                            });
-                        }
+            data.push({
+                id: ranking.user.id,
+                username: ranking.user.username,
+                avatar: ranking.user.avatar,
+                group: ranking.user.group,
+                country: ranking.user.country,
+                joined: ranking.user.created,
+                ranking: {
+                    rank: ranking.rank,
+                    score: ranking.score,
+                    cardCount: ranking.cardCount,
+                    entityCount: ranking.entityCount,
+                },
+            });
+        }
 
-                        resolve(data);
-                    });
-                }
-            );
+        return data;
     }
 
     /**
@@ -65,45 +58,38 @@ export default class Leaderboard {
      * @param season the season to filter the leaderboard
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getCollectionLeaderboards(
+    public async getCollectionLeaderboards(
         collectionId: number,
         page = 1,
         country: string = null,
         season: string = null
     ): Promise<CollectionRanking[]> {
-        return this.baseClient
-            .get(`leaderboards/collections/${collectionId}`, {
-                page,
-                country,
-                season,
-            })
-            .then(
-                (result): Promise<CollectionRanking[]> => {
-                    return new Promise((resolve): void => {
-                        const data: CollectionRanking[] = [];
+        const result = await this.baseClient.get(`leaderboards/collections/${collectionId}`, {
+            page,
+            country,
+            season,
+        });
+        const data: CollectionRanking[] = [];
 
-                        for (let i = 0; i < result.length; i += 1) {
-                            const ranking = result[i];
+        for (let i = 0; i < result.length; i += 1) {
+            const ranking = result[i];
 
-                            data.push({
-                                id: ranking.user.id,
-                                username: ranking.user.username,
-                                avatar: ranking.user.avatar,
-                                group: ranking.user.group,
-                                country: ranking.user.country,
-                                joined: ranking.user.created,
-                                ranking: {
-                                    rank: ranking.rank,
-                                    score: ranking.score,
-                                    cardCount: ranking.cardCount,
-                                    entityCount: ranking.entityCount,
-                                },
-                            });
-                        }
+            data.push({
+                id: ranking.user.id,
+                username: ranking.user.username,
+                avatar: ranking.user.avatar,
+                group: ranking.user.group,
+                country: ranking.user.country,
+                joined: ranking.user.created,
+                ranking: {
+                    rank: ranking.rank,
+                    score: ranking.score,
+                    cardCount: ranking.cardCount,
+                    entityCount: ranking.entityCount,
+                },
+            });
+        }
 
-                        resolve(data);
-                    });
-                }
-            );
+        return data;
     }
 }

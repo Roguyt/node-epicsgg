@@ -32,37 +32,30 @@ export default class Market {
      * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getMarketplaceTemplates(
+    public async getMarketplaceTemplates(
         page = 1,
         filters: Record<string, string | boolean>,
         type: string = null
     ): Promise<MarketTemplate[]> {
-        return this.baseClient
-            .get('market/templates', {
-                page,
-                type,
-                ...filters,
-            })
-            .then(
-                (result): Promise<MarketTemplate[]> => {
-                    return new Promise((resolve): void => {
-                        const data: MarketTemplate[] = [];
+        const result = await this.baseClient.get('market/templates', {
+            page,
+            type,
+            ...filters,
+        });
+        const data: MarketTemplate[] = [];
 
-                        for (let i = 0; i < result.templates.length; i += 1) {
-                            const marketTemplate: MarketTemplate = {
-                                entityTemplateId: result.templates[i].entityTemplateId,
-                                isUserNeed: result.templates[i].isUserNeed,
-                                lowestPrice: result.templates[i].lowestPrice,
-                                cardTemplate: CardUtils.createCardTemplate(result.templates[i].cardTemplate),
-                            };
+        for (let i = 0; i < result.templates.length; i += 1) {
+            const marketTemplate: MarketTemplate = {
+                entityTemplateId: result.templates[i].entityTemplateId,
+                isUserNeed: result.templates[i].isUserNeed,
+                lowestPrice: result.templates[i].lowestPrice,
+                cardTemplate: CardUtils.createCardTemplate(result.templates[i].cardTemplate),
+            };
 
-                            data.push(marketTemplate);
-                        }
+            data.push(marketTemplate);
+        }
 
-                        resolve(data);
-                    });
-                }
-            );
+        return data;
     }
 
     /**
@@ -73,70 +66,58 @@ export default class Market {
      * @param type card / pack / sticker
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getListings(
+    public async getListings(
         templateId: number,
         page = 1,
         sort: string = null,
         type: string = null
     ): Promise<MarketListing[]> {
-        return this.baseClient
-            .get('market/buy', {
-                templateId,
-                page,
-                sort,
-                type,
-            })
-            .then(
-                (result): Promise<MarketListing[]> => {
-                    return new Promise((resolve): void => {
-                        const data: MarketListing[] = [];
+        const result = await this.baseClient.get('market/buy', {
+            templateId,
+            page,
+            sort,
+            type,
+        });
+        const data: MarketListing[] = [];
 
-                        if (!result.market[0]) {
-                            return resolve(data);
-                        }
+        if (!result.market[0]) {
+            return data;
+        }
 
-                        for (let i = 0; i < result.market[0].length; i += 1) {
-                            const marketListing: MarketListing = {
-                                marketId: result.market[0][i].marketId,
+        for (let i = 0; i < result.market[0].length; i += 1) {
+            const marketListing: MarketListing = {
+                marketId: result.market[0][i].marketId,
 
-                                price: result.market[0][i].price,
-                                previousAvgPrice: {
-                                    value: null,
-                                    date: null,
-                                },
-                                currentAvgHourPrice: {
-                                    value: null,
-                                    date: null,
-                                },
+                price: result.market[0][i].price,
+                previousAvgPrice: {
+                    value: null,
+                    date: null,
+                },
+                currentAvgHourPrice: {
+                    value: null,
+                    date: null,
+                },
 
-                                createdAt: new Date(result.market[0][i].created),
+                createdAt: new Date(result.market[0][i].created),
 
-                                type: result.market[0][i].type,
-                                card: CardUtils.createACard(result.market[0][i].card),
-                            };
+                type: result.market[0][i].type,
+                card: CardUtils.createACard(result.market[0][i].card),
+            };
 
-                            if (result.market[0][i].previousAvgPrice !== null) {
-                                marketListing.previousAvgPrice.value = result.market[0][i].previousAvgPrice.statValue;
-                                marketListing.previousAvgPrice.date = new Date(
-                                    result.market[0][i].previousAvgPrice.statValue
-                                );
-                            }
+            if (result.market[0][i].previousAvgPrice !== null) {
+                marketListing.previousAvgPrice.value = result.market[0][i].previousAvgPrice.statValue;
+                marketListing.previousAvgPrice.date = new Date(result.market[0][i].previousAvgPrice.statValue);
+            }
 
-                            if (result.market[0][i].currentHourPrice !== null) {
-                                marketListing.currentAvgHourPrice.value =
-                                    result.market[0][i].currentHourPrice.statValue;
-                                marketListing.currentAvgHourPrice.date = new Date(
-                                    result.market[0][i].currentHourPrice.statValue
-                                );
-                            }
+            if (result.market[0][i].currentHourPrice !== null) {
+                marketListing.currentAvgHourPrice.value = result.market[0][i].currentHourPrice.statValue;
+                marketListing.currentAvgHourPrice.date = new Date(result.market[0][i].currentHourPrice.statValue);
+            }
 
-                            data.push(marketListing);
-                        }
+            data.push(marketListing);
+        }
 
-                        return resolve(data);
-                    });
-                }
-            );
+        return data;
     }
 
     /**
@@ -147,21 +128,14 @@ export default class Market {
      * @param minOffer minOffer value (no minOffer if empty)
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public createListing(id: number, type: string, price: number, minOffer?: number): Promise<number> {
-        return this.baseClient
-            .post(`market/list`, {
-                id,
-                price,
-                type,
-                minOffer,
-            })
-            .then(
-                (result): Promise<number> => {
-                    return new Promise((resolve): void => {
-                        resolve(result.marketId);
-                    });
-                }
-            );
+    public async createListing(id: number, type: string, price: number, minOffer?: number): Promise<number> {
+        const result = await this.baseClient.post(`market/list`, {
+            id,
+            price,
+            type,
+            minOffer,
+        });
+        return result.marketId;
     }
 
     /**
@@ -169,14 +143,8 @@ export default class Market {
      * @param listingId listingId to remove
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public removeListing(listingId: number): Promise<void> {
-        return this.baseClient.delete(`market/listed/${listingId}`).then(
-            (): Promise<void> => {
-                return new Promise((resolve): void => {
-                    resolve();
-                });
-            }
-        );
+    public async removeListing(listingId: number): Promise<void> {
+        await this.baseClient.delete(`market/listed/${listingId}`);
     }
 
     /**
@@ -185,19 +153,11 @@ export default class Market {
      * @param price it's price (?)
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buy(marketId: number, price: number): Promise<void> {
-        return this.baseClient
-            .post(`market/buy`, {
-                marketId,
-                price,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async buy(marketId: number, price: number): Promise<void> {
+        await this.baseClient.post(`market/buy`, {
+            marketId,
+            price,
+        });
     }
 
     /**
@@ -207,20 +167,12 @@ export default class Market {
      * @param counterPrice the counter offer price
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public makeCounterOffer(marketId: number, currentPrice: number, counterPrice: number): Promise<void> {
-        return this.baseClient
-            .post(`market/counter-offers`, {
-                marketId,
-                currentPrice,
-                counterPrice,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async makeCounterOffer(marketId: number, currentPrice: number, counterPrice: number): Promise<void> {
+        await this.baseClient.post(`market/counter-offers`, {
+            marketId,
+            currentPrice,
+            counterPrice,
+        });
     }
 
     /**
@@ -228,14 +180,8 @@ export default class Market {
      * @param counterOfferId counterOfferId to withdraw
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public cancelCounterOffer(counterOfferId: number): Promise<void> {
-        return this.baseClient.delete(`market/counter-offers/${counterOfferId}`).then(
-            (): Promise<void> => {
-                return new Promise((resolve): void => {
-                    resolve();
-                });
-            }
-        );
+    public async cancelCounterOffer(counterOfferId: number): Promise<void> {
+        await this.baseClient.delete(`market/counter-offers/${counterOfferId}`);
     }
 
     /**
@@ -243,18 +189,10 @@ export default class Market {
      * @param counterOfferId the counterOfferId to accept
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public acceptCounterOffer(counterOfferId: number): Promise<void> {
-        return this.baseClient
-            .patch(`market/counter-offers/accept`, {
-                offerId: counterOfferId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async acceptCounterOffer(counterOfferId: number): Promise<void> {
+        await this.baseClient.patch(`market/counter-offers/accept`, {
+            offerId: counterOfferId,
+        });
     }
 
     /**
@@ -262,17 +200,9 @@ export default class Market {
      * @param counterOfferId the counterOfferId to decline
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public declineCounterOffer(counterOfferId: number): Promise<void> {
-        return this.baseClient
-            .patch(`market/counter-offers/decline`, {
-                offerId: counterOfferId,
-            })
-            .then(
-                (): Promise<void> => {
-                    return new Promise((resolve): void => {
-                        resolve();
-                    });
-                }
-            );
+    public async declineCounterOffer(counterOfferId: number): Promise<void> {
+        await this.baseClient.patch(`market/counter-offers/decline`, {
+            offerId: counterOfferId,
+        });
     }
 }

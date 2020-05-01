@@ -19,26 +19,19 @@ export default class Store {
      * @param page the page to get
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public getPacks(page = 1): Promise<Pack[]> {
-        return this.baseClient
-            .get('packs', {
-                page,
-            })
-            .then(
-                (result): Promise<Pack[]> => {
-                    return new Promise((resolve): void => {
-                        const data: Pack[] = [];
+    public async getPacks(page = 1): Promise<Pack[]> {
+        const result = await this.baseClient.get('packs', {
+            page,
+        });
+        const data: Pack[] = [];
 
-                        for (let i = 0; i < result.length; i += 1) {
-                            const pack: Pack = PackUtils.createAPack(result[i]);
+        for (let i = 0; i < result.length; i += 1) {
+            const pack: Pack = PackUtils.createAPack(result[i]);
 
-                            data.push(pack);
-                        }
+            data.push(pack);
+        }
 
-                        resolve(data);
-                    });
-                }
-            );
+        return data;
     }
 
     /**
@@ -47,20 +40,11 @@ export default class Store {
      * @param amount the amount of packs to buy
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public buyPack(packTemplateId: number, amount = 1): Promise<number[]> {
-        return this.baseClient
-            .post(`packs/buy`, {
-                amount,
-                packTemplateId,
-            })
-            .then(
-                (result): Promise<number[]> => {
-                    return new Promise((resolve): void => {
-                        const resultData: number[] = result;
-
-                        resolve(resultData);
-                    });
-                }
-            );
+    public async buyPack(packTemplateId: number, amount = 1): Promise<number[]> {
+        const result = await this.baseClient.post(`packs/buy`, {
+            amount,
+            packTemplateId,
+        });
+        return result;
     }
 }
