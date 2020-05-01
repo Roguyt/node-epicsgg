@@ -6,13 +6,13 @@
         [
             "@semantic-release/commit-analyzer",
             {
-                "preset": "insurgent"
+                "config": "conventional-changelog-insurgent"
             }
         ],
         [
             "@semantic-release/release-notes-generator",
             {
-                "preset": "insurgent"
+                "config": "conventional-changelog-insurgent"
             }
         ],
         [
