@@ -5,13 +5,12 @@ on:
     branches-ignore:
       - master
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [13.8]
+        node-version: [12.16]
 
     steps:
       - name: Checkout project

@@ -2,15 +2,19 @@
     "name": "node-epicsgg",
     "version": "2.0.0",
     "description": "An interface to communicate with Epics.gg API",
-    "keywords": [
-        "epics.gg",
-        "epics"
-    ],
+    "keywords": ["epics.gg", "epics"],
     "author": {
-        "url": "clmntw.fr",
-        "email": "github@clmntw.fr",
+        "url": "https://clmntw.fr",
+        "email": "git@clmntw.fr",
         "name": "Roguyt"
     },
+    "contributors": [
+        {
+            "url": "https://sherlox.io",
+            "email": "me@sherlox.io",
+            "name": "Pierre Cavin"
+        }
+    ],
     "homepage": "https://github.com/Roguyt/node-epicsgg#readme",
     "repository": {
         "url": "https://github.com/Roguyt/node-epicsgg.git",
@@ -18,7 +22,7 @@
     },
     "bugs": {
         "url": "https://github.com/Roguyt/node-epicsgg/issues",
-        "email": "github@clmntw.fr"
+        "email": "git@clmntw.fr"
     },
     "engines": {
         "node": ">=8.0.0"
@@ -36,9 +40,7 @@
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "license": "MIT",
-    "files": [
-        "lib/"
-    ],
+    "files": ["lib/"],
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged --pattern '**/*'"
@@ -47,6 +49,7 @@
     "devDependencies": {
         "@semantic-release/changelog": "^5.0.1",
         "@semantic-release/commit-analyzer": "^8.0.1",
+        "@semantic-release/exec": "^5.0.0",
         "@semantic-release/git": "^9.0.0",
         "@semantic-release/github": "^7.0.5",
         "@semantic-release/npm": "^7.0.5",
