@@ -13,6 +13,7 @@
     },
     "schedule": ["after 4am every day", "before 6am every day"],
     "baseBranches": ["master"],
+    "ignoreDeps": ["@types/node"],
     "packageFiles": ["package.json"],
     "packageRules": [
         {
