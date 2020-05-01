@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Roguyt/node-epicsgg/compare/v2.0.3...v2.1.0) (2020-05-01)
+
+
+### Features
+
+* **UserActions:** implement getCardIds ([#32](https://github.com/Roguyt/node-epicsgg/issues/32)) ([3ccd38a](https://github.com/Roguyt/node-epicsgg/commit/3ccd38a3b1ebc9738d5cc1b5bda59a9c742512a5))
+
 ## [2.0.3](https://github.com/Roguyt/node-epicsgg/compare/v2.0.2...v2.0.3) (2020-05-01)
 
 
