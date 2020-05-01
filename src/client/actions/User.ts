@@ -182,6 +182,19 @@ export default class User {
     }
 
     /**
+     * Get the stickers of a given user and a given stickerTemplate
+     * @param userId the user id to get its stickers
+     * @param stickerTemplateId the stickerTemplateId of the stickers to get
+     */
+    public async getStickers(userId: number, stickerTemplateId: number): Promise<Sticker[]> {
+        const result = await this.baseClient.get(
+            `collections/users/${userId}/sticker-templates/${stickerTemplateId}/stickers`
+        );
+
+        return result.map(StickerUtils.createASticker);
+    }
+
+    /**
      * Get the showcased cards of a given user id
      * @param userId the user id to get its cards
      * @returns a Promise resolved with the response or rejected in case of error

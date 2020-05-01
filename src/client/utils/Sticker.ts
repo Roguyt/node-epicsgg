@@ -19,7 +19,7 @@ export default class StickerUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: this.createStickerTemplate(data.stickerTemplate),
+            template: StickerUtils.createStickerTemplate(data.stickerTemplate),
         };
     }
 
