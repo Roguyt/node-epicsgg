@@ -148,7 +148,7 @@ export default class Trade {
                 user1Balance: 0,
                 user2Balance: 0,
                 user2Id: userId.toString(),
-                entities: entities,
+                entities,
             })
             .then(
                 (result): Promise<number> => {
