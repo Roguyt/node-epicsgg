@@ -1,3 +1,5 @@
+## [2.0.1](https://github.com/Roguyt/node-epicsgg/compare/v2.0.0...v2.0.1) (2020-05-01)
+
 # [2.0.0](https://github.com/Roguyt/node-epicsgg/compare/v1.3.4...v2.0.0) (2020-05-01)
 
 
