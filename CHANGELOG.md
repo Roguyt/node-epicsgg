@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/Roguyt/node-epicsgg/compare/v2.1.0...v2.2.0) (2020-05-01)
+
+
+### Features
+
+* **UserActions:** implement getCards & getStickers & getStickerIds ([#33](https://github.com/Roguyt/node-epicsgg/issues/33)) ([659523e](https://github.com/Roguyt/node-epicsgg/commit/659523ef8f2c4a8d5ffe1c19c54b8066500ab897))
+
 # [2.1.0](https://github.com/Roguyt/node-epicsgg/compare/v2.0.3...v2.1.0) (2020-05-01)
 
 

@@ -2727,6 +2727,9 @@ img {
 					<a href="user.html#getcardids" class="tsd-kind-icon">get<wbr>Card<wbr>Ids</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="user.html#getcards" class="tsd-kind-icon">get<wbr>Cards</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="user.html#getfunds" class="tsd-kind-icon">get<wbr>Funds</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2740,6 +2743,12 @@ img {
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="user.html#getshowcasedcards" class="tsd-kind-icon">get<wbr>Showcased<wbr>Cards</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="user.html#getstickerids" class="tsd-kind-icon">get<wbr>Sticker<wbr>Ids</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="user.html#getstickers" class="tsd-kind-icon">get<wbr>Stickers</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="user.html#getusersummary" class="tsd-kind-icon">get<wbr>User<wbr>Summary</a>
@@ -2775,11 +2784,14 @@ img {
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getcardids" class="tsd-kind-icon">get<wbr>Card<wbr>Ids</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getcards" class="tsd-kind-icon">get<wbr>Cards</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getfunds" class="tsd-kind-icon">get<wbr>Funds</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getmarketlistings" class="tsd-kind-icon">get<wbr>Market<wbr>Listings</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getowned" class="tsd-kind-icon">get<wbr>Owned</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getpacks" class="tsd-kind-icon">get<wbr>Packs</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getshowcasedcards" class="tsd-kind-icon">get<wbr>Showcased<wbr>Cards</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getstickerids" class="tsd-kind-icon">get<wbr>Sticker<wbr>Ids</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getstickers" class="tsd-kind-icon">get<wbr>Stickers</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#getusersummary" class="tsd-kind-icon">get<wbr>User<wbr>Summary</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#openpack" class="tsd-kind-icon">open<wbr>Pack</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="user.html#redeemcard" class="tsd-kind-icon">redeem<wbr>Card</a></li>
@@ -2801,7 +2813,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L145">client/actions/User.ts:145</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L146">client/actions/User.ts:146</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2829,6 +2841,43 @@ img {
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getcards" class="tsd-anchor"></a>
+				<h3>get<wbr>Cards</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Cards<span class="tsd-signature-symbol">(</span>userId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cardTemplateId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/card.html" class="tsd-signature-type">Card</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L162">client/actions/User.ts:162</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the cards of a given user and a given cardTemplate</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>userId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the user id to get its cards</p>
+								</div>
+							</li>
+							<li>
+								<h5>cardTemplateId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the cardTemplateId of the cards to get</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/card.html" class="tsd-signature-type">Card</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getfunds" class="tsd-anchor"></a>
 				<h3>get<wbr>Funds</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -2838,7 +2887,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L59">client/actions/User.ts:59</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L60">client/actions/User.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2861,7 +2910,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L181">client/actions/User.ts:181</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L222">client/actions/User.ts:222</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2899,7 +2948,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L114">client/actions/User.ts:114</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L115">client/actions/User.ts:115</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2937,7 +2986,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L229">client/actions/User.ts:229</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L270">client/actions/User.ts:270</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2960,7 +3009,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L161">client/actions/User.ts:161</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L202">client/actions/User.ts:202</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2983,6 +3032,80 @@ img {
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getstickerids" class="tsd-anchor"></a>
+				<h3>get<wbr>Sticker<wbr>Ids</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Sticker<wbr>Ids<span class="tsd-signature-symbol">(</span>userId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, collectionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/stickerids.html" class="tsd-signature-type">StickerIds</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L173">client/actions/User.ts:173</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the stickers ids of a given user and a given collection</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>userId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the user id to get its stickers ids</p>
+								</div>
+							</li>
+							<li>
+								<h5>collectionId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the collection of the stickers to get</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/stickerids.html" class="tsd-signature-type">StickerIds</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getstickers" class="tsd-anchor"></a>
+				<h3>get<wbr>Stickers</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Stickers<span class="tsd-signature-symbol">(</span>userId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, stickerTemplateId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sticker.html" class="tsd-signature-type">Sticker</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L189">client/actions/User.ts:189</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get the stickers of a given user and a given stickerTemplate</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>userId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the user id to get its stickers</p>
+								</div>
+							</li>
+							<li>
+								<h5>stickerTemplateId: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the stickerTemplateId of the stickers to get</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/sticker.html" class="tsd-signature-type">Sticker</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getusersummary" class="tsd-anchor"></a>
 				<h3>get<wbr>User<wbr>Summary</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -2992,7 +3115,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L70">client/actions/User.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L71">client/actions/User.ts:71</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3018,7 +3141,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L249">client/actions/User.ts:249</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L290">client/actions/User.ts:290</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3050,7 +3173,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L267">client/actions/User.ts:267</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L308">client/actions/User.ts:308</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3082,7 +3205,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/3ccd38a/src/client/actions/User.ts#L35">client/actions/User.ts:35</a></li>
+								<li>Defined in <a href="https://github.com/Roguyt/node-epicsgg/blob/659523e/src/client/actions/User.ts#L36">client/actions/User.ts:36</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
