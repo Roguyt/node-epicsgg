@@ -16,6 +16,7 @@ import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
 import { CardIds } from '../../interfaces/CardIds';
+import { StickerIds } from '../../interfaces/StickerIds';
 
 export default class User {
     private baseClient: BaseClient;
@@ -150,6 +151,22 @@ export default class User {
         return result.map((cardIds: any) => ({
             templateId: cardIds.cardTemplateId,
             ids: cardIds.cardIds,
+        }));
+    }
+
+    /**
+     * Get the stickers ids of a given user and a given collection
+     * @param userId the user id to get its stickers ids
+     * @param collectionId the collection of the stickers to get
+     */
+    public async getStickerIds(userId: number, collectionId: number): Promise<StickerIds[]> {
+        const result = await this.baseClient.get(`collections/users/${userId}/stickerids`, {
+            collectionId,
+        });
+
+        return result.map((stickerIds: any) => ({
+            templateId: stickerIds.stickerTemplateId,
+            ids: stickerIds.stickerIds,
         }));
     }
 
