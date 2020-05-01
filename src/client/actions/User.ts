@@ -15,6 +15,7 @@ import DateUtils from '../utils/Date';
 import { UserFund } from '../../interfaces/UserFund';
 import { UserSummary } from '../../interfaces/UserSummary';
 import { UserCollection } from '../../interfaces/UserCollection';
+import { CardIds } from '../../interfaces/CardIds';
 
 export default class User {
     private baseClient: BaseClient;
@@ -134,6 +135,22 @@ export default class User {
             cards,
             stickers,
         };
+    }
+
+    /**
+     * Get the cards ids of a given user and a given collection
+     * @param userId the user id to get its cards ids
+     * @param collectionId the collection of the cards to get
+     */
+    public async getCardIds(userId: number, collectionId: number): Promise<CardIds[]> {
+        const result = await this.baseClient.get(`collections/users/${userId}/cardids`, {
+            collectionId,
+        });
+
+        return result.map((cardIds: any) => ({
+            templateId: cardIds.cardTemplateId,
+            ids: cardIds.cardIds,
+        }));
     }
 
     /**
