@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/Roguyt/node-epicsgg/compare/v2.0.2...v2.0.3) (2020-05-01)
+
+
+### Bug Fixes
+
+* **MarketActions/getListings:** fix templateId not accounted for ([#30](https://github.com/Roguyt/node-epicsgg/issues/30)) ([3b165e5](https://github.com/Roguyt/node-epicsgg/commit/3b165e589eae7d009441ec3675c16aa40fbf7a09))
+
 ## [2.0.2](https://github.com/Roguyt/node-epicsgg/compare/v2.0.1...v2.0.2) (2020-05-01)
 
 
