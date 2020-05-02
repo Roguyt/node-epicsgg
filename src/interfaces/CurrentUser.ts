@@ -17,7 +17,7 @@ export interface CurrentUser {
     banned: boolean;
     group: number;
     packPublic: boolean;
-    created: Date;
+    created: Date | null;
     onboarding: boolean;
     steam: {
         steamId: string;

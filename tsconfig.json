@@ -12,7 +12,8 @@
         "forceConsistentCasingInFileNames": true,
         "noUnusedLocals": true,
         "pretty": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "strictNullChecks": true
     },
     "include": ["src/**/*", "__tests__/**/*"],
     "exclude": ["node_modules", "tests", "examples"]

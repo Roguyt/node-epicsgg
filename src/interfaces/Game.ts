@@ -4,8 +4,8 @@ export interface Game {
     id: number;
     name: string;
 
-    startDate: Date;
-    endDate: Date;
+    startDate: Date | null;
+    endDate: Date | null;
 
     image: string;
     images: Image[];

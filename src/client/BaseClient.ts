@@ -23,7 +23,7 @@ export default class BaseClient {
     // Currently not used by the API calls inside the webapp
     private gameId: number;
 
-    public currentUser: CurrentUser = null;
+    public currentUser: CurrentUser | null = null;
 
     private axios: AxiosInstance;
 

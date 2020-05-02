@@ -12,7 +12,7 @@ export interface Insert {
         teamIds: number[];
         streamerIds: number[];
         externalItem: boolean;
-        expire: Date;
+        expire: Date | null;
         coins: number;
         silverCoins: number;
         craftingCoins: number;

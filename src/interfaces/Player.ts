@@ -6,7 +6,7 @@ export interface Player {
     gameId: number;
     teamId: number;
 
-    birthDate: Date;
+    birthDate: Date | null;
     age: number;
     country: string;
     homeTown: string;
@@ -18,9 +18,9 @@ export interface Player {
     position: string;
     playerRoleId: number;
 
-    dateStart: Date;
-    dateEnd: Date;
-    lastDate: Date;
+    dateStart: Date | null;
+    dateEnd: Date | null;
+    lastDate: Date | null;
 
     image: string;
     images: Image[];

@@ -26,5 +26,5 @@ export interface PackOpenedFeed {
 
     totalOpened: number;
 
-    createdAt: Date;
+    createdAt: Date | null;
 }

@@ -19,7 +19,7 @@ export interface SpinnerFeed {
         }[];
     };
 
-    createdAt: Date;
+    createdAt: Date | null;
 
     user: UserData;
 }
