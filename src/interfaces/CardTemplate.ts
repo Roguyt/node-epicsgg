@@ -23,8 +23,8 @@ export interface CardTemplate {
         teamId: number;
         playerId: number;
 
-        startDate: Date;
-        endDate: Date;
+        startDate: Date | null;
+        endDate: Date | null;
     };
 
     limitedEdition: boolean;

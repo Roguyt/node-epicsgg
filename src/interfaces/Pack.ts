@@ -27,9 +27,9 @@ export interface Pack {
     limited: boolean;
     comingSoon: boolean;
 
-    releaseTime: Date;
-    startDate: Date;
-    endDate: Date;
+    releaseTime: Date | null;
+    startDate: Date | null;
+    endDate: Date | null;
 
     properties: {
         seasons: [];

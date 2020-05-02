@@ -13,7 +13,7 @@ export interface Collection {
         gameIds: number[];
         teamIds: number[];
     };
-    created: Date;
-    updated: Date;
+    created: Date | null;
+    updated: Date | null;
     visible: boolean;
 }

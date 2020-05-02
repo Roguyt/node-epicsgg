@@ -4,5 +4,5 @@ export interface UserData {
     avatar: string;
     group: number;
     country?: string;
-    joined?: Date;
+    joined?: Date | null;
 }

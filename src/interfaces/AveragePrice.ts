@@ -1,4 +1,4 @@
 export interface AveragePrice {
-    date: Date;
+    date: Date | null;
     value: number;
 }

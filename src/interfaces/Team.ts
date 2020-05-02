@@ -7,9 +7,9 @@ export interface Team {
     shortName: string;
     manager: string;
     country: string;
-    birthDate: Date;
-    startDate: Date;
-    endDate: Date;
+    birthDate: Date | null;
+    startDate: Date | null;
+    endDate: Date | null;
     active: boolean;
 
     gameId: number;

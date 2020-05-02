@@ -8,7 +8,7 @@ export interface MarketListing {
     previousAvgPrice: AveragePrice;
     currentAvgHourPrice: AveragePrice;
 
-    createdAt: Date;
+    createdAt: Date | null;
 
     type: string;
     card: Card;

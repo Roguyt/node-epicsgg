@@ -5,5 +5,5 @@ export interface SpinnerHistory {
     chance: number;
     isPurchased: boolean;
     images: Image[];
-    date: Date;
+    date: Date | null;
 }

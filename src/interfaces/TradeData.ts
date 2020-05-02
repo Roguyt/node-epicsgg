@@ -9,6 +9,6 @@ export interface TradeData {
     sender: TradeUser;
     receiver: TradeUser;
 
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date | null;
+    updatedAt: Date | null;
 }
