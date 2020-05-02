@@ -47,9 +47,9 @@ export default class Trade {
                 balance: trade.user1.tradeBalance,
                 count: trade.user1.count,
 
-                cards: trade.user1.cards.map(CardUtils.createACard),
-                stickers: trade.user1.stickers.map(StickerUtils.createASticker),
-                packs: trade.user1.packs.map(PackUtils.createAPack),
+                cards: trade.user1.cards.map(CardUtils.createCard),
+                stickers: trade.user1.stickers.map(StickerUtils.createSticker),
+                packs: trade.user1.packs.map(PackUtils.createPack),
             },
 
             receiver: {
@@ -63,9 +63,9 @@ export default class Trade {
                 balance: trade.user2.tradeBalance,
                 count: trade.user2.count,
 
-                cards: trade.user2.cards.map(CardUtils.createACard),
-                stickers: trade.user2.stickers.map(StickerUtils.createASticker),
-                packs: trade.user2.packs.map(PackUtils.createAPack),
+                cards: trade.user2.cards.map(CardUtils.createCard),
+                stickers: trade.user2.stickers.map(StickerUtils.createSticker),
+                packs: trade.user2.packs.map(PackUtils.createPack),
             },
 
             createdAt: DateUtils.convertToDate(trade.created),

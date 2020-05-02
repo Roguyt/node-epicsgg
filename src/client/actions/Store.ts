@@ -24,7 +24,7 @@ export default class Store {
             page,
         });
 
-        const data: Pack[] = result.map(PackUtils.createAPack);
+        const data: Pack[] = result.map(PackUtils.createPack);
 
         return data;
     }

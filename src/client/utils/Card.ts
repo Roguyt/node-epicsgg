@@ -7,7 +7,7 @@ import DateUtils from './Date';
  * @hidden
  */
 export default class CardUtils {
-    public static createACard(data: any): Card {
+    public static createCard(data: any): Card {
         return {
             id: data.id,
             uuid: data.uuid,
@@ -23,11 +23,11 @@ export default class CardUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: CardUtils.createACardTemplate(data.cardTemplate),
+            template: CardUtils.createCardTemplate(data.cardTemplate),
         };
     }
 
-    public static createACardTemplate(data: any): CardTemplate {
+    public static createCardTemplate(data: any): CardTemplate {
         const cardTemplate: CardTemplate = {
             id: data.id,
             uuid: data.uuid,

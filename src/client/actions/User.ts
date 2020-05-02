@@ -107,8 +107,8 @@ export default class User {
         const result = await this.baseClient.get(`collections/${collectionId}/users/${userId}/owned2`);
 
         return {
-            cards: result.cards.map(CardUtils.createACard),
-            stickers: result.stickers.map(StickerUtils.createASticker),
+            cards: result.cards.map(CardUtils.createCard),
+            stickers: result.stickers.map(StickerUtils.createSticker),
         };
     }
 
@@ -136,7 +136,7 @@ export default class User {
     public async getCards(userId: number, cardTemplateId: number): Promise<Card[]> {
         const result = await this.baseClient.get(`collections/users/${userId}/card-templates/${cardTemplateId}/cards`);
 
-        return result.map(CardUtils.createACard);
+        return result.map(CardUtils.createCard);
     }
 
     /**
@@ -165,7 +165,7 @@ export default class User {
             `collections/users/${userId}/sticker-templates/${stickerTemplateId}/stickers`
         );
 
-        return result.map(StickerUtils.createASticker);
+        return result.map(StickerUtils.createSticker);
     }
 
     /**
@@ -176,7 +176,7 @@ export default class User {
     public async getShowcasedCards(userId: number): Promise<Card[]> {
         const result = await this.baseClient.get(`showcase/${userId}/all`);
 
-        const data: Card[] = result.cards.map(CardUtils.createACard);
+        const data: Card[] = result.cards.map(CardUtils.createCard);
 
         return data;
     }
@@ -212,7 +212,7 @@ export default class User {
         const data: UserPack[] = result.packs.map((pack: any) => ({
             id: pack.id,
             type: pack.type,
-            packTemplate: PackUtils.createAPack(pack.packTemplate),
+            packTemplate: PackUtils.createPack(pack.packTemplate),
         }));
 
         return data;
@@ -228,7 +228,7 @@ export default class User {
             packId,
         });
 
-        const data: Card[] = result.cards.map(CardUtils.createACard);
+        const data: Card[] = result.cards.map(CardUtils.createCard);
 
         return data;
     }

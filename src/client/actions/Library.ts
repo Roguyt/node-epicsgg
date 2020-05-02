@@ -50,7 +50,7 @@ export default class Library {
     public async getCollectionCardTemplates(collectionId: number): Promise<CardTemplate[]> {
         const result = await this.baseClient.get(`collections/${collectionId}/card-templates`);
 
-        const data: CardTemplate[] = result.map(CardUtils.createACardTemplate);
+        const data: CardTemplate[] = result.map(CardUtils.createCardTemplate);
 
         return data;
     }

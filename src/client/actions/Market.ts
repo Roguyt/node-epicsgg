@@ -48,7 +48,7 @@ export default class Market {
             entityTemplateId: template.entityTemplateId,
             isUserNeed: template.isUserNeed,
             lowestPrice: template.lowestPrice,
-            cardTemplate: CardUtils.createACardTemplate(template.cardTemplate),
+            cardTemplate: CardUtils.createCardTemplate(template.cardTemplate),
         }));
 
         return data;

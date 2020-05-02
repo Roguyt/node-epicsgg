@@ -4,7 +4,7 @@ import { Pack } from '../../interfaces/Pack';
  * @hidden
  */
 export default class PackUtils {
-    public static createAPack(data: any): Pack {
+    public static createPack(data: any): Pack {
         const pack: Pack = {
             id: data.id,
             name: data.name,

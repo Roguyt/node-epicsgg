@@ -5,7 +5,7 @@ import { StickerTemplate } from '../../interfaces/StickerTemplate';
  * @hidden
  */
 export default class StickerUtils {
-    public static createASticker(data: any): Sticker {
+    public static createSticker(data: any): Sticker {
         return {
             id: data.id,
             uuid: data.uuid,
@@ -18,11 +18,11 @@ export default class StickerUtils {
             isGhost: data.isGhost,
             isOnMarket: data.isMarketList,
             isOnTrade: data.isTradeList,
-            template: StickerUtils.createAStickerTemplate(data.stickerTemplate),
+            template: StickerUtils.createStickerTemplate(data.stickerTemplate),
         };
     }
 
-    public static createAStickerTemplate(data: any): StickerTemplate {
+    public static createStickerTemplate(data: any): StickerTemplate {
         return {
             id: data.id,
             uuid: data.uuid,

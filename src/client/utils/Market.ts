@@ -24,7 +24,7 @@ export default class MarketUtils {
             createdAt: new Date(listing.created),
 
             type: listing.type,
-            card: CardUtils.createACard(listing.card),
+            card: CardUtils.createCard(listing.card),
         };
     }
 }
