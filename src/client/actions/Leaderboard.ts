@@ -20,32 +20,27 @@ export default class Leaderboard {
      * @param season the season to filter the leaderboard
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getLeaderboards(page = 1, country: string = null, season: string = null): Promise<UserRanking[]> {
+    public async getLeaderboards(page = 1, country?: string, season?: number | string): Promise<UserRanking[]> {
         const result = await this.baseClient.get('leaderboards/categories/1', {
             page,
             country,
             season,
         });
-        const data: UserRanking[] = [];
 
-        for (let i = 0; i < result.length; i += 1) {
-            const ranking = result[i];
-
-            data.push({
-                id: ranking.user.id,
-                username: ranking.user.username,
-                avatar: ranking.user.avatar,
-                group: ranking.user.group,
-                country: ranking.user.country,
-                joined: ranking.user.created,
-                ranking: {
-                    rank: ranking.rank,
-                    score: ranking.score,
-                    cardCount: ranking.cardCount,
-                    entityCount: ranking.entityCount,
-                },
-            });
-        }
+        const data: UserRanking[] = result.map((ranking: any) => ({
+            id: ranking.user.id,
+            username: ranking.user.username,
+            avatar: ranking.user.avatar,
+            group: ranking.user.group,
+            country: ranking.user.country,
+            joined: ranking.user.created,
+            ranking: {
+                rank: ranking.rank,
+                score: ranking.score,
+                cardCount: ranking.cardCount,
+                entityCount: ranking.entityCount,
+            },
+        }));
 
         return data;
     }
@@ -61,34 +56,29 @@ export default class Leaderboard {
     public async getCollectionLeaderboards(
         collectionId: number,
         page = 1,
-        country: string = null,
-        season: string = null
+        country?: string,
+        season?: number | string
     ): Promise<CollectionRanking[]> {
         const result = await this.baseClient.get(`leaderboards/collections/${collectionId}`, {
             page,
             country,
             season,
         });
-        const data: CollectionRanking[] = [];
 
-        for (let i = 0; i < result.length; i += 1) {
-            const ranking = result[i];
-
-            data.push({
-                id: ranking.user.id,
-                username: ranking.user.username,
-                avatar: ranking.user.avatar,
-                group: ranking.user.group,
-                country: ranking.user.country,
-                joined: ranking.user.created,
-                ranking: {
-                    rank: ranking.rank,
-                    score: ranking.score,
-                    cardCount: ranking.cardCount,
-                    entityCount: ranking.entityCount,
-                },
-            });
-        }
+        const data: CollectionRanking[] = result.map((ranking: any) => ({
+            id: ranking.user.id,
+            username: ranking.user.username,
+            avatar: ranking.user.avatar,
+            group: ranking.user.group,
+            country: ranking.user.country,
+            joined: ranking.user.created,
+            ranking: {
+                rank: ranking.rank,
+                score: ranking.score,
+                cardCount: ranking.cardCount,
+                entityCount: ranking.entityCount,
+            },
+        }));
 
         return data;
     }

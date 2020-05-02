@@ -1,5 +1,4 @@
 import { SpinnerData } from '../../interfaces/SpinnerData';
-import { SpinnerItem } from '../../interfaces/SpinnerItem';
 import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
 
 import DateUtils from '../utils/Date';
@@ -22,34 +21,29 @@ export default class Spinner {
      */
     public async getSpinner(): Promise<SpinnerData> {
         const result = await this.baseClient.get('spinner');
+
         const data: SpinnerData = {
             id: result.id,
             name: result.name,
-            items: [],
+            items: result.items.map((item: any) => ({
+                id: item.id,
+                name: item.name,
+                chance: item.chance,
+                properties: {
+                    coins: item.properties.coins,
+                    silverCoins: item.properties.silvercoins,
+                    craftingCoins: item.properties.craftingcoins,
+                    packs:
+                        item.properties.pack_templates.length > 0
+                            ? {
+                                  id: item.properties.pack_templates[0].id,
+                                  quantity: item.properties.pack_templates[0].quantity,
+                              }
+                            : null,
+                },
+                images: item.images,
+            })),
         };
-
-        for (let i = 0; i < result.items.length; i += 1) {
-            const spinnerItem: SpinnerItem = {
-                id: result.items[i].id,
-                name: result.items[i].name,
-                chance: result.items[i].chance,
-                properties: {},
-                images: result.items[i].images,
-            };
-
-            if (result.items[i].properties.pack_templates.length !== 0) {
-                spinnerItem.properties.packs = {
-                    packId: result.items[i].properties.pack_templates[0].id,
-                    quantity: result.items[i].properties.pack_templates[0].quantity,
-                };
-            }
-
-            spinnerItem.properties.coins = result.items[i].properties.coins;
-            spinnerItem.properties.silverCoins = result.items[i].properties.silvercoins;
-            spinnerItem.properties.craftingCoins = result.items[i].properties.craftingcoins;
-
-            data.items.push(spinnerItem);
-        }
 
         return data;
     }
@@ -60,17 +54,14 @@ export default class Spinner {
      */
     public async getHistory(): Promise<SpinnerHistory[]> {
         const result = await this.baseClient.get(`spinner/history`);
-        const data: SpinnerHistory[] = [];
 
-        for (let i = 0; i < result.spins.length; i += 1) {
-            data.push({
-                name: result.spins[i].name,
-                chance: result.spins[i].chance,
-                date: DateUtils.convertToDate(result.spins[i].created),
-                images: result.spins[i].images,
-                isPurchased: result.spins[i].isPurchased,
-            });
-        }
+        const data: SpinnerHistory[] = result.spins.map((spin: any) => ({
+            name: spin.name,
+            chance: spin.chance,
+            date: DateUtils.convertToDate(spin.created),
+            images: spin.images,
+            isPurchased: spin.isPurchased,
+        }));
 
         return data;
     }

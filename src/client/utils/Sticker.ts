@@ -5,8 +5,7 @@ import { StickerTemplate } from '../../interfaces/StickerTemplate';
  * @hidden
  */
 export default class StickerUtils {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public static createASticker(data: any): Sticker {
+    public static createSticker(data: any): Sticker {
         return {
             id: data.id,
             uuid: data.uuid,
@@ -23,7 +22,6 @@ export default class StickerUtils {
         };
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createStickerTemplate(data: any): StickerTemplate {
         return {
             id: data.id,

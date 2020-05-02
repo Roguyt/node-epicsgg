@@ -11,7 +11,8 @@
                 "devDependencies": ["webpack.config.js", "tests/**/*.{ts,tsx}"]
             }
         ],
-        "require-jsdoc": 0
+        "require-jsdoc": 0,
+        "@typescript-eslint/no-explicit-any": 0
     },
     "settings": {
         "import/resolver": {

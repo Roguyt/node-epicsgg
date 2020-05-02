@@ -7,8 +7,7 @@ import DateUtils from './Date';
  * @hidden
  */
 export default class CardUtils {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public static createACard(data: any): Card {
+    public static createCard(data: any): Card {
         return {
             id: data.id,
             uuid: data.uuid,
@@ -28,7 +27,6 @@ export default class CardUtils {
         };
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static createCardTemplate(data: any): CardTemplate {
         const cardTemplate: CardTemplate = {
             id: data.id,
@@ -132,11 +130,9 @@ export default class CardUtils {
 
         if (data.playerStats) {
             cardTemplate.playerStats = {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 rating: data.playerStats.filter((e: any): any => {
                     return e.name === 'rating2';
                 })[0].value,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 previousRating: data.playerStats.filter((e: any): any => {
                     return e.name === 'prevRating2';
                 })[0].value,

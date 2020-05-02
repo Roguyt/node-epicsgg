@@ -61,7 +61,6 @@ export default class BaseClient {
         if (options.jwt) {
             this.jwt = options.jwt;
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const jwtData = jwt.decode(this.jwt) as { [key: string]: any };
             this.jwtExpiracy = new Date(jwtData.exp * 1000);
         }
@@ -99,7 +98,6 @@ export default class BaseClient {
 
             this.jwt = response.data.data.jwt;
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const jwtData = jwt.decode(this.jwt) as { [key: string]: any };
             this.jwtExpiracy = new Date(jwtData.exp * 1000);
         } catch (e) {
@@ -133,11 +131,7 @@ export default class BaseClient {
         return this.getJWT();
     }
 
-    public async get(
-        path: string,
-        params?: QueryParams
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ): Promise<any> {
+    public async get(path: string, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
         }
@@ -183,7 +177,6 @@ export default class BaseClient {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async post(path: string, data?: BodyData, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
@@ -230,7 +223,6 @@ export default class BaseClient {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async delete(path: string, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();
@@ -277,7 +269,6 @@ export default class BaseClient {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async patch(path: string, data?: BodyData, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();

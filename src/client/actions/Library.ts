@@ -21,28 +21,23 @@ export default class Library {
         const result = await this.baseClient.get(`treatments`, {
             page,
         });
-        const data: Treatment[] = [];
 
-        for (let i = 0; i < result.treatments.length; i += 1) {
-            const treatment: Treatment = {
-                id: result.treatments[i].id,
-                name: result.treatments[i].name,
-                categoryId: result.treatments[i].categoryId,
-                designation: result.treatments[i].designation,
-                tier: result.treatments[i].tier,
-                active: result.treatments[i].active,
-                variation: result.treatments[i].variation,
-                gameSide: result.treatments[i].gameSide,
-                accentColor: result.treatments[i].accentColor,
-                artistName: result.treatments[i].artistName,
-                season: result.treatments[i].season,
-                buyPrice: result.treatments[i].buyPrice,
-                images: result.treatments[i].images,
-                videos: result.treatments[i].videos,
-            };
-
-            data.push(treatment);
-        }
+        const data: Treatment[] = result.treatments.map((treatment: any) => ({
+            id: treatment.id,
+            name: treatment.name,
+            categoryId: treatment.categoryId,
+            designation: treatment.designation,
+            tier: treatment.tier,
+            active: treatment.active,
+            variation: treatment.variation,
+            gameSide: treatment.gameSide,
+            accentColor: treatment.accentColor,
+            artistName: treatment.artistName,
+            season: treatment.season,
+            buyPrice: treatment.buyPrice,
+            images: treatment.images,
+            videos: treatment.videos,
+        }));
 
         return data;
     }
@@ -54,14 +49,8 @@ export default class Library {
      */
     public async getCollectionCardTemplates(collectionId: number): Promise<CardTemplate[]> {
         const result = await this.baseClient.get(`collections/${collectionId}/card-templates`);
-        const data: CardTemplate[] = [];
 
-        for (let i = 0; i < result.length; i += 1) {
-            const cardTemplate = result[i];
-            const cardTemplateData = CardUtils.createCardTemplate(cardTemplate);
-
-            data.push(cardTemplateData);
-        }
+        const data: CardTemplate[] = result.map(CardUtils.createCardTemplate);
 
         return data;
     }
