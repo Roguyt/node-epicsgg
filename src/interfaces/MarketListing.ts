@@ -1,5 +1,7 @@
 import { AveragePrice } from './AveragePrice';
 import { Card } from './Card';
+import { Pack } from './Pack';
+import { Sticker } from './Sticker';
 
 export interface MarketListing {
     marketId: number;
@@ -11,5 +13,7 @@ export interface MarketListing {
     createdAt: Date | null;
 
     type: string;
-    card: Card;
+    card?: Card;
+    pack?: Pack;
+    sticker?: Sticker;
 }
