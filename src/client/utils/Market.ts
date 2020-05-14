@@ -1,5 +1,7 @@
 import { MarketListing } from '../../interfaces/MarketListing';
 import CardUtils from './Card';
+import PackUtils from './Pack';
+import StickerUtils from './Sticker';
 
 import DateUtils from './Date';
 
@@ -8,7 +10,7 @@ import DateUtils from './Date';
  */
 export default class MarketUtils {
     public static createMarketListing(listing: any): MarketListing {
-        return {
+        const marketListing: MarketListing = {
             marketId: listing.marketId,
 
             price: listing.price,
@@ -24,7 +26,12 @@ export default class MarketUtils {
             createdAt: new Date(listing.created),
 
             type: listing.type,
-            card: CardUtils.createCard(listing.card),
         };
+
+        if (listing.card) marketListing.card = CardUtils.createCard(listing.card);
+        if (listing.pack) marketListing.pack = PackUtils.createPack(listing.pack.packTemplate);
+        if (listing.sticker) marketListing.sticker = StickerUtils.createSticker(listing.sticker);
+
+        return marketListing;
     }
 }
