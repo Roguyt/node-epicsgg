@@ -16,9 +16,9 @@ export default class MarketUtils {
                 value: listing.previousAvgPrice?.statValue ?? null,
                 date: DateUtils.convertToDate(listing.previousAvgPrice?.statDate ?? null),
             },
-            currentAvgHourPrice: {
-                value: listing.currentAvgHourPrice?.statValue ?? null,
-                date: DateUtils.convertToDate(listing.currentAvgHourPrice?.statDate ?? null),
+            currentHourPrice: {
+                value: listing.currentHourPrice?.statValue ?? null,
+                date: DateUtils.convertToDate(listing.currentHourPrice?.statDate ?? null),
             },
 
             createdAt: new Date(listing.created),

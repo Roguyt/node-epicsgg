@@ -6,7 +6,7 @@ export interface MarketListing {
 
     price: number;
     previousAvgPrice: AveragePrice;
-    currentAvgHourPrice: AveragePrice;
+    currentHourPrice: AveragePrice;
 
     createdAt: Date | null;
 
