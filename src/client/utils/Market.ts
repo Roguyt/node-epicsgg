@@ -16,7 +16,8 @@ export default class MarketUtils {
                 value: listing.previousAvgPrice?.statValue ?? null,
                 date: DateUtils.convertToDate(listing.previousAvgPrice?.statDate ?? null),
             },
-            currentHourPrice: {
+            // @TODO rename to currentHourPrice to stick to the API contract
+            currentAvgHourPrice: {
                 value: listing.currentHourPrice?.statValue ?? null,
                 date: DateUtils.convertToDate(listing.currentHourPrice?.statDate ?? null),
             },
