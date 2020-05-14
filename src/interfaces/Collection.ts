@@ -9,7 +9,7 @@ export interface Collection {
     properties: {
         tiers: string[];
         types: string[];
-        seasons: string;
+        seasons: string[];
         gameIds: number[];
         teamIds: number[];
     };
