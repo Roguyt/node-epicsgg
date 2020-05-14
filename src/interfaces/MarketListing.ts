@@ -8,6 +8,7 @@ export interface MarketListing {
 
     price: number;
     previousAvgPrice: AveragePrice;
+    // @TODO rename to currentHourPrice to stick to the API contract
     currentAvgHourPrice: AveragePrice;
 
     createdAt: Date | null;
