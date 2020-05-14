@@ -1,3 +1,11 @@
+## [2.2.3](https://github.com/Roguyt/node-epicsgg/compare/v2.2.2...v2.2.3) (2020-05-14)
+
+
+### Bug Fixes
+
+* **Market:** Fix field retrieved from API to get the market hour price ([#44](https://github.com/Roguyt/node-epicsgg/issues/44)) ([bbd362b](https://github.com/Roguyt/node-epicsgg/commit/bbd362be42afd0a6e159eb5b1043e1ecaaa665e0))
+* **Market:** Handle pack and sticker market listings ([#46](https://github.com/Roguyt/node-epicsgg/issues/46)) ([3dcec3c](https://github.com/Roguyt/node-epicsgg/commit/3dcec3c9c5ab83fbf81141f401e63187eb8d6807))
+
 ## [2.2.2](https://github.com/Roguyt/node-epicsgg/compare/v2.2.1...v2.2.2) (2020-05-04)
 
 ## [2.2.1](https://github.com/Roguyt/node-epicsgg/compare/v2.2.0...v2.2.1) (2020-05-02)
