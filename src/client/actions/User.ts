@@ -65,7 +65,7 @@ export default class User {
 
     public async getUserSummary(userId: number, season?: number | string): Promise<UserSummary> {
         const result = await this.baseClient.get(`collections/users/${userId}/user-summary`, {
-            season: season?.toString(),
+            seasons: season?.toString(),
         });
 
         const data: UserSummary = {
