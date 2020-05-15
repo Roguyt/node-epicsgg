@@ -1,3 +1,10 @@
+## [2.2.4](https://github.com/Roguyt/node-epicsgg/compare/v2.2.3...v2.2.4) (2020-05-15)
+
+
+### Bug Fixes
+
+* **User:** Fix parameter sent to API to filter user collection by season ([8a029eb](https://github.com/Roguyt/node-epicsgg/commit/8a029ebd2a2774120b72dfc276dec84bc85e7b9a))
+
 ## [2.2.3](https://github.com/Roguyt/node-epicsgg/compare/v2.2.2...v2.2.3) (2020-05-14)
 
 
