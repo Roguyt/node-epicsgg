@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/Roguyt/node-epicsgg/compare/v2.2.4...v2.3.0) (2020-05-16)
+
+
+### Features
+
+* Allow to filter user listed items by type [#47](https://github.com/Roguyt/node-epicsgg/issues/47) ([722455e](https://github.com/Roguyt/node-epicsgg/commit/722455e5691ef626df695eceeb995bd817454ed5))
+
 ## [2.2.4](https://github.com/Roguyt/node-epicsgg/compare/v2.2.3...v2.2.4) (2020-05-15)
 
 
