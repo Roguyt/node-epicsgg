@@ -185,12 +185,14 @@ export default class User {
      * Get the market listings of a given user id
      * @param userId the user id to get its cards
      * @param page the page to get (1 page = 40 Market listings)
+     * @param type type of item listed (card|pack|sticker)
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getMarketListings(userId: number, page = 1): Promise<UserMarketListings> {
+    public async getMarketListings(userId: number, page = 1, type?: string): Promise<UserMarketListings> {
         const result = await this.baseClient.get(`market/listed/users/${userId}`, {
             userId,
             page,
+            type,
         });
 
         const data: UserMarketListings = {
