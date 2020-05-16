@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 
+import { PackOpenedFeed } from '../interfaces/PackOpenedFeed';
 import { PackPurchasedFeed } from '../interfaces/PackPurchasedFeed';
 import { SpinnerFeed } from '../interfaces/SpinnerFeed';
-import { PackOpenedFeed } from '../interfaces/PackOpenedFeed';
 
 import SocketIO = require('socket.io');
 

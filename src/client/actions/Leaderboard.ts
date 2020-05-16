@@ -1,7 +1,7 @@
-import { UserRanking } from '../../interfaces/UserRanking';
-import { CollectionRanking } from '../../interfaces/CollectionRanking';
-
 import BaseClient from '../BaseClient';
+
+import { CollectionRanking } from '../../interfaces/CollectionRanking';
+import { UserRanking } from '../../interfaces/UserRanking';
 
 export default class Leaderboard {
     private baseClient: BaseClient;

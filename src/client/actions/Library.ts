@@ -1,9 +1,9 @@
-import { CardTemplate } from '../../interfaces/CardTemplate';
-import { Treatment } from '../../interfaces/Treatment';
-
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
+
+import { CardTemplate } from '../../interfaces/CardTemplate';
+import { Treatment } from '../../interfaces/Treatment';
 
 export default class Library {
     private baseClient: BaseClient;

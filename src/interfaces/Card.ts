@@ -1,5 +1,5 @@
-import { Mint } from './Mint';
 import { CardTemplate } from './CardTemplate';
+import { Mint } from './Mint';
 
 export interface Card {
     id: number;

@@ -1,21 +1,21 @@
-import { Owned } from '../../interfaces/Owned';
-import { Card } from '../../interfaces/Card';
-import { Sticker } from '../../interfaces/Sticker';
-import { UserMarketListings } from '../../interfaces/UserMarketListings';
-import { UserData } from '../../interfaces/UserData';
-import { UserPack } from '../../interfaces/UserPack';
-
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
-import MarketUtils from '../utils/Market';
-import StickerUtils from '../utils/Sticker';
-import PackUtils from '../utils/Pack';
 import DateUtils from '../utils/Date';
-import { UserFund } from '../../interfaces/UserFund';
-import { UserSummary } from '../../interfaces/UserSummary';
+import MarketUtils from '../utils/Market';
+import PackUtils from '../utils/Pack';
+import StickerUtils from '../utils/Sticker';
+
+import { Card } from '../../interfaces/Card';
 import { CardIds } from '../../interfaces/CardIds';
+import { Owned } from '../../interfaces/Owned';
+import { Sticker } from '../../interfaces/Sticker';
 import { StickerIds } from '../../interfaces/StickerIds';
+import { UserData } from '../../interfaces/UserData';
+import { UserFund } from '../../interfaces/UserFund';
+import { UserMarketListings } from '../../interfaces/UserMarketListings';
+import { UserPack } from '../../interfaces/UserPack';
+import { UserSummary } from '../../interfaces/UserSummary';
 
 export default class User {
     private baseClient: BaseClient;

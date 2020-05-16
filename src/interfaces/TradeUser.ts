@@ -1,7 +1,7 @@
-import { UserData } from './UserData';
 import { Card } from './Card';
-import { Sticker } from './Sticker';
 import { Pack } from './Pack';
+import { Sticker } from './Sticker';
+import { UserData } from './UserData';
 
 export interface TradeUser {
     user: UserData;

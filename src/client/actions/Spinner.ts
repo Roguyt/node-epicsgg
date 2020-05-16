@@ -1,9 +1,9 @@
-import { SpinnerData } from '../../interfaces/SpinnerData';
-import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
+import BaseClient from '../BaseClient';
 
 import DateUtils from '../utils/Date';
 
-import BaseClient from '../BaseClient';
+import { SpinnerData } from '../../interfaces/SpinnerData';
+import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
 
 export default class Spinner {
     private baseClient: BaseClient;

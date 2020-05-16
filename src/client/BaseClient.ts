@@ -1,11 +1,11 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import * as jwt from 'jsonwebtoken';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+import * as jwt from 'jsonwebtoken';
 
 import { BaseClientOptions } from '../interfaces/BaseClientOptions';
+import { BodyData } from '../interfaces/BodyData';
 import { CurrentUser } from '../interfaces/CurrentUser';
 import { QueryParams } from '../interfaces/QueryParams';
-import { BodyData } from '../interfaces/BodyData';
 
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;

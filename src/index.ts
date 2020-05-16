@@ -1,6 +1,7 @@
 import { BaseClientOptions } from './interfaces/BaseClientOptions';
 
 import BaseClient from './client/BaseClient';
+import SocketClient from './client/SocketClient';
 
 import User from './client/actions/User';
 import Library from './client/actions/Library';
@@ -9,7 +10,6 @@ import Trade from './client/actions/Trade';
 import Market from './client/actions/Market';
 import Spinner from './client/actions/Spinner';
 import Leaderboard from './client/actions/Leaderboard';
-import SocketClient from './client/SocketClient';
 
 export = class Index {
     public baseClient: BaseClient;

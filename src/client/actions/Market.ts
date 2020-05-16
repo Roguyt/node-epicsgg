@@ -3,8 +3,8 @@ import BaseClient from '../BaseClient';
 import CardUtils from '../utils/Card';
 import MarketUtils from '../utils/Market';
 
-import { MarketTemplate } from '../../interfaces/MarketTemplate';
 import { MarketListing } from '../../interfaces/MarketListing';
+import { MarketTemplate } from '../../interfaces/MarketTemplate';
 
 export default class Market {
     private baseClient: BaseClient;

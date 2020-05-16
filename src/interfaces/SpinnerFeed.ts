@@ -1,5 +1,5 @@
-import { UserData } from './UserData';
 import { ImagesFeed } from './ImagesFeed';
+import { UserData } from './UserData';
 
 export interface SpinnerFeed {
     name: string;

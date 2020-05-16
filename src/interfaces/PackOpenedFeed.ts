@@ -1,5 +1,5 @@
-import { UserData } from './UserData';
 import { Mint } from './Mint';
+import { UserData } from './UserData';
 
 export interface PackOpenedFeed {
     id: number;

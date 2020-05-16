@@ -1,13 +1,13 @@
 import BaseClient from '../BaseClient';
 
-import { Card } from '../../interfaces/Card';
-import { Sticker } from '../../interfaces/Sticker';
-import { TradeData } from '../../interfaces/TradeData';
-
 import DateUtils from '../utils/Date';
 import CardUtils from '../utils/Card';
 import PackUtils from '../utils/Pack';
 import StickerUtils from '../utils/Sticker';
+
+import { Card } from '../../interfaces/Card';
+import { Sticker } from '../../interfaces/Sticker';
+import { TradeData } from '../../interfaces/TradeData';
 
 export default class Trade {
     private baseClient: BaseClient;
