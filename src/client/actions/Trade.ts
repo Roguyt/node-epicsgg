@@ -9,6 +9,8 @@ import { Card } from '../../interfaces/Card';
 import { Sticker } from '../../interfaces/Sticker';
 import { TradeData } from '../../interfaces/TradeData';
 
+import EntityType from '../../enums/entityType';
+
 export default class Trade {
     private baseClient: BaseClient;
 
@@ -87,11 +89,11 @@ export default class Trade {
         const entities = [
             ...cards.map((card: any) => ({
                 id: card.id,
-                type: 'card',
+                type: EntityType.card,
             })),
             ...stickers.map((sticker: any) => ({
                 id: sticker.id,
-                type: 'sticker',
+                type: EntityType.sticker,
             })),
         ];
 

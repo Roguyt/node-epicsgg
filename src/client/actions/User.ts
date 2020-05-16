@@ -17,6 +17,8 @@ import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserPack } from '../../interfaces/UserPack';
 import { UserSummary } from '../../interfaces/UserSummary';
 
+import EntityType from '../../enums/entityType';
+
 export default class User {
     private baseClient: BaseClient;
 
@@ -185,10 +187,14 @@ export default class User {
      * Get the market listings of a given user id
      * @param userId the user id to get its cards
      * @param page the page to get (1 page = 40 Market listings)
-     * @param type type of item listed (card|pack|sticker)
+     * @param type type of item listed
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getMarketListings(userId: number, page = 1, type?: string): Promise<UserMarketListings> {
+    public async getMarketListings(userId: number, page = 1, type?: EntityType): Promise<UserMarketListings> {
+        if (type && !(type in EntityType)) {
+            throw new Error(`This isn't a valid entity type`);
+        }
+
         const result = await this.baseClient.get(`market/listed/users/${userId}`, {
             userId,
             page,
