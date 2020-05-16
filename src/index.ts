@@ -11,7 +11,9 @@ import Market from './client/actions/Market';
 import Spinner from './client/actions/Spinner';
 import Leaderboard from './client/actions/Leaderboard';
 
-export = class Index {
+import EntityType from './enums/entityType';
+
+export class EpicsGGAPI {
     public baseClient: BaseClient;
 
     public User: User;
@@ -41,8 +43,10 @@ export = class Index {
         this.Spinner = new Spinner(this.baseClient);
         this.Leaderboard = new Leaderboard(this.baseClient);
 
-        if (typeof options.useSocket === 'undefined' || options.useSocket === true) {
+        if (typeof options.useSocket === 'undefined' || options.useSocket) {
             this.SocketClient = new SocketClient();
         }
     }
-};
+}
+
+export { EntityType };
