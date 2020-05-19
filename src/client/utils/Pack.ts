@@ -1,4 +1,6 @@
 import { Pack } from '../../interfaces/Pack';
+import { PackTemplate } from '../../interfaces/PackTemplate';
+import DateUtils from './Date';
 
 /**
  * @hidden
@@ -53,5 +55,41 @@ export default class PackUtils {
         }
 
         return pack;
+    }
+
+    public static createPackTemplate(data: any): PackTemplate {
+        return {
+            id: data.id,
+            name: data.name,
+            categoryId: data.categoryId,
+            description: data.description,
+            properties: {
+                seasons: data.properties.seasons,
+                gameIds: data.properties.game_ids,
+                orderMessageMin: data.properties.order_message_min,
+            },
+            packType: data.packType,
+            packPrimary: data.packPrimary,
+            packPrimaryId: data.packPrimaryId,
+            openType: data.openType,
+            cost: data.cost,
+            costType: data.costType,
+            saleCost: data.saleCost,
+            sale: data.sale,
+
+            cardCount: data.cardCount,
+            entityCount: data.entityCount,
+            inventoryCount: data.inventoryCount,
+            starter: data.starter,
+            limited: data.limited,
+            legacy: data.legacy,
+            comingSoon: data.comingSoon,
+            purchaseStart: DateUtils.convertToDate(data.purchaseStart),
+            releaseTime: DateUtils.convertToDate(data.releaseTime),
+            purchaseEnd: DateUtils.convertToDate(data.purchaseEnd),
+            userLimit: data.userLimit,
+            images: data.images,
+            videos: data.videos,
+        };
     }
 }
