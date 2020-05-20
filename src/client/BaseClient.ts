@@ -75,6 +75,33 @@ export default class BaseClient {
         }
     }
 
+    // TODO: Rework to make it typesafe and more stable
+    private static handleErrors(e: any): void {
+        if (e.errorCode) {
+            throw new Error(e.message);
+        } else if (!e.response) {
+            throw new Error('Internet error');
+        } else {
+            // Throw a custom error, not an axios one
+            switch (e.response.status) {
+                case 429:
+                    throw new Error('Rate limit reached');
+
+                case 409:
+                    throw new Error(e.response.data.error);
+
+                case 403:
+                    throw new Error(e.response.data.error);
+
+                case 400:
+                    throw new Error(`Invalid inputs. ${JSON.stringify(e.response.data.error.fields)}`);
+
+                default:
+                    throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
+            }
+        }
+    }
+
     private static timeout(ms: number): Promise<void> {
         return new Promise(
             (resolve): Timeout => {
@@ -158,26 +185,7 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
-            if (e.errorCode) {
-                throw new Error(e.message);
-            } else if (!e.response) {
-                throw new Error('Internet error');
-            } else {
-                // Throw a custom error, not an axios one
-                switch (e.response.status) {
-                    case 429:
-                        throw new Error('Rate limit reached');
-
-                    case 409:
-                        throw new Error(e.response.data.error);
-
-                    case 403:
-                        throw new Error(e.response.data.error);
-
-                    default:
-                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
-                }
-            }
+            return BaseClient.handleErrors(e);
         }
     }
 
@@ -204,26 +212,7 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
-            if (e.errorCode) {
-                throw new Error(e.message);
-            } else if (!e.response) {
-                throw new Error('Internet error');
-            } else {
-                // Throw a custom error, not an axios one
-                switch (e.response.status) {
-                    case 429:
-                        throw new Error('Rate limit reached');
-
-                    case 409:
-                        throw new Error(e.response.data.error);
-
-                    case 403:
-                        throw new Error(e.response.data.error);
-
-                    default:
-                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
-                }
-            }
+            return BaseClient.handleErrors(e);
         }
     }
 
@@ -250,26 +239,7 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
-            if (e.errorCode) {
-                throw new Error(e.message);
-            } else if (!e.response) {
-                throw new Error('Internet error');
-            } else {
-                // Throw a custom error, not an axios one
-                switch (e.response.status) {
-                    case 429:
-                        throw new Error('Rate limit reached');
-
-                    case 409:
-                        throw new Error(e.response.data.error);
-
-                    case 403:
-                        throw new Error(e.response.data.error);
-
-                    default:
-                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
-                }
-            }
+            return BaseClient.handleErrors(e);
         }
     }
 
@@ -296,32 +266,7 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
-            if (
-                (path.indexOf('accept-offer') !== -1 || path.indexOf('decline-offer') !== -1) &&
-                e.message.indexOf('Trade offer already sent.')
-            ) {
-                throw new Error("You can't accept your own offer.");
-            }
-            if (e.errorCode) {
-                throw new Error(e.message);
-            } else if (!e.response) {
-                throw new Error('Internet error');
-            } else {
-                // Throw a custom error, not an axios one
-                switch (e.response.status) {
-                    case 429:
-                        throw new Error('Rate limit reached');
-
-                    case 409:
-                        throw new Error(e.response.data.error);
-
-                    case 403:
-                        throw new Error(e.response.data.error);
-
-                    default:
-                        throw new Error(`Unhandled error. ${JSON.stringify(e.response.data)}`);
-                }
-            }
+            return BaseClient.handleErrors(e);
         }
     }
 }
