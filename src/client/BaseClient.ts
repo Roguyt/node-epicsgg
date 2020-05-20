@@ -131,6 +131,10 @@ export default class BaseClient {
         return this.getJWT();
     }
 
+    public getCategoryId(): number {
+        return this.categoryId;
+    }
+
     public async get(path: string, params?: QueryParams): Promise<any> {
         if (!this.jwt || this.jwtExpiracy < new Date()) {
             await this.login();

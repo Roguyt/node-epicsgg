@@ -21,7 +21,7 @@ export default class Leaderboard {
      * @returns a Promise resolved with the response or rejected in case of error
      */
     public async getLeaderboards(page = 1, country?: string, season?: number | string): Promise<UserRanking[]> {
-        const result = await this.baseClient.get('leaderboards/categories/1', {
+        const result = await this.baseClient.get(`leaderboards/categories/${this.baseClient.getCategoryId()}`, {
             page,
             country,
             season,
