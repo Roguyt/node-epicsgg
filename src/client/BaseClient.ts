@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import debug from 'debug';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import * as jwt from 'jsonwebtoken';
 
@@ -6,6 +7,8 @@ import { BaseClientOptions } from '../interfaces/BaseClientOptions';
 import { BodyData } from '../interfaces/BodyData';
 import { CurrentUser } from '../interfaces/CurrentUser';
 import { QueryParams } from '../interfaces/QueryParams';
+
+const log = debug('node-epicsgg');
 
 // eslint-disable-next-line no-undef
 import Timeout = NodeJS.Timeout;
@@ -69,7 +72,9 @@ export default class BaseClient {
     }
 
     private validateOptions(): void {
+        log('Validate module options');
         if ((this.username === '' || this.password === '') && this.jwt === '') {
+            log('Missing any potential form of authentification');
             // Throw an error
             throw new Error('Missing epics.gg credentials');
         }
@@ -110,7 +115,19 @@ export default class BaseClient {
         );
     }
 
+    private async validateorRefreshJWT(): Promise<boolean> {
+        if (!this.jwt || this.jwtExpiracy < new Date()) {
+            log('Refreshing JWT');
+            await this.login();
+            log('JWT refreshed');
+            return false;
+        }
+
+        return true;
+    }
+
     public async login(): Promise<void> {
+        log('Logging in...');
         try {
             const response: AxiosResponse = await this.axios.post('https://api.epics.gg/api/v1/auth/login', {
                 email: this.username,
@@ -159,11 +176,10 @@ export default class BaseClient {
     }
 
     public async get(path: string, params?: QueryParams): Promise<any> {
-        if (!this.jwt || this.jwtExpiracy < new Date()) {
-            await this.login();
-        }
+        await this.validateorRefreshJWT();
 
         try {
+            log(`Requesting https://api.epics.gg/api/v1/${path}`);
             const response: AxiosResponse = await this.axios.get(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
@@ -181,16 +197,16 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
             return BaseClient.handleErrors(e);
         }
     }
 
     public async post(path: string, data?: BodyData, params?: QueryParams): Promise<any> {
-        if (!this.jwt || this.jwtExpiracy < new Date()) {
-            await this.login();
-        }
+        await this.validateorRefreshJWT();
 
         try {
+            log(`Requesting https://api.epics.gg/api/v1/${path}`);
             const response: AxiosResponse = await this.axios.post(`https://api.epics.gg/api/v1/${path}`, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
@@ -208,16 +224,16 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
             return BaseClient.handleErrors(e);
         }
     }
 
     public async delete(path: string, params?: QueryParams): Promise<any> {
-        if (!this.jwt || this.jwtExpiracy < new Date()) {
-            await this.login();
-        }
+        await this.validateorRefreshJWT();
 
         try {
+            log(`Requesting https://api.epics.gg/api/v1/${path}`);
             const response: AxiosResponse = await this.axios.delete(`https://api.epics.gg/api/v1/${path}`, {
                 headers: {
                     'X-User-JWT': this.jwt,
@@ -235,16 +251,16 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
             return BaseClient.handleErrors(e);
         }
     }
 
     public async patch(path: string, data?: BodyData, params?: QueryParams): Promise<any> {
-        if (!this.jwt || this.jwtExpiracy < new Date()) {
-            await this.login();
-        }
+        await this.validateorRefreshJWT();
 
         try {
+            log(`Requesting https://api.epics.gg/api/v1/${path}`);
             const response: AxiosResponse = await this.axios.patch(`https://api.epics.gg/api/v1/${path}`, data, {
                 headers: {
                     'X-User-JWT': this.jwt,
@@ -262,6 +278,7 @@ export default class BaseClient {
 
             return response.data.data;
         } catch (e) {
+            log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
             return BaseClient.handleErrors(e);
         }
     }
