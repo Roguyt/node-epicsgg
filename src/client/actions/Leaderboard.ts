@@ -1,5 +1,7 @@
 import BaseClient from '../BaseClient';
 
+import DateUtils from '../utils/Date';
+
 import { CollectionRanking } from '../../interfaces/CollectionRanking';
 import { UserRanking } from '../../interfaces/UserRanking';
 
@@ -33,7 +35,7 @@ export default class Leaderboard {
             avatar: ranking.user.avatar,
             group: ranking.user.group,
             country: ranking.user.country,
-            joined: ranking.user.created,
+            joined: DateUtils.convertToDate(ranking.user.created),
             ranking: {
                 rank: ranking.rank,
                 score: ranking.score,
@@ -71,7 +73,7 @@ export default class Leaderboard {
             avatar: ranking.user.avatar,
             group: ranking.user.group,
             country: ranking.user.country,
-            joined: ranking.user.created,
+            joined: DateUtils.convertToDate(ranking.user.created),
             ranking: {
                 rank: ranking.rank,
                 score: ranking.score,
