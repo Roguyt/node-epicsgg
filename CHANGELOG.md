@@ -1,3 +1,11 @@
+## [2.3.1](https://github.com/Roguyt/node-epicsgg/compare/v2.3.0...v2.3.1) (2020-05-20)
+
+
+### Bug Fixes
+
+* **Leaderboard:** convert the date returned by API ([c0b76e7](https://github.com/Roguyt/node-epicsgg/commit/c0b76e7a5b28aaba43ab6753737859f8d0574ddc))
+* **Leaderboard:** use the correct category id for getLeaderboards ([6bc4b12](https://github.com/Roguyt/node-epicsgg/commit/6bc4b12f4a81acac0f0245910952eb2b56813da1))
+
 # [2.3.0](https://github.com/Roguyt/node-epicsgg/compare/v2.2.4...v2.3.0) (2020-05-16)
 
 
