@@ -1,8 +1,10 @@
 import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
+import StickerUtils from '../utils/Sticker';
 
 import { CardTemplate } from '../../interfaces/CardTemplate';
+import { StickerTemplate } from '../../interfaces/StickerTemplate';
 import { Treatment } from '../../interfaces/Treatment';
 
 export default class Library {
@@ -51,6 +53,19 @@ export default class Library {
         const result = await this.baseClient.get(`collections/${collectionId}/card-templates`);
 
         const data: CardTemplate[] = result.map(CardUtils.createCardTemplate);
+
+        return data;
+    }
+
+    /**
+     * Get a list of StickerTemplate given a collection id
+     * @param collectionId the collection id
+     * @returns a Promise resolved with the response or rejected in case of error
+     */
+    public async getCollectionStickerTemplates(collectionId: number): Promise<StickerTemplate[]> {
+        const result = await this.baseClient.get(`collections/${collectionId}/sticker-templates`);
+
+        const data: StickerTemplate[] = result.map(StickerUtils.createStickerTemplate);
 
         return data;
     }
