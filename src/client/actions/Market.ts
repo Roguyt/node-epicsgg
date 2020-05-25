@@ -2,9 +2,13 @@ import BaseClient from '../BaseClient';
 
 import CardUtils from '../utils/Card';
 import MarketUtils from '../utils/Market';
+import StickerUtils from '../utils/Sticker';
+import PackUtils from '../utils/Pack';
 
 import { MarketListing } from '../../interfaces/MarketListing';
 import { MarketTemplate } from '../../interfaces/MarketTemplate';
+import StickerUtils from '../utils/Sticker';
+import PackUtils from '../utils/Pack';
 
 import EntityType from '../../enums/entityType';
 
@@ -50,12 +54,22 @@ export default class Market {
             ...filters,
         });
 
-        const data: MarketTemplate[] = result.templates.map((template: any) => ({
-            entityTemplateId: template.entityTemplateId,
-            isUserNeed: template.isUserNeed,
-            lowestPrice: template.lowestPrice,
-            cardTemplate: CardUtils.createCardTemplate(template.cardTemplate),
-        }));
+        const data: MarketTemplate[] = result.templates.map((template: any) => {
+            const marketTemplate: MarketTemplate = {
+                entityTemplateId: template.entityTemplateId,
+                isUserNeed: template.isUserNeed,
+                lowestPrice: template.lowestPrice,
+            };
+
+            if (template.cardTemplate)
+                marketTemplate.cardTemplate = CardUtils.createCardTemplate(template.cardTemplate);
+            if (template.stickerTemplate)
+                marketTemplate.stickerTemplate = StickerUtils.createStickerTemplate(template.stickerTemplate);
+            if (template.packTemplate)
+                marketTemplate.packTemplate = PackUtils.createPackTemplate(template.packTemplate);
+
+            return marketTemplate;
+        });
 
         return data;
     }
