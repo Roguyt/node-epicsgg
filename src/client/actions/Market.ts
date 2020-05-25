@@ -7,6 +7,8 @@ import PackUtils from '../utils/Pack';
 
 import { MarketListing } from '../../interfaces/MarketListing';
 import { MarketTemplate } from '../../interfaces/MarketTemplate';
+import StickerUtils from '../utils/Sticker';
+import PackUtils from '../utils/Pack';
 
 import EntityType from '../../enums/entityType';
 
