@@ -1,6 +1,7 @@
+import DateUtils from './Date';
+
 import { Pack } from '../../interfaces/Pack';
 import { PackTemplate } from '../../interfaces/PackTemplate';
-import DateUtils from './Date';
 
 /**
  * @hidden
