@@ -1,3 +1,5 @@
+## [2.3.5](https://github.com/Roguyt/node-epicsgg/compare/v2.3.4...v2.3.5) (2020-09-27)
+
 ## [2.3.4](https://github.com/Roguyt/node-epicsgg/compare/v2.3.3...v2.3.4) (2020-09-27)
 
 ## [2.3.3](https://github.com/Roguyt/node-epicsgg/compare/v2.3.2...v2.3.3) (2020-09-27)
