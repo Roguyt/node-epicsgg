@@ -1,8 +1,11 @@
 {
     "name": "node-epicsgg",
-    "version": "2.3.5",
+    "version": "2.3.6",
     "description": "An interface to communicate with Epics.gg API",
-    "keywords": ["epics.gg", "epics"],
+    "keywords": [
+        "epics.gg",
+        "epics"
+    ],
     "author": {
         "url": "https://clmntw.fr",
         "email": "git@clmntw.fr",
@@ -40,7 +43,9 @@
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "license": "MIT",
-    "files": ["lib/"],
+    "files": [
+        "lib/"
+    ],
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged --pattern '**/*'"
