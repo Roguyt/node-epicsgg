@@ -9,29 +9,30 @@ import { MarketListing } from '../../interfaces/MarketListing';
  * @hidden
  */
 export default class MarketUtils {
-    public static createMarketListing(listing: any): MarketListing {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public static createMarketListing(data: any): MarketListing {
         const marketListing: MarketListing = {
-            marketId: listing.marketId,
+            marketId: data.marketId,
 
-            price: listing.price,
+            price: data.price,
             previousAvgPrice: {
-                value: listing.previousAvgPrice?.statValue ?? null,
-                date: DateUtils.convertToDate(listing.previousAvgPrice?.statDate ?? null),
+                value: data.previousAvgPrice?.statValue ?? null,
+                date: DateUtils.convertToDate(data.previousAvgPrice?.statDate ?? null),
             },
             // @TODO rename to currentHourPrice to stick to the API contract
             currentAvgHourPrice: {
-                value: listing.currentHourPrice?.statValue ?? null,
-                date: DateUtils.convertToDate(listing.currentHourPrice?.statDate ?? null),
+                value: data.currentHourPrice?.statValue ?? null,
+                date: DateUtils.convertToDate(data.currentHourPrice?.statDate ?? null),
             },
 
-            createdAt: new Date(listing.created),
+            createdAt: new Date(data.created),
 
-            type: listing.type,
+            type: data.type,
         };
 
-        if (listing.card) marketListing.card = CardUtils.createCard(listing.card);
-        if (listing.pack) marketListing.pack = PackUtils.createPack(listing.pack.packTemplate);
-        if (listing.sticker) marketListing.sticker = StickerUtils.createSticker(listing.sticker);
+        if (data.card) marketListing.card = CardUtils.createCard(data.card);
+        if (data.pack) marketListing.pack = PackUtils.createPack(data.pack.packTemplate);
+        if (data.sticker) marketListing.sticker = StickerUtils.createSticker(data.sticker);
 
         return marketListing;
     }

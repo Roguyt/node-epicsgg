@@ -7,6 +7,7 @@ import DateUtils from './Date';
  * @hidden
  */
 export default class CardUtils {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static createCard(data: any): Card {
         return {
             id: data.id,
@@ -27,6 +28,7 @@ export default class CardUtils {
         };
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static createCardTemplate(data: any): CardTemplate {
         const cardTemplate: CardTemplate = {
             id: data.id,

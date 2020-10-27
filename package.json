@@ -2,10 +2,7 @@
     "name": "node-epicsgg",
     "version": "2.3.5",
     "description": "An interface to communicate with Epics.gg API",
-    "keywords": [
-        "epics.gg",
-        "epics"
-    ],
+    "keywords": ["epics.gg", "epics"],
     "author": {
         "url": "https://clmntw.fr",
         "email": "git@clmntw.fr",
@@ -43,9 +40,7 @@
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "license": "MIT",
-    "files": [
-        "lib/"
-    ],
+    "files": ["lib/"],
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged --pattern '**/*'"
@@ -64,17 +59,17 @@
         "@types/mocha": "^7.0.0",
         "@types/node": "^12.0.12",
         "@types/socket.io": "^2.1.2",
-        "@typescript-eslint/eslint-plugin": "^2.30.0",
-        "@typescript-eslint/parser": "^2.30.0",
+        "@typescript-eslint/eslint-plugin": "^4.0.0",
+        "@typescript-eslint/parser": "^4.0.0",
         "chai": "^4.2.0",
         "conventional-changelog-insurgent": "^6.1.1",
-        "eslint": "^7.0.0",
-        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint": "^7.2.0",
+        "eslint-config-airbnb-base": "^14.2.0",
         "eslint-config-prettier": "^6.0.0",
         "eslint-config-typescript": "^3.0.0",
         "eslint-formatter-pretty": "^4.0.0",
         "eslint-import-resolver-typescript": "^2.0.0",
-        "eslint-plugin-import": "^2.18.0",
+        "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^3.1.0",
         "husky": "^4.2.5",
         "mocha": "^7.0.0",
