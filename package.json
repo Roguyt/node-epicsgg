@@ -28,7 +28,7 @@
         "node": ">=8.0.0"
     },
     "scripts": {
-        "test": "mocha --opts tests/mocha.opts tests/**/*-test.{ts,tsx}",
+        "test": "mocha --config tests/.mocharc.js tests/**/*-test.{ts,tsx}",
         "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
         "format": "prettier --write 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}'",
         "build": "tsc -p tsconfig.json",
