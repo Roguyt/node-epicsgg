@@ -4,6 +4,7 @@ import { PackOpenedFeed } from '../interfaces/PackOpenedFeed';
 import { PackPurchasedFeed } from '../interfaces/PackPurchasedFeed';
 import { SpinnerFeed } from '../interfaces/SpinnerFeed';
 
+// eslint-disable-next-line import/order
 import SocketIO = require('socket.io');
 
 /**

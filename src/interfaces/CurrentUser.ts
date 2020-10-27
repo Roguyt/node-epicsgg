@@ -30,5 +30,5 @@ export interface CurrentUser {
         profileUrl: string;
         avatar: string;
     } | null;
-    opskins: {} | null;
+    opskins: Record<string, unknown> | null;
 }

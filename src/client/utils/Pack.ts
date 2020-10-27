@@ -4,6 +4,7 @@ import { Pack } from '../../interfaces/Pack';
  * @hidden
  */
 export default class PackUtils {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static createPack(data: any): Pack {
         const pack: Pack = {
             id: data.id,
