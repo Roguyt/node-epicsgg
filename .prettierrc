@@ -1,32 +1,4 @@
 {
-  "bracketSpacing": true,
-  "semi": true,
-  "parser": "typescript",
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "printWidth": 120,
-  "tabWidth": 4,
-  "useTabs": false,
-  "overrides": [
-    {
-      "files": ["*.json"],
-      "options": {
-        "parser": "json",
-        "tabWidth": 4
-      }
-    },
-    {
-      "files": ["*.yml"],
-      "options": {
-        "parser": "yaml",
-        "tabWidth": 2
-      }
-    },
-    {
-      "files": ["*.md"],
-      "options": {
-        "parser": "markdown"
-      }
-    }
-  ]
+    "singleQuote": true,
+    "trailingComma": "all"
 }
