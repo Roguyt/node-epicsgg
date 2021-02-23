@@ -1,20 +1,26 @@
 {
     "compilerOptions": {
-        "outDir": "lib/",
-        "sourceMap": true,
         "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "target": "es2017",
+        "sourceMap": true,
+        "baseUrl": "./",
+        "outDir": "./lib/",
+        "incremental": true,
+
         "moduleResolution": "node",
         "noEmitOnError": true,
-        "target": "es2015",
-        "declaration": true,
-        "removeComments": false,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "forceConsistentCasingInFileNames": true,
         "noUnusedLocals": true,
         "pretty": true,
         "esModuleInterop": true,
         "strictNullChecks": true
     },
-    "include": ["src/**/*", "__tests__/**/*"],
-    "exclude": ["node_modules", "test", "examples"]
+    "exclude": ["node_modules", "lib"]
 }

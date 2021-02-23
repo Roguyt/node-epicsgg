@@ -37,9 +37,9 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "lint": "eslint '{src,test}/**/*.{ts,tsx}' --fix",
         "format": "prettier --write 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
-        "build": "tsc -p tsconfig.json",
-        "build:watch": "tsc -w -p tsconfig.json",
-        "build:docs": "typedoc --out ./docs --tsconfig tsconfig.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
+        "build": "tsc -p tsconfig.build.json",
+        "build:watch": "tsc -w -p tsconfig.build.json",
+        "build:docs": "typedoc --out ./docs --tsconfig tsconfig.build.json --mode file --excludeExternals --includeDeclarations --excludePrivate --excludeNotExported --theme minimal",
         "prepack": "yarn run build",
         "release": "semantic-release"
     },
