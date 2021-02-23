@@ -1,9 +1,9 @@
+import { MarketListing } from '../../interfaces/MarketListing';
+
 import CardUtils from './Card';
 import DateUtils from './Date';
 import PackUtils from './Pack';
 import StickerUtils from './Sticker';
-
-import { MarketListing } from '../../interfaces/MarketListing';
 
 /**
  * @hidden

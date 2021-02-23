@@ -1,20 +1,17 @@
-import { BaseClientOptions } from './interfaces/BaseClientOptions';
-
-import BaseClient from './client/BaseClient';
-import SocketClient from './client/SocketClient';
-
-import User from './client/actions/User';
+import Leaderboard from './client/actions/Leaderboard';
 import Library from './client/actions/Library';
-import Store from './client/actions/Store';
-import Trade from './client/actions/Trade';
 import Market from './client/actions/Market';
 import Spinner from './client/actions/Spinner';
-import Leaderboard from './client/actions/Leaderboard';
-
+import Store from './client/actions/Store';
+import Trade from './client/actions/Trade';
+import User from './client/actions/User';
+import RestClient from './client/rest.client';
+import WebSocketClient from './client/web-socket/web-socket.client';
 import EntityType from './enums/entityType';
+import { BaseClientOptions } from './interfaces/BaseClientOptions';
 
 export class EpicsGGAPI {
-    public baseClient: BaseClient;
+    public baseClient: RestClient;
 
     public User: User;
 
@@ -29,11 +26,8 @@ export class EpicsGGAPI {
     public Spinner: Spinner;
 
     public Leaderboard: Leaderboard;
-
-    public SocketClient: SocketClient;
-
     public constructor(options: BaseClientOptions) {
-        this.baseClient = new BaseClient(options);
+        this.baseClient = new RestClient(options);
 
         this.User = new User(this.baseClient);
         this.Library = new Library(this.baseClient);
@@ -42,11 +36,9 @@ export class EpicsGGAPI {
         this.Market = new Market(this.baseClient);
         this.Spinner = new Spinner(this.baseClient);
         this.Leaderboard = new Leaderboard(this.baseClient);
-
-        if (typeof options.useSocket === 'undefined' || options.useSocket) {
-            this.SocketClient = new SocketClient();
-        }
     }
 }
+
+export { RestClient, WebSocketClient };
 
 export { EntityType };

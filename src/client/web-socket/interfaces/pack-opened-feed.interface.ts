@@ -1,7 +1,7 @@
-import { Mint } from './Mint';
-import { UserData } from './UserData';
+import { Mint } from '../../../interfaces/Mint';
+import { UserData } from '../../../interfaces/UserData';
 
-export interface PackOpenedFeed {
+export interface PackOpenedFeedInterface {
     id: number;
     packTemplateId: number;
 
@@ -10,16 +10,16 @@ export interface PackOpenedFeed {
         id: number;
         cardTemplateId: number;
         cardTemplate: {
-            images: Record<string, string>;
+            images: Record<string, string | Record<string, string>>;
         };
-        images: Record<string, string>;
+        images: Record<string, string | Record<string, string>>;
         title: string;
         mint: Mint;
     }[];
     stickers: {
         id: number;
         stickerTemplateId: number;
-        images: Record<string, string>;
+        images: Record<string, string | Record<string, string>>;
         title: string;
         mint: Mint;
     }[];

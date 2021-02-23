@@ -1,16 +1,14 @@
-import BaseClient from '../BaseClient';
-
-import CardUtils from '../utils/Card';
-import StickerUtils from '../utils/Sticker';
-
 import { CardTemplate } from '../../interfaces/CardTemplate';
 import { StickerTemplate } from '../../interfaces/StickerTemplate';
 import { Treatment } from '../../interfaces/Treatment';
+import RestClient from '../rest.client';
+import CardUtils from '../utils/Card';
+import StickerUtils from '../utils/Sticker';
 
 export default class Library {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 

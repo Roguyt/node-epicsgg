@@ -1,11 +1,4 @@
-import BaseClient from '../BaseClient';
-
-import CardUtils from '../utils/Card';
-import DateUtils from '../utils/Date';
-import MarketUtils from '../utils/Market';
-import PackUtils from '../utils/Pack';
-import StickerUtils from '../utils/Sticker';
-
+import EntityType from '../../enums/entityType';
 import { Card } from '../../interfaces/Card';
 import { CardIds } from '../../interfaces/CardIds';
 import { Owned } from '../../interfaces/Owned';
@@ -16,16 +9,20 @@ import { UserFund } from '../../interfaces/UserFund';
 import { UserMarketListings } from '../../interfaces/UserMarketListings';
 import { UserPack } from '../../interfaces/UserPack';
 import { UserSummary } from '../../interfaces/UserSummary';
-
-import EntityType from '../../enums/entityType';
+import RestClient from '../rest.client';
+import CardUtils from '../utils/Card';
+import DateUtils from '../utils/Date';
+import MarketUtils from '../utils/Market';
+import PackUtils from '../utils/Pack';
+import StickerUtils from '../utils/Sticker';
 
 export default class User {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 
@@ -163,9 +160,7 @@ export default class User {
      * @param stickerTemplateId the stickerTemplateId of the stickers to get
      */
     public async getStickers(userId: number, stickerTemplateId: number): Promise<Sticker[]> {
-        const result = await this.baseClient.get(
-            `collections/users/${userId}/sticker-templates/${stickerTemplateId}/stickers`
-        );
+        const result = await this.baseClient.get(`collections/users/${userId}/sticker-templates/${stickerTemplateId}/stickers`);
 
         return result.map(StickerUtils.createSticker);
     }

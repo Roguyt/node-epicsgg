@@ -1,7 +1,7 @@
+import EntityType from '../enums/entityType';
+
 import { CardTemplate } from './CardTemplate';
 import { Mint } from './Mint';
-
-import EntityType from '../enums/entityType';
 
 export interface Card {
     id: number;

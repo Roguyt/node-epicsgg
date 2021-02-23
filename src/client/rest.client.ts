@@ -16,7 +16,7 @@ import Timeout = NodeJS.Timeout;
 /**
  * @hidden
  */
-export default class BaseClient {
+export default class RestClient {
     private readonly username: string;
 
     private readonly password: string;
@@ -37,7 +37,7 @@ export default class BaseClient {
     public constructor(options: BaseClientOptions) {
         if (!options) {
             // Throw a warning
-            throw new Error('Missing BaseClient options');
+            throw new Error('Missing RestClient options');
         }
 
         this.username = options.email || '';
@@ -111,7 +111,7 @@ export default class BaseClient {
         return new Promise(
             (resolve): Timeout => {
                 return setTimeout(resolve, ms);
-            }
+            },
         );
     }
 
@@ -146,11 +146,11 @@ export default class BaseClient {
             this.jwtExpiracy = new Date(jwtData.exp * 1000);
         } catch (e) {
             if (!e.response) {
-                await BaseClient.timeout(5 * 1000);
+                await RestClient.timeout(5 * 1000);
             } else {
                 switch (e.response.status) {
                     case 429: {
-                        await BaseClient.timeout(60 * 1000);
+                        await RestClient.timeout(60 * 1000);
                         break;
                     }
                     case 400: {
@@ -202,7 +202,7 @@ export default class BaseClient {
             return response.data.data;
         } catch (e) {
             log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
-            return BaseClient.handleErrors(e);
+            return RestClient.handleErrors(e);
         }
     }
 
@@ -229,7 +229,7 @@ export default class BaseClient {
             return response.data.data;
         } catch (e) {
             log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
-            return BaseClient.handleErrors(e);
+            return RestClient.handleErrors(e);
         }
     }
 
@@ -256,7 +256,7 @@ export default class BaseClient {
             return response.data.data;
         } catch (e) {
             log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
-            return BaseClient.handleErrors(e);
+            return RestClient.handleErrors(e);
         }
     }
 
@@ -283,7 +283,7 @@ export default class BaseClient {
             return response.data.data;
         } catch (e) {
             log(`Got an error while requesting https://api.epics.gg/api/v1/${path}`);
-            return BaseClient.handleErrors(e);
+            return RestClient.handleErrors(e);
         }
     }
 }

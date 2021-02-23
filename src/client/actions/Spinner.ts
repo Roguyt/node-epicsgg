@@ -1,17 +1,15 @@
-import BaseClient from '../BaseClient';
-
-import DateUtils from '../utils/Date';
-
 import { SpinnerData } from '../../interfaces/SpinnerData';
 import { SpinnerHistory } from '../../interfaces/SpinnerHistory';
+import RestClient from '../rest.client';
+import DateUtils from '../utils/Date';
 
 export default class Spinner {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 

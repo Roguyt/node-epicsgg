@@ -1,23 +1,20 @@
-import BaseClient from '../BaseClient';
-
-import DateUtils from '../utils/Date';
-import CardUtils from '../utils/Card';
-import PackUtils from '../utils/Pack';
-import StickerUtils from '../utils/Sticker';
-
+import EntityType from '../../enums/entityType';
 import { Card } from '../../interfaces/Card';
 import { Sticker } from '../../interfaces/Sticker';
 import { TradeData } from '../../interfaces/TradeData';
-
-import EntityType from '../../enums/entityType';
+import RestClient from '../rest.client';
+import CardUtils from '../utils/Card';
+import DateUtils from '../utils/Date';
+import PackUtils from '../utils/Pack';
+import StickerUtils from '../utils/Sticker';
 
 export default class Trade {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 

@@ -1,17 +1,15 @@
-import BaseClient from '../BaseClient';
-
-import DateUtils from '../utils/Date';
-
 import { CollectionRanking } from '../../interfaces/CollectionRanking';
 import { UserRanking } from '../../interfaces/UserRanking';
+import RestClient from '../rest.client';
+import DateUtils from '../utils/Date';
 
 export default class Leaderboard {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 
@@ -59,7 +57,7 @@ export default class Leaderboard {
         collectionId: number,
         page = 1,
         country?: string,
-        season?: number | string
+        season?: number | string,
     ): Promise<CollectionRanking[]> {
         const result = await this.baseClient.get(`leaderboards/collections/${collectionId}`, {
             page,

@@ -1,20 +1,17 @@
-import BaseClient from '../BaseClient';
-
+import EntityType from '../../enums/entityType';
+import { MarketListing } from '../../interfaces/MarketListing';
+import { MarketTemplate } from '../../interfaces/MarketTemplate';
+import RestClient from '../rest.client';
 import CardUtils from '../utils/Card';
 import MarketUtils from '../utils/Market';
 
-import { MarketListing } from '../../interfaces/MarketListing';
-import { MarketTemplate } from '../../interfaces/MarketTemplate';
-
-import EntityType from '../../enums/entityType';
-
 export default class Market {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 
@@ -38,7 +35,7 @@ export default class Market {
     public async getMarketplaceTemplates(
         page = 1,
         filters: Record<string, string | boolean>,
-        type: EntityType = EntityType.card
+        type: EntityType = EntityType.card,
     ): Promise<MarketTemplate[]> {
         if (!(type in EntityType)) {
             throw new Error(`This isn't a valid entity type`);
@@ -68,12 +65,7 @@ export default class Market {
      * @param type the type of the entity
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async getListings(
-        templateId: number,
-        page = 1,
-        sort?: string,
-        type: EntityType = EntityType.card
-    ): Promise<MarketListing[]> {
+    public async getListings(templateId: number, page = 1, sort?: string, type: EntityType = EntityType.card): Promise<MarketListing[]> {
         if (!(type in EntityType)) {
             throw new Error(`This isn't a valid entity type`);
         }
@@ -102,12 +94,7 @@ export default class Market {
      * @param minOffer minOffer value (no minOffer if empty)
      * @returns a Promise resolved with the response or rejected in case of error
      */
-    public async createListing(
-        id: number,
-        type: EntityType = EntityType.card,
-        price: number,
-        minOffer?: number
-    ): Promise<number> {
+    public async createListing(id: number, type: EntityType = EntityType.card, price: number, minOffer?: number): Promise<number> {
         if (!(type in EntityType)) {
             throw new Error(`This isn't a valid entity type`);
         }

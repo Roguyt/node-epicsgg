@@ -1,16 +1,14 @@
-import BaseClient from '../BaseClient';
-
+import { Pack } from '../../interfaces/Pack';
+import RestClient from '../rest.client';
 import PackUtils from '../utils/Pack';
 
-import { Pack } from '../../interfaces/Pack';
-
 export default class Store {
-    private baseClient: BaseClient;
+    private baseClient: RestClient;
 
     /**
      * @hidden
      */
-    public constructor(baseClient: BaseClient) {
+    public constructor(baseClient: RestClient) {
         this.baseClient = baseClient;
     }
 
